@@ -8,7 +8,7 @@ let colors = [
 'lemonchiffon',
 ];
 
-let shapes = [];
+let shapes = {};
 let cosTable = []
 let sinTable = [];
 
@@ -16,19 +16,18 @@ function setup() {
   createCanvas(1000, 1000);
 
   //fill(255,0,0);
-  //noFill();
-  stroke(220);
+  noFill();
 
   background(0,0,0.2*255);
   translate(width/2, height/2);
   
   let grid = [];
-  let spacing = 10;
-  let steps = 20;
+  let spacing = 40;
+  let steps = 10;
   let numGrids = 5;
   let multiplier = 2 * PI / numGrids;
   
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < numGrids; i++) {
     sinTable.push(sin(i*multiplier));
     cosTable.push(cos(i*multiplier));
   }
@@ -46,19 +45,22 @@ function setup() {
     }
   }
   
-  //drawLines(grid);
+  stroke(255,0,0);
+  drawLines(grid);
+  
+  stroke(128);
   
   console.log('grid size: ' + grid.length + ' points');
   var t1 = new Date().getTime();
   console.log("Creating grids took " + (t1 - t0) + " milliseconds.")  
   
-  let intersections = findIntersections(grid, spacing);
+  let intersections = findIntersections(grid, spacing, steps);
   var t2 = new Date().getTime();
   console.log("findIntersections took " + (t2 - t1) + " milliseconds.")  
 
   for (let pt of Object.values(intersections)) {
     let medianPts = findMedianPoints(pt);
-    findDualPoints(medianPts, spacing, multiplier, offsets);
+    findDualPoints(medianPts, spacing, multiplier, offsets, numGrids);
   }
   var t3 = new Date().getTime();
   console.log("medianPts & findDualPoints took " + (t3 - t2) + " milliseconds.")  
@@ -114,7 +116,7 @@ function findMedianPoints(pt) {
 }
 
 
-function findDualPoints(medianPts, spacing, anglePrefix, offset) {
+function findDualPoints(medianPts, spacing, anglePrefix, offset, numGrids) {
     
   let dualPts = [];
     
@@ -122,10 +124,10 @@ function findDualPoints(medianPts, spacing, anglePrefix, offset) {
     let xd = 0;
     let yd = 0;
 
-    for (let i=0; i<5; i++) {
+    for (let i = 0; i < numGrids; i++) {
       let k = floor((pt.x/spacing) * cosTable[i] + (pt.y/spacing) * sinTable[i] - offset[i]);
-      xd += spacing * k * cosTable[i]/1.06;
-      yd += spacing * k * sinTable[i]/1.06;
+      xd += spacing * k * cosTable[i] * (2/numGrids);
+      yd += spacing * k * sinTable[i] * (2/numGrids);
     }
 
     dualPts.push({
@@ -142,15 +144,23 @@ function findDualPoints(medianPts, spacing, anglePrefix, offset) {
     area += 0.5 * (dualPts[i].x * dualPts[(i+1)%dMax].y - dualPts[i].y * dualPts[(i+1)%dMax].x)
   }
 
-  area = round(area);
+  area = str(round(1000000*area)/1000000);
 
-  if (!shapes.includes(area)) {
-    shapes.push(area);
+  if (!Object.keys(shapes).includes(area)) {
+    let r = random(255);
+    let g = random(255);
+    let b = random(255);
+    let o = 50;
+
+    shapes[area] = {
+      color: color((r+255)/2, (g+255)/2, (b+255)/2),
+      dualColor: color((r+o)/2, (g+o)/2, (b+o)/2),
+      points: dualPts
+    };
   }
 
-  let i = shapes.indexOf(area);
-  fill(colors[i]);
-  
+  fill(shapes[area].color);
+  stroke(shapes[area].dualColor);
 
   beginShape();
   for (let i=0;i<dMax; i++) {
@@ -165,7 +175,7 @@ function findDualPoints(medianPts, spacing, anglePrefix, offset) {
   
 }
 
-function findIntersections(grid, spacing) {
+function findIntersections(grid, spacing, steps) {
    
   let pts = {};
   //let angle1 = grid[20][0];
@@ -173,7 +183,7 @@ function findIntersections(grid, spacing) {
   
   for (let [angle1, index1] of grid) {
     for (let [angle2, index2] of grid) {
-      if (angle1 !== angle2 && index1 <= 15*spacing  && index1 >= -15*spacing) {
+      if (angle1 < angle2) {
         let s1 = sin(angle1);
         let s2 = sin(angle2);
         let c1 = cos(angle1);
@@ -184,9 +194,8 @@ function findIntersections(grid, spacing) {
         let x = (index2 * s1 - index1 * s2)/s12;
         let y = (index2 * c1 - index1 * c2)/s21;
         
-        let yprime = x * sin(-angle1) + y * cos(-angle1);
-        
-        if (yprime <= 15*spacing && yprime >= -15*spacing) {
+        if (dist(x,y,0,0) <= spacing * steps) {
+
           let index = JSON.stringify([round(1000000*x)/1000000,round(1000000*y)/1000000]);
           if (pts[index]) {
             pts[index].angles.push(angle2);
@@ -198,7 +207,7 @@ function findIntersections(grid, spacing) {
             pts[index].angles = [angle1, angle2];
           }
         }
-     }
+      }
     }
   }
   
