@@ -1,12 +1,61 @@
-<!DOCTYPE html><html lang="en"><head>
-    <script src="p5.js"></script>
-    <script src="p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<html lang="en">
 
-  </head>
-  <body>
-    <script src="sketch.js"></script>
-  
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <!-- Load in libraries here -->
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+</head>
 
-</body></html>
+<body>
+
+<div id="root"> <!-- Vue can only access things contained within this div -->
+
+  <h1>Pattern Collider</h1>
+
+  <h2>Sliders</h2>
+
+  <!-- Some input sliders that are bound to data -->
+  <ul>
+    <li>
+    	numGrids: 
+    	<input type="range" v-model.number="numGrids" min="3" max="15" step="1"></input>
+    	{{numGrids}}
+    </li>
+  	<li>
+  		steps:
+  		<input type="range" v-model.number="steps" min="1" max="10" step="1"></input>
+  		{{steps}}
+  	</li>
+  	<li>
+  		offset:
+  		<input type="range" v-model.number="offset" min="0" max="1" step="0.01"></input>
+  		{{offset}}
+  	</li>
+  	<li>
+  		sum:
+  		<input type="range" v-model.number="sum" min="0" max="1" step="0.01"></input>
+  		{{sum}}
+  	</li>
+  </ul>
+  <!-- Vue components for p5 sketches, also bound to data -->
+  <p5 src="./sketch1.js" :data="{
+  	grid: grid,
+  	steps: steps,
+  	multiplier: multiplier,
+  	intersectionPoints: intersectionPoints
+  }"></p5>
+  <p5 src="./sketch2.js" :data="{
+  	tiles: tiles,
+  	steps: steps,
+  	multiplier: multiplier,
+  }"></p5>
+
+</div>
+
+<script src="vue-definitions.js"></script>
+
+</body>
+</html>

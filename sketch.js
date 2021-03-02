@@ -1,20 +1,37 @@
+/* 
+TODO
+- [ ] separate drawing tiles/grid from creating them
+interaction:
+- [ ] hover over lines to highlight
+- [ ] hover over tiles to highlight
+- [ ] click line to select ribbon
+- [ ] click tile to select point
+- [ ] show ribbon edges mode?
+- [ ] SVG / highres export
+*/
+
+// PARAMETERS
+
+let numGrids = 5;      // should be 3 or more
+let steps = 10;        // more steps = larger area
+let offset = 0.1;      // grid offset, between 0 and 1 (0 & 0.5 are singular)
+let sum = 0.;          // sum of offsets, between 0 and 1 (0 & 0.5 are interesting)
+let drawGrid = true;   // draws n-grid in background
+let showTiles = true;  // show tiles
+let colorTiles = true; // colors tiles
+
+// END OF PARAMETERS
+
 const epsilon = Math.pow(10,-6);
-
-let colors = [
-'#ffe3d8', // light
-'#03506f', // dark
-'indigo',
-'palegoldenrod',
-'lemonchiffon',
-];
-
 let shapes = {};
 let cosTable = []
 let sinTable = [];
 
 function setup() {
-  createCanvas(1000, 1000);
+  createCanvas(windowWidth, windowHeight);
 
+  spacing = min(width,height)/(2*steps + 1);
+  
   //fill(255,0,0);
   noFill();
 
@@ -22,9 +39,6 @@ function setup() {
   translate(width/2, height/2);
   
   let grid = [];
-  let spacing = 40;
-  let steps = 10;
-  let numGrids = 5;
   let multiplier = 2 * PI / numGrids;
   
   for (let i = 0; i < numGrids; i++) {
@@ -32,9 +46,9 @@ function setup() {
     cosTable.push(cos(i*multiplier));
   }
   
-  let offsets = Array(numGrids).fill(0.1);
-  let sum = offsets.slice(0,-1).reduce((a,b) => a+b, 0);
-  offsets[offsets.length - 1] = 0.5 - sum;
+  let offsets = Array(numGrids).fill(offset);
+  let normalize = offsets.slice(0,-1).reduce((a,b) => a+b, 0);
+  offsets[offsets.length - 1] = sum - normalize;
   
   
   var t0 = new Date().getTime();
@@ -46,24 +60,35 @@ function setup() {
   }
   
   stroke(255,0,0);
-  drawLines(grid);
+  if (drawGrid){
+    drawLines(grid);  
+  }
   
-  stroke(128);
+  if (colorTiles) {
+    stroke(128);  
+  } else {
+    stroke(0,255,0);
+  }
   
   console.log('grid size: ' + grid.length + ' points');
   var t1 = new Date().getTime();
   console.log("Creating grids took " + (t1 - t0) + " milliseconds.")  
   
-  let intersections = findIntersections(grid, spacing, steps);
-  var t2 = new Date().getTime();
-  console.log("findIntersections took " + (t2 - t1) + " milliseconds.")  
+  if (showTiles) {
 
-  for (let pt of Object.values(intersections)) {
-    let medianPts = findMedianPoints(pt);
-    findDualPoints(medianPts, spacing, multiplier, offsets, numGrids);
+    let intersections = findIntersections(grid, spacing, steps);
+    var t2 = new Date().getTime();
+    console.log("findIntersections took " + (t2 - t1) + " milliseconds.")  
+
+    for (let pt of Object.values(intersections)) {
+      let medianPts = findMedianPoints(pt);
+      findDualPoints(medianPts, spacing, multiplier, offsets, numGrids);
+    }
+    var t3 = new Date().getTime();
+    console.log("medianPts & findDualPoints took " + (t3 - t2) + " milliseconds.")  
+    
   }
-  var t3 = new Date().getTime();
-  console.log("medianPts & findDualPoints took " + (t3 - t2) + " milliseconds.")  
+
   
   noLoop();
 }
@@ -138,29 +163,33 @@ function findDualPoints(medianPts, spacing, anglePrefix, offset, numGrids) {
 
   let dMax = dualPts.length;
       
-  // compute area using determinant method
-  let area = 0;
-  for (let i=0; i<dMax; i++) {
-    area += 0.5 * (dualPts[i].x * dualPts[(i+1)%dMax].y - dualPts[i].y * dualPts[(i+1)%dMax].x)
+  if (colorTiles) {
+
+    // compute area using determinant method
+    let area = 0;
+    for (let i=0; i<dMax; i++) {
+      area += 0.5 * (dualPts[i].x * dualPts[(i+1)%dMax].y - dualPts[i].y * dualPts[(i+1)%dMax].x)
+    }
+
+    area = str(round(1000000*area)/1000000);
+
+    if (!Object.keys(shapes).includes(area)) {
+      let r = random(50,255);
+      let g = random(50,255);
+      let b = random(50,255);
+      let o = 50;
+
+      shapes[area] = {
+        color: color((r+255)/2, (g+255)/2, (b+255)/2),
+        dualColor: color((r+o)/2, (g+o)/2, (b+o)/2),
+        points: dualPts
+      };
+    }
+    
+    fill(shapes[area].color);
+    stroke(shapes[area].dualColor);
+    
   }
-
-  area = str(round(1000000*area)/1000000);
-
-  if (!Object.keys(shapes).includes(area)) {
-    let r = random(255);
-    let g = random(255);
-    let b = random(255);
-    let o = 50;
-
-    shapes[area] = {
-      color: color((r+255)/2, (g+255)/2, (b+255)/2),
-      dualColor: color((r+o)/2, (g+o)/2, (b+o)/2),
-      points: dualPts
-    };
-  }
-
-  fill(shapes[area].color);
-  stroke(shapes[area].dualColor);
 
   beginShape();
   for (let i=0;i<dMax; i++) {
@@ -194,7 +223,12 @@ function findIntersections(grid, spacing, steps) {
         let x = (index2 * s1 - index1 * s2)/s12;
         let y = (index2 * c1 - index1 * c2)/s21;
         
-        if (dist(x,y,0,0) <= spacing * steps) {
+        if (dist(x,y,0,0) <= spacing * steps && 
+            x > -width/2 - spacing && 
+            x < width/2 + spacing && 
+            y > -height/2 - spacing && 
+            y < height/2 + spacing  
+           ) {
 
           let index = JSON.stringify([round(1000000*x)/1000000,round(1000000*y)/1000000]);
           if (pts[index]) {
