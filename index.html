@@ -26,7 +26,8 @@
     	grid: grid,
     	steps: steps,
     	multiplier: multiplier,
-    	intersectionPoints: intersectionPoints
+    	intersectionPoints: intersectionPoints,
+      showIntersections: showIntersections,
     }"></p5>
     <p5 src="./sketch2.js" :data="{
     	tiles: tiles,
@@ -41,24 +42,24 @@
     <!-- Some input sliders that are bound to data -->
     <ul>
       <li>
-        numGrids: 
-        <input type="range" v-model.number="numGrids" min="3" max="15" step="1"></input>
-        {{numGrids}}
+        <input type="range" id="numGrids" v-model.number="numGrids" min="3" max="15" step="1"></input>
+        <label for="numGrids">numGrids: {{ numGrids }}</label>        
       </li>
       <li>
-        steps:
-        <input type="range" v-model.number="steps" min="1" max="10" step="1"></input>
-        {{steps}}
+        <input type="range" id="steps" v-model.number="steps" min="1" max="10" step="1"></input>
+        <label for="steps">steps: {{ steps }}</label>        
       </li>
       <li>
-        offset:
-        <input type="range" v-model.number="offset" min="0" max="1" step="0.01"></input>
-        {{offset}}
+        <input type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
+        <label for="offset">offset: {{ offset }}</label>        
       </li>
       <li>
-        sum:
-        <input type="range" v-model.number="sum" min="0" max="1" step="0.01"></input>
-        {{sum}}
+        <input type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>
+        <label for="sum">sum: {{ sum }}</label>        
+      </li>
+      <li>
+        <label for="showIntersections">show intersections?</label>        
+        <input type="checkbox" id="showIntersections" v-model="showIntersections">
       </li>
     </ul>
   </footer>

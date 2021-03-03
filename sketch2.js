@@ -4,14 +4,15 @@
 function sketch(parent) { // we pass the sketch data from the parent
   return function( p ) { // p could be any variable name
     // p5 sketch goes here
+    let canvas;
 
     p.setup = function() {
 
-      let target = parent.$el;
+      target = parent.$el;
       let width = target.clientWidth;
       let height = target.clientHeight;
 
-      let canvas = p.createCanvas(width, height);
+      canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
 
       p.background(p.random(255), p.random(255), p.random(255));
@@ -32,12 +33,23 @@ function sketch(parent) { // we pass the sketch data from the parent
       drawTiles(data);
     };
 
-
+    // uses some logic from https://stackoverflow.com/a/33558386
     p.windowResized = function() {
+      // Hide the canvas so we can get the parent's responsive bounds
+      let displayBackup = canvas.elt.style.display;
+      canvas.elt.style.display = "none";
+
+      // measure parent without canvas
       let target = parent.$el;
       let width = target.clientWidth;
       let height = target.clientHeight;
+
+      // resize canvas
       p.resizeCanvas(width, height);
+
+      // restore canvas visibility
+      canvas.elt.style.display = displayBackup;
+
       drawTiles(parent.data);
     };
 

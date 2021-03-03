@@ -10,13 +10,11 @@ body {
 }
 
 canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
+	display: block;
 }
 
 #root {
-  height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -36,6 +34,7 @@ main {
 .half {
 	border: 1px solid;
 	flex: 1;
+	min-width: 300px;
 	margin: 0;
 }
 

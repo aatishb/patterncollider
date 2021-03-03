@@ -281,9 +281,10 @@ var app = new Vue({
 
   data: {
     numGrids: 5,
-    steps: 10,
+    steps: 5,
     offset: 0.1,
     sum: 0,
+    showIntersections: false,
     intersectionPoints: {},
     tiles: [],
     colors: {},
