@@ -53,7 +53,6 @@ function sketch(parent) { // we pass the sketch data from the parent
     };
 
     function drawTiles(data) {
-      let tiles = data.tiles;
       let steps = data.steps;
       let multiplier = data.multiplier;
       let spacing = p.min(p.width, p.height) / (2 * steps + 1);
@@ -69,7 +68,8 @@ function sketch(parent) { // we pass the sketch data from the parent
         p.noFill();
       }
 
-      for (let tile of tiles) {
+      let tiles = data.tiles;
+      for (let tile of Object.values(tiles)) {
         if (data.colorTiles) {
           let color = data.colors[tile.area].color;
           p.fill(p.color(...color));
@@ -78,7 +78,7 @@ function sketch(parent) { // we pass the sketch data from the parent
           p.stroke(p.color(...stroke));
         }
         p.beginShape();
-        for (let pt of tile.points) {
+        for (let pt of tile.dualPts) {
           p.vertex(preFactor * pt.x, preFactor * pt.y);
         }
         p.endShape(p.CLOSE);

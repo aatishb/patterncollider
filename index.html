@@ -32,24 +32,28 @@
   <main>
     <div class="half">
       <div>Grid</div>
-      <p5 src="./sketch1.js" :data="{
+      <p5 src="./drawGrid.js" :data="{
         grid: grid,
         steps: steps,
         multiplier: multiplier,
         intersectionPoints: intersectionPoints,
         showIntersections: showIntersections,
         zoom: zoom,
+      }" v-bind.sync="{
+        intersectionPoints: intersectionPoints
       }"></p5>
     </div>
     <div class="half">
       <div>Tiling</div>
-      <p5 src="./sketch2.js" :data="{
-        tiles: tiles,
+      <p5 src="./drawTiles.js" :data="{
+        tiles: intersectionPoints,
         steps: steps,
         multiplier: multiplier,
         zoom: zoom,
         colorTiles: colorTiles,
         colors: colors,
+      }" v-bind.sync="{
+        tiles: intersectionPoints
       }"></p5>
     </div>
   </main>

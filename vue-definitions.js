@@ -90,8 +90,9 @@ var app = new Vue({
       alert('not yet supported, sorry!');
     },
 
-    generateIntersectionPoints() {
+    generateTiles() {
 
+      // calculate intersection points of lines on grid
       let pts = {};
       
       for (let [angle1, index1] of this.grid) {
@@ -131,16 +132,9 @@ var app = new Vue({
           }
         }
       }
-      
-      this.intersectionPoints = pts;
 
-    },
-
-    generateTiles() {
-
-      let tiles = [];
-
-      for (let pt of Object.values(this.intersectionPoints)) {
+      // calculate dual points to intersection points
+      for (let pt of Object.values(pts)) {
 
         // sort angles of all edges that meet at an intersection point
         let angles = pt.angles.filter((e, i, arr) => arr.indexOf(e) == i).map(e => e * this.multiplier);
@@ -224,14 +218,20 @@ var app = new Vue({
           };
         }
 
+        pt.area = area;
+        pt.dualPts = dualPts;
+        /*
         tiles.push({
           points: dualPts,
           area: area
         })
+        */
 
       }
 
-      this.tiles = tiles;
+      //this.tiles = tiles;
+      
+      this.intersectionPoints = pts;
 
     },
 
@@ -288,13 +288,11 @@ var app = new Vue({
   },
 
   mounted() {
-    this.generateIntersectionPoints();
     this.generateTiles();
   },
 
   watch: {
     grid() {
-      this.generateIntersectionPoints();
       this.generateTiles();
     }
   },
@@ -304,7 +302,7 @@ var app = new Vue({
     steps: 5,
     offset: 0.1,
     sum: 0,
-    zoom: 0.9,
+    zoom: 0.75,
     showIntersections: true,
     colorTiles: true,
     intersectionPoints: {},
