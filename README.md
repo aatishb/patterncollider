@@ -5,3 +5,4 @@ TODO
 - [ ] randomize colors button
 - [ ] ability to select colors
 - [ ] download SVG button
+- [ ] color tiles

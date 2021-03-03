@@ -7,6 +7,8 @@
   <!-- Load in libraries here -->
   <script src="https://unpkg.com/vue"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,300;1,600&family=Raleway:wght@200;300;400;700&display=swap" rel="stylesheet"> 
 </head>
 
 <body>
@@ -45,23 +47,23 @@
     <!-- Some input sliders that are bound to data -->
     <ul>
       <li>
-        <input type="range" id="numGrids" v-model.number="numGrids" min="3" max="15" step="1"></input>
+        <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="15" step="1"></input>
         <label for="numGrids">symmetry: {{ numGrids }}</label>        
       </li>
       <li>
-        <input type="range" id="steps" v-model.number="steps" min="1" max="10" step="1"></input>
+        <input class="slider" type="range" id="steps" v-model.number="steps" min="1" max="10" step="1"></input>
         <label for="steps">tiles</label>        
       </li>
       <li>
-        <input type="range" id="zoom" v-model.number="zoom" min="0.5" max="2" step="0.01"></input>
+        <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.5" max="2" step="0.01"></input>
         <label for="sum">zoom</label>        
       </li>
       <li>
-        <input type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
-        <label for="offset">offset: {{ offset }}</label>        
+        <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
+        <label for="offset">shift: {{ offset }}</label>        
       </li>
       <li>
-        <input type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>
+        <input class="slider" type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>
         <label for="sum">sum: {{ sum }}</label>        
       </li>
       <li>
