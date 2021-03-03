@@ -2,7 +2,7 @@
 
 Vue.component('p5', {
 
-  template: '<div class="half"></div>',
+  template: '<div></div>',
 
   props: ['src','data'],
 
@@ -286,6 +286,7 @@ var app = new Vue({
     sum: 0,
     zoom: 0.9,
     showIntersections: false,
+    colorTiles: true,
     intersectionPoints: {},
     tiles: [],
     colors: {},

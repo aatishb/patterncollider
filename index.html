@@ -3,6 +3,14 @@
 
 <head>
   <meta charset="utf-8">
+  <title>Pattern Collider</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An Interactive to Draw Tiling Patterns">
+  <meta name="author" content="Aatish Bhatia">
+
+
+  <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <!-- Load in libraries here -->
   <script src="https://unpkg.com/vue"></script>
@@ -17,60 +25,83 @@
 
   <header>
     <h1>Pattern Collider</h1>
-    <h3>An Interactive Tool to Generate Quasiperiodic Tiling Patterns</h3>
+    <h3>An Interactive to Draw Tiling Patterns</h3>
   </header>
 
   <main>
-    <!--
-    <div class="half"></div>
-    <div class="half"></div>
-    -->
-    <p5 src="./sketch1.js" :data="{
-    	grid: grid,
-    	steps: steps,
-    	multiplier: multiplier,
-    	intersectionPoints: intersectionPoints,
-      showIntersections: showIntersections,
-      zoom: zoom,
-    }"></p5>
-    <p5 src="./sketch2.js" :data="{
-    	tiles: tiles,
-    	steps: steps,
-    	multiplier: multiplier,
-      zoom: zoom,
-    }"></p5>
+    <div class="half">
+      <div>Grid</div>
+      <p5 src="./sketch1.js" :data="{
+        grid: grid,
+        steps: steps,
+        multiplier: multiplier,
+        intersectionPoints: intersectionPoints,
+        showIntersections: showIntersections,
+        zoom: zoom,
+      }"></p5>
+    </div>
+    <div class="half">
+      <div>Tiling</div>
+      <p5 src="./sketch2.js" :data="{
+        tiles: tiles,
+        steps: steps,
+        multiplier: multiplier,
+        zoom: zoom,
+        colorTiles: colorTiles,
+      }"></p5>
+    </div>
   </main>
 
   <footer>
-    <h2>Settings</h2>
+    <div class="grid">
+      <div>
+        <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="15" step="1"></input>
+        <label for="numGrids">Symmetry: {{ numGrids }}</label>        
+      </div>
+      <div>
+        <input class="slider" type="range" id="steps" v-model.number="steps" min="1" max="10" step="1"></input>
+        <label for="steps">Tiles</label>        
+      </div>
+      <div>
+        <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.5" max="2" step="0.01"></input>
+        <label for="sum">Zoom</label>        
+      </div>
+      <div>
+        <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
+        <label for="offset">Shift: {{ offset }}</label>        
+      </div>
+      <div>
+        <input class="slider" type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>
+        <label for="sum">Sum: {{ sum }}</label>        
+      </div>
+      <div>
+        <label for="showIntersections">Show Intersections?</label>
+        <input type="checkbox" id="showIntersections" v-model="showIntersections">
+      </div>
+      <div>
+        <label for="colorTiles">Color Tiles?</label>
+        <input type="checkbox" id="colorTiles" v-model="colorTiles">
+      </div>
+    </div>
 
-    <!-- Some input sliders that are bound to data -->
+    <!--
     <ul>
       <li>
-        <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="15" step="1"></input>
-        <label for="numGrids">symmetry: {{ numGrids }}</label>        
       </li>
       <li>
-        <input class="slider" type="range" id="steps" v-model.number="steps" min="1" max="10" step="1"></input>
-        <label for="steps">tiles</label>        
       </li>
       <li>
-        <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.5" max="2" step="0.01"></input>
-        <label for="sum">zoom</label>        
       </li>
       <li>
-        <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
-        <label for="offset">shift: {{ offset }}</label>        
       </li>
       <li>
-        <input class="slider" type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>
-        <label for="sum">sum: {{ sum }}</label>        
       </li>
       <li>
-        <label for="showIntersections">Show grid intersections?</label>        
-        <input type="checkbox" id="showIntersections" v-model="showIntersections">
       </li>
     </ul>
+    -->
+
+
   </footer>
 
 

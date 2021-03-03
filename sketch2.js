@@ -64,9 +64,16 @@ function sketch(parent) { // we pass the sketch data from the parent
       p.background(0, 0, 0.2 * 255);
       p.translate(p.width / 2, p.height / 2);
 
+      if (!data.colorTiles) {
+        p.stroke(0, 255, 0);
+        p.noFill();
+      }
+
       for (let tile of tiles) {
-        p.fill(p.color(...tile.color));
-        p.stroke(p.color(...tile.stroke));
+        if (data.colorTiles) {
+          p.fill(p.color(...tile.color));
+          p.stroke(p.color(...tile.stroke));
+        }
         p.beginShape();
         for (let pt of tile.points) {
           p.vertex(preFactor * pt.x, preFactor * pt.y);
