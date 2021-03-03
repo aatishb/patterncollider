@@ -284,12 +284,13 @@ var app = new Vue({
     steps: 5,
     offset: 0.1,
     sum: 0,
+    zoom: 0.9,
     showIntersections: false,
     intersectionPoints: {},
     tiles: [],
     colors: {},
-    epsilon: Math.pow(10, -4),
-    inverseEpsilon: 10000,
+    epsilon: Math.pow(10, -6),
+    inverseEpsilon: Math.pow(10, 6),
   }
 
 });

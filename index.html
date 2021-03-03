@@ -29,11 +29,13 @@
     	multiplier: multiplier,
     	intersectionPoints: intersectionPoints,
       showIntersections: showIntersections,
+      zoom: zoom,
     }"></p5>
     <p5 src="./sketch2.js" :data="{
     	tiles: tiles,
     	steps: steps,
     	multiplier: multiplier,
+      zoom: zoom,
     }"></p5>
   </main>
 
@@ -44,11 +46,15 @@
     <ul>
       <li>
         <input type="range" id="numGrids" v-model.number="numGrids" min="3" max="15" step="1"></input>
-        <label for="numGrids">numGrids: {{ numGrids }}</label>        
+        <label for="numGrids">symmetry: {{ numGrids }}</label>        
       </li>
       <li>
         <input type="range" id="steps" v-model.number="steps" min="1" max="10" step="1"></input>
-        <label for="steps">steps: {{ steps }}</label>        
+        <label for="steps">tiles</label>        
+      </li>
+      <li>
+        <input type="range" id="zoom" v-model.number="zoom" min="0.5" max="2" step="0.01"></input>
+        <label for="sum">zoom</label>        
       </li>
       <li>
         <input type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>

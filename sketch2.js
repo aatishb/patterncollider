@@ -58,7 +58,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       let multiplier = data.multiplier;
       let spacing = p.min(p.width, p.height) / (2 * steps + 1);
       let preFactor = spacing * data.multiplier / Math.PI;
-      preFactor = preFactor;
+      preFactor = preFactor * data.zoom;
 
       p.push();
       p.background(0, 0, 0.2 * 255);
