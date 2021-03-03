@@ -135,6 +135,7 @@ h3 {
 button {
   padding: 0.3rem;
   font-size: 1rem;
+  font-weight: 100;
   width: 6rem;
 
   text-align: center;
@@ -173,3 +174,8 @@ button:hover {
 	padding: 1rem;
 	text-align: center;
 }
+
+.dotted {
+  border-bottom: dotted 2px rgba(255, 190, 137, 0.5);  
+}
+
