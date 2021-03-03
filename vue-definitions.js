@@ -2,7 +2,7 @@
 
 Vue.component('p5', {
 
-  template: '<div></div>',
+  template: '<div class="half"></div>',
 
   props: ['src','data'],
 

@@ -6,8 +6,14 @@ function sketch(parent) { // we pass the sketch data from the parent
     // p5 sketch goes here
 
     p.setup = function() {
-      let canvas = p.createCanvas(600, 600);
+
+      let target = parent.$el;
+      let width = target.clientWidth;
+      let height = target.clientHeight;
+
+      let canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
+
       p.background(p.random(255), p.random(255), p.random(255));
       p.noLoop();
       //p.noFill();
@@ -24,6 +30,15 @@ function sketch(parent) { // we pass the sketch data from the parent
       // console.log('data changed');
       // console.log('x: ', val.x, 'y: ', val.y);
       drawTiles(data);
+    };
+
+
+    p.windowResized = function() {
+      let target = parent.$el;
+      let width = target.clientWidth;
+      let height = target.clientHeight;
+      p.resizeCanvas(width, height);
+      drawTiles(parent.data);
     };
 
     function drawTiles(data) {
