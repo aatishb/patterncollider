@@ -15,7 +15,6 @@ function sketch(parent) { // we pass the sketch data from the parent
       canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
 
-      p.background(p.random(255), p.random(255), p.random(255));
       p.noLoop();
       //p.noFill();
       //p.stroke(0, 255, 0);
@@ -59,7 +58,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       let multiplier = data.multiplier;
       let spacing = p.min(p.width, p.height) / (2 * steps + 1);
       let preFactor = spacing * data.multiplier / Math.PI;
-      preFactor = preFactor / 1.1;
+      preFactor = preFactor;
 
       p.push();
       p.background(0, 0, 0.2 * 255);

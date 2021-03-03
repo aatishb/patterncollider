@@ -1,6 +1,6 @@
 html, body {
-  width: 100vw !important;
-  height: 100vh !important;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
 }
 
@@ -40,4 +40,30 @@ main {
 
 footer {
 	border: 1px solid;
+	padding: 1rem;
+}
+
+h1 {
+  text-align: center;
+  font-weight: 200;
+  font-size: 3rem;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+h3 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+header > h1 {
+  margin-bottom: 0.25rem;	
+}
+
+header > h3 {
+  margin-top: 0.25rem;	
 }

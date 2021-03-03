@@ -62,7 +62,7 @@ var app = new Vue({
   methods: {
 
     approx(x) {
-      return Math.round(1000*x)/1000;
+      return Math.round(x * this.inverseEpsilon) / this.inverseEpsilon;
     },
 
     dist(x,y) {
@@ -288,7 +288,8 @@ var app = new Vue({
     intersectionPoints: {},
     tiles: [],
     colors: {},
-    epsilon: Math.pow(10,-4),
+    epsilon: Math.pow(10, -4),
+    inverseEpsilon: 10000,
   }
 
 });
