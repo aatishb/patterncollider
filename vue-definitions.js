@@ -69,6 +69,27 @@ var app = new Vue({
       return Math.sqrt(x*x + y*y);
     },
 
+    randomizeColors() {
+      for (let color of Object.values(this.colors)) {
+
+        let r = (255 - 50) * Math.random() + 50;
+        let g = (255 - 50) * Math.random() + 50;
+        let b = (255 - 50) * Math.random() + 50;
+        let o = 50;
+
+        color.color = [(r + 255) / 2, (g + 255) / 2, (b + 255) / 2];
+        color.stroke = [(r + o) / 2, (g + o) / 2, (b + o) / 2];
+
+      }
+
+      // force a deep copy to trigger the data watcher in the p5 component
+      this.colors = JSON.parse(JSON.stringify(this.colors));
+    },
+
+    downloadPattern() {
+      alert('not yet supported, sorry!');
+    },
+
     generateIntersectionPoints() {
 
       let pts = {};
@@ -94,7 +115,7 @@ var app = new Vue({
             let xprime = x * c1 + y * s1;
             let yprime = - x * s1 + y * c1;
             
-            if (this.dist(x,y) <= this.steps) {
+            if (this.dist(x,y) <= this.steps + 0.5) {
 
               let index = JSON.stringify([this.approx(x), this.approx(y)]);
               if (pts[index]) {
@@ -205,8 +226,7 @@ var app = new Vue({
 
         tiles.push({
           points: dualPts,
-          color: this.colors[area].color,
-          stroke: this.colors[area].stroke
+          area: area
         })
 
       }
@@ -285,7 +305,7 @@ var app = new Vue({
     offset: 0.1,
     sum: 0,
     zoom: 0.9,
-    showIntersections: false,
+    showIntersections: true,
     colorTiles: true,
     intersectionPoints: {},
     tiles: [],

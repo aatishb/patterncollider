@@ -71,8 +71,11 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       for (let tile of tiles) {
         if (data.colorTiles) {
-          p.fill(p.color(...tile.color));
-          p.stroke(p.color(...tile.stroke));
+          let color = data.colors[tile.area].color;
+          p.fill(p.color(...color));
+
+          let stroke = data.colors[tile.area].stroke;
+          p.stroke(p.color(...stroke));
         }
         p.beginShape();
         for (let pt of tile.points) {

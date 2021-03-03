@@ -24,8 +24,9 @@
 <div id="root"> <!-- Vue can only access things contained within this div -->
 
   <header>
+    <!-- Tiloscope / Pattern Scope / Pattern Prism / Pattern Collider / Prismatic / Infini-tile / Tilomatic -->
     <h1>Pattern Collider</h1>
-    <h3>An Interactive to Draw Tiling Patterns</h3>
+    <h3>Create Infinite Tiling Patterns</h3>
   </header>
 
   <main>
@@ -48,6 +49,7 @@
         multiplier: multiplier,
         zoom: zoom,
         colorTiles: colorTiles,
+        colors: colors,
       }"></p5>
     </div>
   </main>
@@ -55,11 +57,11 @@
   <footer>
     <div class="grid">
       <div>
-        <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="15" step="1"></input>
+        <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="10" step="1"></input>
         <label for="numGrids">Symmetry:  <span class="dotted">{{ numGrids }}</span></label>        
       </div>
       <div>
-        <input class="slider" type="range" id="steps" v-model.number="steps" min="1" max="10" step="1"></input>
+        <input class="slider" type="range" id="steps" v-model.number="steps" min="0" max="10" step="1"></input>
         <label for="steps">Tiles</label>        
       </div>
       <div>
@@ -83,10 +85,10 @@
         <input type="checkbox" id="colorTiles" v-model="colorTiles">
       </div>
       <div>
-        <button>Randomize Colors</button>
+        <button @click="randomizeColors">Randomize Colors</button>
       </div>
       <div>
-        <button>Download SVG</button>
+        <button @click="downloadPattern">Download Pattern</button>
       </div>
     </div>
 
