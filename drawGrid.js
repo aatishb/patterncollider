@@ -5,6 +5,9 @@ function sketch(parent) { // we pass the sketch data from the parent
   return function( p ) { // p could be any variable name
     // p5 sketch goes here
     let canvas;
+    let grid, spacing, multiplier;
+    let recentHover = false;
+    let selectedLine = [];
 
     p.setup = function() {
       let target = parent.$el;
@@ -50,21 +53,112 @@ function sketch(parent) { // we pass the sketch data from the parent
       drawLines(parent.data);
     };
 
+    p.mouseMoved = function() {
+
+      if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+
+        drawLines(parent.data);
+        
+        let minLine = getNearestLine(p.mouseX, p.mouseY);
+
+        if (minLine.length > 0) {
+          p.push();
+            p.translate(p.width / 2, p.height / 2);
+            p.stroke(0, 255, 0);
+            drawLine(multiplier * minLine[0], spacing * minLine[1]);
+          p.pop();
+
+          selectedLine = minLine;
+        }
+
+      } else {
+        if (recentHover) {
+          recentHover = false;
+          selectedLine = [];
+          drawLines(parent.data);
+        }
+      }
+
+    };
+
+    p.mouseClicked = function() {
+      if (selectedLine.length > 0) {
+        updateSelectedLines(selectedLine);
+      }
+    };
+
+    // algorithm for identifying closest line
+    // needs testing, could be optimized
+    function getNearestLine(mouseX, mouseY) {
+
+      recentHover = true;
+      let minDist = spacing;
+      let minLine = [];
+
+      for (let [angle, index] of grid) {
+        let dist = p.abs(getXVal(multiplier * angle, spacing * index, mouseY - p.height/2) - (mouseX - p.width/2));
+
+        if (!isNaN(dist)) {
+          if (dist < minDist) {
+            minLine = [angle, index];
+            minDist = dist;
+          }
+        } 
+
+        dist = p.abs(getYVal(multiplier * angle, spacing * index, mouseX - p.width/2) - (mouseY - p.height/2));
+        if (!isNaN(dist)) {
+          if (dist < minDist) {
+            minLine = [angle, index];
+            minDist = dist;
+          }
+        }        
+      }
+
+      if (minDist < 10 && minDist < spacing) {
+        return minLine;
+      } else {
+        return [];
+      }
+    }
+
+    function updateSelectedLines(line) {
+
+      let index = parent.data.selectedLines.findIndex(e => e[0] == line[0] && e[1] == line[1]);
+
+      if (index < 0) {
+        let selectedLines = [...parent.data.selectedLines];
+        selectedLines.push(line);
+        parent.$emit('update:selected-lines', selectedLines); 
+      } else {
+        let selectedLines = parent.data.selectedLines.filter((e,i) => i !== index);
+        parent.$emit('update:selected-lines', selectedLines); 
+      }
+
+    }
+
     function drawLines(data) {
-      let grid = data.grid;
+      grid = data.grid;
       let steps = data.steps;
-      let multiplier = data.multiplier;
-      let spacing = p.min(p.width, p.height) / (2 * steps + 1);
+      multiplier = data.multiplier;
+      spacing = p.min(p.width, p.height) / (2 * steps + 1);
       spacing = spacing * data.zoom; // zoom out to show parallel lines
 
       p.push();
       p.background(0, 0, 0.2 * 255);
       p.translate(p.width / 2, p.height / 2);
 
+      let selectedLines = parent.data.selectedLines;
+
       for (let [angle, index] of grid) {
+        if (selectedLines.filter(e => e[0] == angle && e[1] == index).length > 0) {
+          p.stroke(0, 255, 0);
+        } else {
+          p.stroke(255, 0, 0);
+        }
         drawLine(multiplier * angle, spacing * index);
       }
 
+      p.stroke(255,0,0);
       if (data.showIntersections) {
         for (let pt of Object.values(data.intersectionPoints)) {
           p.ellipse(pt.x * spacing, pt.y * spacing, 5);

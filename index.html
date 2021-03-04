@@ -39,9 +39,10 @@
         intersectionPoints: intersectionPoints,
         showIntersections: showIntersections,
         zoom: zoom,
-      }" v-bind.sync="{
-        intersectionPoints: intersectionPoints
-      }"></p5>
+        selectedLines: selectedLines
+      }"
+      v-on:update:selected-lines="selectedLines = $event"
+      ></p5>
     </div>
     <div class="half">
       <div>Tiling</div>
@@ -52,8 +53,7 @@
         zoom: zoom,
         colorTiles: colorTiles,
         colors: colors,
-      }" v-bind.sync="{
-        tiles: intersectionPoints
+        selectedLines: selectedLines
       }"></p5>
     </div>
   </main>

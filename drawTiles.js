@@ -63,20 +63,37 @@ function sketch(parent) { // we pass the sketch data from the parent
       p.background(0, 0, 0.2 * 255);
       p.translate(p.width / 2, p.height / 2);
 
-      if (!data.colorTiles) {
-        p.stroke(0, 255, 0);
-        p.noFill();
-      }
 
       let tiles = data.tiles;
       for (let tile of Object.values(tiles)) {
+
+        let selected = false;
+        for (let l of tile.lines) {
+          if (data.selectedLines.filter(e => e[0] == l[0] && e[1] == l[1]).length > 0) {
+            selected = true;
+          }
+        }
+
         if (data.colorTiles) {
           let color = data.colors[tile.area].color;
           p.fill(p.color(...color));
 
           let stroke = data.colors[tile.area].stroke;
           p.stroke(p.color(...stroke));
+
+          if (selected) {
+            p.fill(0, 255, 0);
+          } 
+
+        } else {
+          p.stroke(0, 255, 0);
+          if (selected) {
+            p.fill(0, 255, 0, 150);
+          } else {
+            p.noFill();
+          }
         }
+
         p.beginShape();
         for (let pt of tile.dualPts) {
           p.vertex(preFactor * pt.x, preFactor * pt.y);

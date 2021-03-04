@@ -87,10 +87,12 @@ var app = new Vue({
     },
 
     downloadPattern() {
-      alert('not yet supported, sorry!');
     },
 
     generateTiles() {
+
+      // reset line selection
+      this.selectedLines = [];
 
       // calculate intersection points of lines on grid
       let pts = {};
@@ -122,11 +124,14 @@ var app = new Vue({
               if (pts[index]) {
                 pts[index].angles.push(angle2);
                 pts[index].angles.push(angle1);
+                pts[index].lines.push([angle1, index1]);
+                pts[index].lines.push([angle2, index2]);
               } else {
                 pts[index] = {};
                 pts[index].x = x;
                 pts[index].y = y;
                 pts[index].angles = [angle1, angle2];
+                pts[index].lines = [[angle1, index1], [angle2, index2]];
               }
             }
           }
@@ -308,6 +313,8 @@ var app = new Vue({
     intersectionPoints: {},
     tiles: [],
     colors: {},
+    selectedLines: [],
+    selectedTiles: [],
     epsilon: Math.pow(10, -6),
     inverseEpsilon: Math.pow(10, 6),
   }
