@@ -38,8 +38,10 @@ main {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	padding: 1rem;
+	padding-bottom: 1rem;
 	padding-top: 0rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .half {
@@ -136,7 +138,7 @@ button {
   padding: 0.3rem;
   font-size: 1rem;
   font-weight: 100;
-  width: 6rem;
+  width: 8rem;
 
   text-align: center;
   text-decoration: none;

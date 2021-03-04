@@ -57,6 +57,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
 
+        recentHover = true;
         drawLines(parent.data);
         
         let minLine = getNearestLine(p.mouseX, p.mouseY);
@@ -91,7 +92,6 @@ function sketch(parent) { // we pass the sketch data from the parent
     // needs testing, could be optimized
     function getNearestLine(mouseX, mouseY) {
 
-      recentHover = true;
       let minDist = spacing;
       let minLine = [];
 
