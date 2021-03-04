@@ -73,23 +73,23 @@
         <label for="sum">Zoom</label>        
       </div>
       <div>
-        <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
-        <label for="offset">Shift:  <span class="dotted">{{ offset }}</span></label>        
-      </div>
-      <div>
         <input class="slider" type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>
         <label for="sum">Sum:  <span class="dotted">{{ sum }}</span></label>        
       </div>
       <div>
-        <label for="showIntersections">Show Intersections?</label>
+        <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
+        <label for="offset">Shift:  <span class="dotted">{{ offset }}</span></label>        
+      </div>
+      <div>
+        <label for="showIntersections">Show Intersections</label>
         <input type="checkbox" id="showIntersections" v-model="showIntersections">
       </div>
       <div>
-        <label for="colorTiles">Color Tiles?</label>
+        <label for="colorTiles">Color Tiles</label>
         <input type="checkbox" id="colorTiles" v-model="colorTiles">
       </div>
       <div>
-        <button @click="randomizeColors">Randomize Colors</button>
+        <button @click="randomizeColors">Change Colors</button>
       </div>
     </div>
 
