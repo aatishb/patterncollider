@@ -1,9 +1,10 @@
 TODO
 
-- [X] hover and click on lines
-- [ ] hover and click on tiles
-- [X] randomize colors button
+- [x] hover and click on lines
+- [x] hover and click on tiles
+- [x] randomize colors button
 - [ ] rescale tiles slider
+- [ ] show ribbon edges view
 
 eventually:
 - [ ] ability to select colors

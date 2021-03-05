@@ -158,11 +158,20 @@ function sketch(parent) { // we pass the sketch data from the parent
         drawLine(multiplier * angle, spacing * index);
       }
 
-      p.stroke(255,0,0);
+
       if (data.showIntersections) {
+        p.noStroke();
+        p.fill(255);
         for (let pt of Object.values(data.intersectionPoints)) {
-          p.ellipse(pt.x * spacing, pt.y * spacing, 5);
+          p.ellipse(pt.x * spacing, pt.y * spacing, 4);
         }
+      }
+
+      // intersections corresponding to selected tiles
+      p.noStroke();
+      p.fill(0, 255, 0);
+      for (let tile of data.selectedTiles) {
+        p.ellipse(tile.x * spacing, tile.y * spacing, 5);
       }
       
       p.pop();

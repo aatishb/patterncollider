@@ -7,6 +7,7 @@ function sketch(parent) { // we pass the sketch data from the parent
     let canvas;
     let recentHover = false;
     let preFactor;
+    let selectedTile = {};
 
     p.setup = function() {
 
@@ -83,6 +84,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
           if (inside) {
 
+            selectedTile = tile;
             drawTiles(parent.data);
 
             p.push();
@@ -101,11 +103,34 @@ function sketch(parent) { // we pass the sketch data from the parent
       } else {
         if (recentHover) {
           recentHover = false;
+          selectedTile = {};
           drawTiles(parent.data);
         }
       }
 
     };
+
+    function updateSelectedTiles(tile) {
+
+      let index = parent.data.selectedTiles.findIndex(e => e.x == tile.x && e.y == tile.y);
+
+      if (index < 0) {
+        let selectedTiles = [...parent.data.selectedTiles];
+        selectedTiles.push(tile);
+        parent.$emit('update:selected-tiles', selectedTiles); 
+      } else {
+        let selectedTiles = parent.data.selectedTiles.filter((e,i) => i !== index);
+        parent.$emit('update:selected-tiles', selectedTiles); 
+      }
+
+    }
+
+    p.mouseClicked = function() {
+      if (Object.keys(selectedTile).length > 0) {
+        updateSelectedTiles(selectedTile);
+      }
+    };
+
     function drawTiles(data) {
       let steps = data.steps;
       let multiplier = data.multiplier;
@@ -116,7 +141,6 @@ function sketch(parent) { // we pass the sketch data from the parent
       p.push();
       p.background(0, 0, 0.2 * 255);
       p.translate(p.width / 2, p.height / 2);
-
 
       for (let tile of Object.values(data.tiles)) {
 
@@ -134,17 +158,17 @@ function sketch(parent) { // we pass the sketch data from the parent
           let stroke = data.colors[tile.area].stroke;
           p.stroke(p.color(...stroke));
 
-          if (selected) {
+          if (selected || data.selectedTiles.filter(e => e.x == tile.x && e.y == tile.y).length > 0) {
             p.fill(0, 255, 0);
           } 
 
         } else {
           p.stroke(0, 255, 0);
-          if (selected) {
+          p.noFill();
+
+          if (selected || data.selectedTiles.filter(e => e.x == tile.x && e.y == tile.y).length > 0) {
             p.fill(0, 255, 0, 150);
-          } else {
-            p.noFill();
-          }
+          } 
         }
 
         p.beginShape();

@@ -30,6 +30,7 @@
   </header>
 
   <main>
+
     <div class="half">
       <div>Grid</div>
       <p5 src="./drawGrid.js" :data="{
@@ -39,11 +40,13 @@
         intersectionPoints: intersectionPoints,
         showIntersections: showIntersections,
         zoom: zoom,
-        selectedLines: selectedLines
+        selectedLines: selectedLines,
+        selectedTiles: selectedTiles
       }"
       v-on:update:selected-lines="selectedLines = $event"
       ></p5>
     </div>
+
     <div class="half">
       <div>Tiling</div>
       <p5 src="./drawTiles.js" :data="{
@@ -53,9 +56,13 @@
         zoom: zoom,
         colorTiles: colorTiles,
         colors: colors,
-        selectedLines: selectedLines
-      }"></p5>
+        selectedLines: selectedLines,
+        selectedTiles: selectedTiles
+      }"
+      v-on:update:selected-tiles="selectedTiles = $event"
+      ></p5>
     </div>
+
   </main>
 
   <footer>

@@ -91,8 +91,9 @@ var app = new Vue({
 
     generateTiles() {
 
-      // reset line selection
+      // reset selections
       this.selectedLines = [];
+      this.selectedTiles = [];
 
       // calculate intersection points of lines on grid
       let pts = {};
