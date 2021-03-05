@@ -5,9 +5,9 @@ function sketch(parent) { // we pass the sketch data from the parent
   return function( p ) { // p could be any variable name
     // p5 sketch goes here
     let canvas;
-    let recentHover = false;
     let preFactor;
     let selectedTile = {};
+    let recentHover = true;
 
     p.setup = function() {
 
@@ -62,19 +62,50 @@ function sketch(parent) { // we pass the sketch data from the parent
     p.mouseMoved = function() {
 
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
-
         recentHover = true;
+        selectedTile = getSelectedTile(p.mouseX, p.mouseY);
+      } else if (recentHover) {
+        recentHover = false;
+        selectedTile = {};
+      } 
 
-        let x = (p.mouseX - p.width/2)/preFactor;
-        let y = (p.mouseY - p.height/2)/preFactor;
+      drawTiles(parent.data);
 
-        for (let tile of Object.values(parent.data.tiles)) {
+      if (Object.keys(selectedTile).length > 0) {
+        p.push();
+          p.translate(p.width/2, p.height/2);
+          p.fill(0, 255, 0);
+          p.beginShape();
+          for (let pt of selectedTile.dualPts) {
+            p.vertex(preFactor * pt.x, preFactor * pt.y);
+          }
+          p.endShape(p.CLOSE);
+        p.pop();
+      } 
 
+    };
+
+    p.mouseClicked = function() {
+      if (Object.keys(selectedTile).length > 0) {
+        updateSelectedTiles(selectedTile);
+      }
+    };
+
+    function getSelectedTile(mouseX, mouseY) {
+      let x = (mouseX - p.width/2)/preFactor;
+      let y = (mouseY - p.height/2)/preFactor;
+
+      let inside = false;
+      let mySelectedTile = {};
+
+      for (let tile of Object.values(parent.data.tiles)) {
+
+        if (!inside) {
           let vertices = tile.dualPts;
           let numVertices = vertices.length;
 
           let a = whichSide(x, y, vertices[0].x, vertices[0].y, vertices[1].x, vertices[1].y);
-          let inside = true;
+          inside = true;
 
           for (let i = 1; i < numVertices; i++) {
             if (a !== whichSide(x, y, vertices[i].x, vertices[i].y, vertices[(i + 1) % numVertices].x, vertices[(i + 1) % numVertices].y)) {
@@ -83,32 +114,14 @@ function sketch(parent) { // we pass the sketch data from the parent
           }
 
           if (inside) {
-
-            selectedTile = tile;
-            drawTiles(parent.data);
-
-            p.push();
-              p.translate(p.width/2, p.height/2);
-              p.fill(0, 255, 0);
-              p.beginShape();
-              for (let pt of vertices) {
-                p.vertex(preFactor * pt.x, preFactor * pt.y);
-              }
-              p.endShape(p.CLOSE);
-            p.pop();
-
+            mySelectedTile = tile;
           }
-        }
-
-      } else {
-        if (recentHover) {
-          recentHover = false;
-          selectedTile = {};
-          drawTiles(parent.data);
         }
       }
 
-    };
+      return mySelectedTile;
+
+    }
 
     function updateSelectedTiles(tile) {
 
@@ -124,12 +137,6 @@ function sketch(parent) { // we pass the sketch data from the parent
       }
 
     }
-
-    p.mouseClicked = function() {
-      if (Object.keys(selectedTile).length > 0) {
-        updateSelectedTiles(selectedTile);
-      }
-    };
 
     function drawTiles(data) {
       let steps = data.steps;

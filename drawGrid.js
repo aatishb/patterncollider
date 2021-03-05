@@ -72,12 +72,10 @@ function sketch(parent) { // we pass the sketch data from the parent
           selectedLine = minLine;
         }
 
-      } else {
-        if (recentHover) {
-          recentHover = false;
-          selectedLine = [];
-          drawLines(parent.data);
-        }
+      } else if (recentHover) {
+        recentHover = false;
+        selectedLine = [];
+        drawLines(parent.data);
       }
 
     };
