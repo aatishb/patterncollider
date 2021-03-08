@@ -69,6 +69,9 @@ main {
 
 footer {
   flex: 1 1 0;
+  display: flex;
+  flex-direction: row;
+
 	padding: 1rem;
   padding-top: 0rem;
 }
@@ -156,12 +159,6 @@ button:hover {
   color: rgb(254, 199, 81);
 }
 
-.row {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  min-height: 5rem;
-}
 
 .grid {
   width: 100%;
@@ -204,11 +201,6 @@ button:hover {
     height: 300px;
   }
 
-  .row {
-    flex-direction: column-reverse;
-
-  }
-
   .menu {
     flex-direction: row;
     width: 100%;
@@ -218,6 +210,10 @@ button:hover {
   main {
     padding-left: 0.5rem;
     padding-right: 0.5rem;    
+  }
+
+  footer {
+    flex-direction: column-reverse;
   }
 
 } 
