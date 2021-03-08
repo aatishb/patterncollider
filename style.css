@@ -197,7 +197,7 @@ button:hover {
 @media only screen and (max-width: 600px) {
   html, body {
     height: 100%;
-    width: 100vw;
+    width: 100%;
   }
 
   .half {
