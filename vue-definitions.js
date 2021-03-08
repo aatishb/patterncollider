@@ -317,7 +317,7 @@ var app = new Vue({
     steps: 9,
     offset: 0.1,
     sum: 0,
-    zoom: 0.6,
+    zoom: 0.75,
     showIntersections: true,
     colorTiles: true,
     showRibbons: true,
