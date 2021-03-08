@@ -46,7 +46,9 @@ main {
 	flex: 1;
 	min-width: 300px;
 	display: flex;
-	flex-direction: column
+	flex-direction: column;
+  align-items: center;
+  justify-content: center
 }
 
 .half > div:nth-child(2) {
@@ -186,5 +188,34 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  html, body {
+    height: 100%;
+    width: 100vw;
+  }
+
+  .half {
+    height: 300px;
+  }
+
+  .row {
+    flex-direction: column-reverse;
+
+  }
+
+  .menu {
+    flex-direction: row;
+    width: 100%;
+    padding-bottom: 0.5rem;
+  }
+
+  main {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;    
+  }
+
+} 
