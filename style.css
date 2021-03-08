@@ -29,10 +29,11 @@ canvas {
 
 header {
 	padding: 1rem;
+  flex: 1 1 0;
 }
 
 main {
-	flex: 1;
+  flex: 6 1 0;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -67,6 +68,7 @@ main {
 
 
 footer {
+  flex: 1 1 0;
 	padding: 1rem;
   padding-top: 0rem;
 }
