@@ -141,7 +141,7 @@ function sketch(parent) { // we pass the sketch data from the parent
     function drawTiles(data) {
       let steps = data.steps;
       let multiplier = data.multiplier;
-      let spacing = p.min(p.width, p.height) / (2 * steps + 1);
+      let spacing = p.min(p.width, p.height) / (steps);
       preFactor = spacing * data.multiplier / Math.PI;
       preFactor = preFactor * data.zoom;
 

@@ -116,10 +116,12 @@ var app = new Vue({
             let x = (index2 * s1 - index1 * s2)/s12;
             let y = (index2 * c1 - index1 * c2)/s21;
 
+            /*
             let xprime = x * c1 + y * s1;
             let yprime = - x * s1 + y * c1;
-            
-            if (this.dist(x,y) <= this.steps + 0.5) {
+            */
+
+            if ((this.steps == 1 && this.dist(x,y) <= 0.5 * this.steps) || this.dist(x,y) <= 0.5 * this.steps - 0.5) {
 
               let index = JSON.stringify([this.approx(x), this.approx(y)]);
               if (pts[index]) {
@@ -250,9 +252,9 @@ var app = new Vue({
       // create array
       let array =  Array(this.numGrids).fill(this.offset);
       // sum all but last element
-      let normalize = array.slice(0,-1).reduce((a,b) => a+b, 0);
+      let normalize = array.slice(0, -1).reduce((a,b) => a + b, 0);
       // set last element to enforce sum
-      array[array.length - 1] = this.sum - normalize;
+      array[array.length - 1] = (this.sum - normalize) % 1;
 
       return array;
     },
@@ -261,13 +263,17 @@ var app = new Vue({
       return 2 * Math.PI / this.numGrids;
     },
 
+    make1Dgrid() {
+      return Array(this.steps).fill(0).map((e,i) => i - (this.steps-1)/2);
+    },
+
     grid() { // dependencies: numGrids, steps, multiplier, offsets
 
 
       let table = [];
 
       for (let i = 0; i < this.numGrids; i++) {
-        for (let n = -this.steps; n <= this.steps; n++) {
+        for (let n of this.make1Dgrid) {
           // grid is a set of tuples of [angle, index] for each grid line
           table.push([ i, (n + this.offsets[i]) ]);
         }
@@ -300,17 +306,21 @@ var app = new Vue({
   watch: {
     grid() {
       this.generateTiles();
+    },
+    showRibbons() {
+      this.generateTiles();
     }
   },
 
   data: {
     numGrids: 5,
-    steps: 5,
+    steps: 9,
     offset: 0.1,
     sum: 0,
-    zoom: 0.75,
+    zoom: 0.6,
     showIntersections: true,
     colorTiles: true,
+    showRibbons: true,
     intersectionPoints: {},
     tiles: [],
     colors: {},

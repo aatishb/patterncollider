@@ -5,7 +5,11 @@ TODO
 - [x] randomize colors button
 - [ ] rescale tiles slider
 - [ ] show ribbon edges view
+- [ ] reset selection button
+- [ ] hold mouse to select multiple tiles
+- [ ] select colors
+- [ ] better default colors
 
 eventually:
-- [ ] ability to select colors
 - [ ] download SVG button
+- [ ] get shareable link?

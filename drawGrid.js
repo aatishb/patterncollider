@@ -138,7 +138,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       grid = data.grid;
       let steps = data.steps;
       multiplier = data.multiplier;
-      spacing = p.min(p.width, p.height) / (2 * steps + 1);
+      spacing = p.min(p.width, p.height) / (steps);
       spacing = spacing * data.zoom; // zoom out to show parallel lines
 
       p.push();
