@@ -243,6 +243,12 @@ var app = new Vue({
 
     },
 
+
+    onResize() {
+      this.canvas1Resized = false;
+      this.canvas2Resized = false;
+    },
+
   },
 
   computed: {
@@ -297,10 +303,19 @@ var app = new Vue({
       return table;
     },
 
+    canvasDisplaySetting() {
+      if (this.canvas1Resized && this.canvas2Resized) {
+        return '';
+      } else {
+        return 'none';
+      }
+    }
+
   },
 
   mounted() {
     this.generateTiles();
+    window.addEventListener("resize", this.onResize);
   },
 
   watch: {
@@ -315,7 +330,7 @@ var app = new Vue({
   data: {
     numGrids: 5,
     steps: 9,
-    offset: 0.1,
+    offset: 0.2,
     sum: 0,
     zoom: 0.75,
     showIntersections: true,
@@ -328,6 +343,9 @@ var app = new Vue({
     selectedTiles: [],
     epsilon: Math.pow(10, -6),
     inverseEpsilon: Math.pow(10, 6),
+    mode: 'settings',
+    canvas1Resized: true,
+    canvas2Resized: true,    
   }
 
 });

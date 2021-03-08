@@ -10,7 +10,8 @@ function sketch(parent) { // we pass the sketch data from the parent
     let selectedLine = [];
 
     p.setup = function() {
-      let target = parent.$el;
+
+      let target = parent.$el.parentElement;
       let width = target.clientWidth;
       let height = target.clientHeight;
 
@@ -30,27 +31,18 @@ function sketch(parent) { // we pass the sketch data from the parent
     p.dataChanged = function(data, oldData) {
       // console.log('data changed');
       // console.log('x: ', val.x, 'y: ', val.y);
+      if (data.display == 'none') {
+        // measure parent without canvas
+        let target = parent.$el.parentElement;
+        let width = target.clientWidth;
+        let height = target.clientHeight;
+
+        // resize canvas
+        p.resizeCanvas(width, height);
+        parent.$emit('update:resize-completed'); 
+      }
+
       drawLines(data);
-    };
-
-    // uses some logic from https://stackoverflow.com/a/33558386
-    p.windowResized = function() {
-      // Hide the canvas so we can get the parent's responsive bounds
-      let displayBackup = canvas.elt.style.display;
-      canvas.elt.style.display = 'none';
-
-      // measure parent without canvas
-      let target = parent.$el;
-      let width = target.clientWidth;
-      let height = target.clientHeight;
-
-      // resize canvas
-      p.resizeCanvas(width, height);
-
-      // restore canvas visibility
-      canvas.elt.style.display = displayBackup;
-
-      drawLines(parent.data);
     };
 
     p.mouseMoved = function() {

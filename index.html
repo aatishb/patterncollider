@@ -33,71 +33,99 @@
 
     <div class="half">
       <div>Grid</div>
-      <p5 src="./drawGrid.js" :data="{
-        grid: grid,
-        steps: steps,
-        multiplier: multiplier,
-        intersectionPoints: intersectionPoints,
-        showIntersections: showIntersections,
-        zoom: zoom,
-        selectedLines: selectedLines,
-        selectedTiles: selectedTiles
-      }"
-      v-on:update:selected-lines="selectedLines = $event"
-      ></p5>
+      <div>
+        <p5 src="./drawGrid.js"
+        :style="{display: canvasDisplaySetting}"
+        :data="{
+          grid: grid,
+          steps: steps,
+          multiplier: multiplier,
+          intersectionPoints: intersectionPoints,
+          showIntersections: showIntersections,
+          zoom: zoom,
+          selectedLines: selectedLines,
+          selectedTiles: selectedTiles,
+          display: canvasDisplaySetting,
+        }"
+        v-on:update:selected-lines="selectedLines = $event"
+        v-on:update:resize-completed="canvas1Resized = true"
+        ></p5>
+      </div>
     </div>
 
     <div class="half">
       <div>Tiling</div>
-      <p5 src="./drawTiles.js" :data="{
-        tiles: intersectionPoints,
-        steps: steps,
-        multiplier: multiplier,
-        zoom: zoom,
-        colorTiles: colorTiles,
-        colors: colors,
-        selectedLines: selectedLines,
-        selectedTiles: selectedTiles
-      }"
-      v-on:update:selected-tiles="selectedTiles = $event"
-      ></p5>
+      <div>
+        <p5 src="./drawTiles.js"
+        :style="{display: canvasDisplaySetting}"
+        :data="{
+          tiles: intersectionPoints,
+          steps: steps,
+          multiplier: multiplier,
+          zoom: zoom,
+          colorTiles: colorTiles,
+          colors: colors,
+          selectedLines: selectedLines,
+          selectedTiles: selectedTiles,
+          display: canvasDisplaySetting,
+        }"
+        v-on:update:selected-tiles="selectedTiles = $event"
+        v-on:update:resize-completed="canvas2Resized = true"
+        ></p5>
+      </div>
     </div>
 
   </main>
 
   <footer>
-    <div class="grid">
-      <div>
-        <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="10" step="1"></input>
-        <label for="numGrids">Symmetry:  <span class="dotted">{{ numGrids }}</span></label>        
+    <div class="row">
+      
+      <div class="menu">
+        <button @click="mode = 'settings'">⚙️</button>
+        <button @click="mode = 'design'">🖌</button>
       </div>
-      <div>
-        <input class="slider" type="range" id="steps" v-model.number="steps" min="1" max="15" step="2"></input>
-        <label for="steps">Size</label>        
+
+      <div class="grid" :style="{display: mode == 'settings' ? 'flex' : 'none'}">
+        <div>
+          <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="10" step="1"></input>
+          <label for="numGrids">Symmetry:  <span class="dotted">{{ numGrids }}</span></label>       
+        </div>
+        <div>
+          <input class="slider" type="range" id="steps" v-model.number="steps" min="1" max="15" step="2"></input>
+          <label for="steps">Size</label>        
+        </div>
+        <div>
+          <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.5" max="2" step="0.01"></input>
+          <label for="sum">Zoom</label>        
+        </div>
+        <div>
+          <input class="slider" type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>
+          <label for="sum">Sum:  <span class="dotted">{{ sum }}</span></label>        
+        </div>
+        <div>
+          <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
+          <label for="offset">Offset:  <span class="dotted">{{ offset }}</span></label>        
+        </div>
       </div>
-      <div>
-        <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.5" max="2" step="0.01"></input>
-        <label for="sum">Zoom</label>        
+
+      <div class="grid" :style="{display: mode == 'design' ? 'flex' : 'none'}">
+        <div>
+          <div>
+            <label for="showIntersections">Intersections</label>
+            <input type="checkbox" id="showIntersections" v-model="showIntersections" class="checkbox">
+          </div>
+        </div>
+        <div>
+          <div>
+            <label for="colorTiles">Color Tiles</label>
+            <input type="checkbox" id="colorTiles" v-model="colorTiles" class="checkbox">
+          </div>
+        </div>
+        <div>
+          <button @click="randomizeColors">Random Colors</button>
+        </div>
       </div>
-      <div>
-        <input class="slider" type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>
-        <label for="sum">Sum:  <span class="dotted">{{ sum }}</span></label>        
-      </div>
-      <div>
-        <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
-        <label for="offset">Offset:  <span class="dotted">{{ offset }}</span></label>        
-      </div>
-      <div>
-        <label for="showIntersections">Intersections</label>
-        <input type="checkbox" id="showIntersections" v-model="showIntersections">
-      </div>
-      <div>
-        <label for="colorTiles">Color Tiles</label>
-        <input type="checkbox" id="colorTiles" v-model="colorTiles">
-      </div>
-      <div>
-        <button @click="randomizeColors">Change Colors</button>
-      </div>
+
     </div>
 
   </footer>

@@ -28,12 +28,10 @@ canvas {
 }
 
 header {
-	/*border: 1px solid;*/
 	padding: 1rem;
 }
 
 main {
-	/*border: 1px solid;*/
 	flex: 1;
 	display: flex;
 	flex-direction: row;
@@ -45,7 +43,6 @@ main {
 }
 
 .half {
-	/*border: 1px solid;*/
 	flex: 1;
 	min-width: 300px;
 	display: flex;
@@ -68,9 +65,8 @@ main {
 
 
 footer {
-	/*border: 1px solid;*/
 	padding: 1rem;
-	padding-top: 0rem;
+  padding-top: 0rem;
 }
 
 h1, h2, h3, h4 {
@@ -108,6 +104,7 @@ h3 {
   opacity: 1;
   -webkit-transition: .2s;
   transition: opacity .2s;
+  margin-bottom: 0.5rem;
 }
 
 .slider::-webkit-slider-thumb {
@@ -135,10 +132,8 @@ h3 {
 }
 
 button {
-  padding: 0.3rem;
   font-size: 1rem;
   font-weight: 100;
-  width: 8rem;
 
   text-align: center;
   text-decoration: none;
@@ -158,13 +153,14 @@ button:hover {
 }
 
 .row {
-	/*border: 1px solid;*/
   width: 100%;
   display: flex;
   flex-direction: row;
+  min-height: 5rem;
 }
 
 .grid {
+  width: 100%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -172,12 +168,23 @@ button:hover {
 }
 
 .grid > div {
-	width: 7rem;
+	width: 8rem;
 	padding: 1rem;
 	text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .dotted {
   border-bottom: dotted 2px rgba(255, 190, 137, 0.5);  
 }
 
+.menu {
+  width: 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
