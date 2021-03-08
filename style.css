@@ -190,8 +190,12 @@ button:hover {
   justify-content: space-evenly;
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+
+/* screens under 600 px width OR height */
+@media screen and (max-width: 600px),
+       screen and (max-height: 600px),
+ {
+
   html, body {
     height: 100%;
     width: 100%;
