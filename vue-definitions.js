@@ -65,25 +65,28 @@ var app = new Vue({
       return Math.round(x * this.inverseEpsilon) / this.inverseEpsilon;
     },
 
-    dist(x,y) {
-      return Math.sqrt(x*x + y*y);
+    dist(x1,y1, x2, y2) {
+      let dx = x2 - x1;
+      let dy = y2 - y1;
+      return Math.sqrt(dx * dx + dy * dy);
     },
 
     randomizeColors() {
-      for (let color of Object.values(this.colors)) {
+      for (let color of this.colors) {
 
         let r = (255 - 50) * Math.random() + 50;
         let g = (255 - 50) * Math.random() + 50;
         let b = (255 - 50) * Math.random() + 50;
         let o = 50;
 
-        color.color = [(r + 255) / 2, (g + 255) / 2, (b + 255) / 2];
+        color.fill = [(r + 255) / 2, (g + 255) / 2, (b + 255) / 2];
         color.stroke = [(r + o) / 2, (g + o) / 2, (b + o) / 2];
 
       }
 
       // force a deep copy to trigger the data watcher in the p5 component
       this.colors = JSON.parse(JSON.stringify(this.colors));
+
     },
 
     clearSelection() {
@@ -92,6 +95,10 @@ var app = new Vue({
     },
 
     downloadPattern() {
+    },
+
+    protoTileClicked(tile) {
+      this.selectedProtoTile = tile;
     },
 
     generateTiles() {
@@ -126,7 +133,7 @@ var app = new Vue({
             let yprime = - x * s1 + y * c1;
             */
 
-            if ((this.steps == 1 && this.dist(x,y) <= 0.5 * this.steps) || this.dist(x,y) <= 0.5 * this.steps - 0.5) {
+            if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * this.steps - 0.5) {
 
               let index = JSON.stringify([this.approx(x), this.approx(y)]);
               if (pts[index]) {
@@ -145,6 +152,8 @@ var app = new Vue({
           }
         }
       }
+
+      this.colors.forEach(e => e.onScreen = false);
 
       // calculate dual points to intersection points
       for (let pt of Object.values(pts)) {
@@ -219,16 +228,24 @@ var app = new Vue({
 
         area = String(Math.round(1000 * area) / 1000);
 
-        if (!Object.keys(this.colors).includes(area)) {
+        let colorIndex = this.colors.findIndex(e => e.symmetry == this.numGrids && e.area == area);
+
+        if (colorIndex < 0) {
           let r = (255 - 50) * Math.random() + 50;
           let g = (255 - 50) * Math.random() + 50;
           let b = (255 - 50) * Math.random() + 50;
           let o = 50;
 
-          this.colors[area] = {
-            color: [(r + 255) / 2, (g + 255) / 2, (b + 255) / 2],
+          this.colors.push({
+            fill: [(r + 255) / 2, (g + 255) / 2, (b + 255) / 2],
             stroke: [(r + o) / 2, (g + o) / 2, (b + o) / 2],
-          };
+            points: dualPts,
+            symmetry: this.numGrids,
+            area: area,
+            onScreen: true
+          });
+        } else {
+          this.colors[colorIndex].onScreen = true;
         }
 
         pt.area = area;
@@ -247,7 +264,6 @@ var app = new Vue({
       this.intersectionPoints = pts;
 
     },
-
 
     onResize() {
       this.canvas1Resized = false;
@@ -314,7 +330,54 @@ var app = new Vue({
       } else {
         return 'none';
       }
-    }
+    },
+
+    protoTiles() {
+      
+      let arr = [];
+      let dist = 0;
+      let angle = 0;
+
+      for (let color of this.colors.filter(e => e.symmetry == this.numGrids && e.onScreen)) {
+        let points = color.points;
+        let numPts = points.length;
+
+        let xbar = 0;
+        let ybar = 0;
+
+        // find angle of longest diagonal
+        for (let i = 0; i < numPts; i++) {
+          xbar += points[i].x;
+          ybar += points[i].y;
+          for (let j = i; j < numPts; j++) {
+            let d = this.dist(points[i].x, points[i].y, points[j].x, points[j].y);
+            if (d > dist) {
+              dist = d;
+              angle = Math.atan2(points[j].y - points[i].y, points[j].x - points[i].x);
+            }
+          }
+        }
+
+        xbar /= numPts;
+        ybar /= numPts;
+
+        let normalPts = points.map(e => [50 * (e.x - xbar) / dist, 50 * (e.y - ybar) / dist]);
+        arr.push(
+        {
+          points: normalPts.map(e => String(e[0] + 25) + ',' + String(e[1] + 25)).reduce((a,b) => a + ' ' + b),
+          style: 'fill:rgb(' + color.fill.reduce((a,b) => a + ',' + b)
+          + ');stroke:rgb(' + color.stroke.reduce((a,b) => a + ',' + b) 
+          + ');stroke-width:1;',
+          color: color,
+        });
+      }
+
+      return arr;
+    },
+
+    selectedProtoTileIndex() {
+      return this.colors.findIndex(e => e.symmetry == this.selectedProtoTile.color.symmetry && e.area == this.selectedProtoTile.color.area);
+    },
 
   },
 
@@ -343,14 +406,15 @@ var app = new Vue({
     showRibbons: true,
     intersectionPoints: {},
     tiles: [],
-    colors: {},
+    colors: [],
     selectedLines: [],
     selectedTiles: [],
+    selectedProtoTile: {},
     epsilon: Math.pow(10, -6),
     inverseEpsilon: Math.pow(10, 6),
     mode: 'settings',
     canvas1Resized: false,
-    canvas2Resized: false,    
+    canvas2Resized: false, 
   }
 
 });

@@ -13,8 +13,8 @@
   <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <!-- Load in libraries here -->
-  <script src="https://unpkg.com/vue"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+  <script src="libraries/vue.dev.js"></script>
+  <script src="libraries/p5.min.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,300;1,600&family=Raleway:wght@200;300;400;700&display=swap" rel="stylesheet"> 
 </head>
@@ -68,6 +68,7 @@
           selectedLines: selectedLines,
           selectedTiles: selectedTiles,
           display: canvasDisplaySetting,
+          symmetry: numGrids
         }"
         v-on:update:selected-tiles="selectedTiles = $event"
         v-on:update:resize-completed="canvas2Resized = true"
@@ -85,7 +86,7 @@
       <button @click="mode = 'save'">💾</button>
     </div>
 
-    <div :class="mode == 'settings' ? 'grid' : 'grid hidden'">
+    <div v-if="mode == 'settings'" class="grid">
       <div>
         <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="10" step="1"></input>
         <label for="numGrids">Symmetry:  <span class="dotted">{{ numGrids }}</span></label>       
@@ -108,7 +109,7 @@
       </div>
     </div>
 
-    <div :class="mode == 'design' ? 'grid' : 'grid hidden'">
+    <div v-if="mode == 'design'" class="grid">
       <div>
         <div>
           <label for="showIntersections">Intersections</label>
@@ -127,9 +128,23 @@
       <div v-if="selectedTiles.length > 0 || selectedLines.length > 0">
         <button @click="clearSelection">Deselect All</button>
       </div>
+      <div style="width: 12rem;">
+        <div style="flex-direction: row;">
+          <svg height = "50" width="50" v-for="tile in protoTiles" @click="protoTileClicked(tile)">
+            <polygon :points="tile.points" :style="tile.style">
+          </svg>
+        </div>
+        <div v-if="JSON.stringify({}) !== JSON.stringify(selectedProtoTile)">
+          <div> <span>R: {{Math.round(colors[selectedProtoTileIndex].fill[0])}} </span> <input class="slider" type="range" id="steps" v-model.number="colors[selectedProtoTileIndex].fill[0]" min="0" max="255" step="1" style="width: 50%"></input></div>        
+          <div> <span>G: {{Math.round(colors[selectedProtoTileIndex].fill[1])}} </span> <input class="slider" type="range" id="steps" v-model.number="colors[selectedProtoTileIndex].fill[1]" min="0" max="255" step="1" style="width: 50%"></input></div>        
+          <div> <span>B: {{Math.round(colors[selectedProtoTileIndex].fill[2])}} </span> <input class="slider" type="range" id="steps" v-model.number="colors[selectedProtoTileIndex].fill[2]" min="0" max="255" step="1" style="width: 50%"></input></div>        
+        </div>
+      </div>
     </div>
 
-    <div :class="mode == 'save' ? 'grid' : 'grid hidden'">
+    </div>
+
+    <div v-if="mode == 'save'" class="grid">
     </div>
   </footer>
 

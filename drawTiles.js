@@ -149,10 +149,10 @@ function sketch(parent) { // we pass the sketch data from the parent
         }
 
         if (data.colorTiles) {
-          let color = data.colors[tile.area].color;
+          let color = data.colors.filter(e => e.area == tile.area && e.symmetry == data.symmetry)[0].fill;
           p.fill(p.color(...color));
 
-          let stroke = data.colors[tile.area].stroke;
+          let stroke = data.colors.filter(e => e.area == tile.area && e.symmetry == data.symmetry)[0].stroke;
           p.stroke(p.color(...stroke));
 
           if (selected || data.selectedTiles.filter(e => e.x == tile.x && e.y == tile.y).length > 0) {

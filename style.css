@@ -177,10 +177,6 @@ button:hover {
   justify-content: center;
 }
 
-.hidden {
-  display: none;
-}
-
 .dotted {
   border-bottom: dotted 2px rgba(255, 190, 137, 0.5);  
 }
