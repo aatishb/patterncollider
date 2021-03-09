@@ -6,12 +6,12 @@ TODO
 - [x] rescale tiles slider
 - [ ] select colors
 - [ ] better default colors
-
-eventually:
+- [ ] keep size constant across symmetry
+- [ ] fix for even # lines
 - [ ] download SVG button
 - [ ] get shareable link?
+- [ ] reset selection button
 
 maybe
 - [ ] show ribbon edges view
-- [ ] reset selection button
 - [ ] hold mouse to select multiple tiles

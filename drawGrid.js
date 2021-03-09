@@ -17,6 +17,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
+      parent.$emit('update:resize-completed'); 
 
       p.stroke(255,0,0);
       p.noLoop();

@@ -29,11 +29,10 @@ canvas {
 
 header {
 	padding: 1rem;
-  flex: 1 1 0;
 }
 
 main {
-  flex: 6 1 0;
+  height: 100%;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -68,12 +67,10 @@ main {
 
 
 footer {
-  flex: 1 1 0;
   display: flex;
   flex-direction: row;
 
 	padding: 1rem;
-  padding-top: 0rem;
 }
 
 h1, h2, h3, h4 {
@@ -151,6 +148,8 @@ button {
   color: rgb(254, 199, 81);
   border: 0.125rem solid rgb(85, 56, 100);
   border-radius: 0.25rem;
+
+  margin: 0rem;
 }
 
 button:hover {
@@ -178,6 +177,10 @@ button:hover {
   justify-content: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .dotted {
   border-bottom: dotted 2px rgba(255, 190, 137, 0.5);  
 }
@@ -187,7 +190,16 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+}
+
+.menu > button {
+  margin: 0.25rem;
+}
+
+.stretch {
+  width: 100%;
+  height: 100%;
 }
 
 

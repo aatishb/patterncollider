@@ -344,8 +344,8 @@ var app = new Vue({
     epsilon: Math.pow(10, -6),
     inverseEpsilon: Math.pow(10, 6),
     mode: 'settings',
-    canvas1Resized: true,
-    canvas2Resized: true,    
+    canvas1Resized: false,
+    canvas2Resized: false,    
   }
 
 });

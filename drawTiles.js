@@ -17,10 +17,9 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
+      parent.$emit('update:resize-completed'); 
 
       p.noLoop();
-      //p.noFill();
-      //p.stroke(0, 255, 0);
       drawTiles(parent.data);
     };
 
