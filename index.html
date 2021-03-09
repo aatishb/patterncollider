@@ -124,6 +124,9 @@
       <div>
         <button @click="randomizeColors">Random Colors</button>
       </div>
+      <div v-if="selectedTiles.length > 0 || selectedLines.length > 0">
+        <button @click="clearSelection">Deselect All</button>
+      </div>
     </div>
 
     <div :class="mode == 'save' ? 'grid' : 'grid hidden'">

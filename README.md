@@ -10,7 +10,7 @@ TODO
 - [ ] fix for even # lines
 - [ ] download SVG button
 - [ ] get shareable link?
-- [ ] reset selection button
+- [x] reset selection button
 
 maybe
 - [ ] show ribbon edges view

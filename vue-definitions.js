@@ -86,6 +86,11 @@ var app = new Vue({
       this.colors = JSON.parse(JSON.stringify(this.colors));
     },
 
+    clearSelection() {
+      this.selectedLines = [];
+      this.selectedTiles = [];
+    },
+
     downloadPattern() {
     },
 

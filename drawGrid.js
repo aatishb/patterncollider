@@ -136,6 +136,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       p.push();
       p.background(0, 0, 0.2 * 255);
+      p.strokeWeight(1);
       p.translate(p.width / 2, p.height / 2);
 
       let selectedLines = parent.data.selectedLines;
@@ -159,10 +160,11 @@ function sketch(parent) { // we pass the sketch data from the parent
       }
 
       // intersections corresponding to selected tiles
-      p.noStroke();
-      p.fill(0, 255, 0);
+      p.strokeWeight(2);
+      p.stroke(0, 255, 0);
+      p.noFill();
       for (let tile of data.selectedTiles) {
-        p.ellipse(tile.x * spacing, tile.y * spacing, 5);
+        p.ellipse(tile.x * spacing, tile.y * spacing, 10);
       }
       
       p.pop();
