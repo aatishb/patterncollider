@@ -110,42 +110,48 @@
     </div>
 
     <div v-if="mode == 'design'" class="grid">
+      
       <div>
-        <div>
-          <label for="showIntersections">Intersections</label>
-          <input type="checkbox" id="showIntersections" v-model="showIntersections" class="checkbox">
+        <button @click="randomizeColors">Random Colors</button>
+      </div>
+
+      <div>
+        <div>Change Tile Color</div>
+        <div style="display: flex; flex-direction: row;">
+          <span v-for="tile in protoTiles">
+            <label>
+              <svg height = "50" width="50" @click="protoTileClicked(tile)">
+                <polygon :points="tile.points" :style="tile.style">
+              </svg>
+              <input type="color" class="colorpicker" value="#ff0000"> 
+            </label>
+          </span>
         </div>
       </div>
+
       <div>
         <div>
           <label for="colorTiles">Color Tiles</label>
           <input type="checkbox" id="colorTiles" v-model="colorTiles" class="checkbox">
         </div>
       </div>
+
       <div>
-        <button @click="randomizeColors">Random Colors</button>
+        <div>
+          <label for="showIntersections">Intersections</label>
+          <input type="checkbox" id="showIntersections" v-model="showIntersections" class="checkbox">
+        </div>
       </div>
+
       <div v-if="selectedTiles.length > 0 || selectedLines.length > 0">
         <button @click="clearSelection">Deselect All</button>
       </div>
-      <div style="width: 12rem;">
-        <div style="flex-direction: row;">
-          <svg height = "50" width="50" v-for="tile in protoTiles" @click="protoTileClicked(tile)">
-            <polygon :points="tile.points" :style="tile.style">
-          </svg>
-        </div>
-        <div v-if="JSON.stringify({}) !== JSON.stringify(selectedProtoTile)">
-          <div> <span>R: {{Math.round(colors[selectedProtoTileIndex].fill[0])}} </span> <input class="slider" type="range" id="steps" v-model.number="colors[selectedProtoTileIndex].fill[0]" min="0" max="255" step="1" style="width: 50%"></input></div>        
-          <div> <span>G: {{Math.round(colors[selectedProtoTileIndex].fill[1])}} </span> <input class="slider" type="range" id="steps" v-model.number="colors[selectedProtoTileIndex].fill[1]" min="0" max="255" step="1" style="width: 50%"></input></div>        
-          <div> <span>B: {{Math.round(colors[selectedProtoTileIndex].fill[2])}} </span> <input class="slider" type="range" id="steps" v-model.number="colors[selectedProtoTileIndex].fill[2]" min="0" max="255" step="1" style="width: 50%"></input></div>        
-        </div>
-      </div>
-    </div>
 
     </div>
 
     <div v-if="mode == 'save'" class="grid">
-    </div>
+     </div>
+
   </footer>
 
 

@@ -1,3 +1,7 @@
+* {
+  outline: 1px solid white;
+}
+
 html, body {
   width: 100vw;
   height: 100vh;
@@ -198,6 +202,9 @@ button:hover {
   height: 100%;
 }
 
+.colorpicker {
+  visibility: hidden;
+}
 
 /* screens under 600 px width OR height */
 @media screen and (max-width: 600px),
