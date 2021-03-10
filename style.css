@@ -201,7 +201,7 @@ button:hover {
 }
 
 .colorpicker {
-  visibility: hidden;
+  display: none;
 }
 
 .row {
@@ -239,6 +239,10 @@ button:hover {
   footer {
     flex-shrink: 0;
     flex-direction: column-reverse;
+  }
+
+  .colorpicker {
+    display: '';
   }
 
 } 
