@@ -201,7 +201,7 @@ button:hover {
 }
 
 .colorpicker {
-  display: none;
+  visibility: hidden;
 }
 
 .row {
