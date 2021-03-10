@@ -72,7 +72,7 @@ var app = new Vue({
     },
 
     randomColor() {
-      return hsluv.hsluvToRgb([360 * Math.random(), 100, 75]).map(e => 255 * e);
+      return [0.5 * Math.random(), 0.5 * Math.random(), Math.random()].map(e => 255 * e).map(e => (e + 255)/2);
     },
 
     randomizeColors() {
@@ -193,6 +193,8 @@ var app = new Vue({
       }
 
       this.colors.forEach(e => e.onScreen = false);
+      let colorPaletteIndex = 0;
+      let colorPaletteLength = this.colorPalette.length;
 
       // calculate dual points to intersection points
       for (let pt of Object.values(pts)) {
@@ -272,12 +274,13 @@ var app = new Vue({
         if (colorIndex < 0) {
 
           this.colors.push({
-            fill: this.rgbToHex(...this.randomColor()),
+            fill: this.rgbToHex(...this.colorPalette[colorPaletteIndex]),
             points: this.normalize(dualPts),
             symmetry: this.numGrids,
             area: area,
             onScreen: true
           });
+          colorPaletteIndex = (colorPaletteIndex + 1) % colorPaletteLength;
 
         } else {
           this.colors[colorIndex].onScreen = true;
@@ -400,6 +403,7 @@ var app = new Vue({
     tiles: [],
     colors: [],
     stroke: 70,
+    rotate: 0,
     selectedLines: [],
     selectedTiles: [],
     epsilon: Math.pow(10, -6),
@@ -407,6 +411,14 @@ var app = new Vue({
     mode: 'settings',
     canvas1Resized: false,
     canvas2Resized: false,
+    colorPalette: [[255, 190, 137],
+                   [255, 161, 155],
+                   [202, 124, 152],
+                   [141, 92, 131],
+                   [85, 56, 100],
+                   [55, 42, 80],
+                   [40, 32, 68]
+                   ]
   }
 
 });

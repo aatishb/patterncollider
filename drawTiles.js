@@ -135,12 +135,14 @@ function sketch(parent) { // we pass the sketch data from the parent
       preFactor = spacing * data.multiplier / Math.PI;
       preFactor = preFactor * data.zoom;
       let stroke = data.stroke;
+      let rotate = p.radians(data.rotate);
 
       let onScreenColors = data.colors.filter(e => e.onScreen && e.symmetry == data.symmetry);
 
       p.push();
       p.background(0, 0, 0.2 * 255);
       p.translate(p.width / 2, p.height / 2);
+      p.rotate(rotate);
 
       for (let tile of Object.values(data.tiles)) {
 

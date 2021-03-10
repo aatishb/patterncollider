@@ -133,11 +133,13 @@ function sketch(parent) { // we pass the sketch data from the parent
       multiplier = data.multiplier;
       spacing = p.min(p.width, p.height) / (steps);
       spacing = spacing * data.zoom; // zoom out to show parallel lines
+      let rotate = p.radians(data.rotate);
 
       p.push();
       p.background(0, 0, 0.2 * 255);
       p.strokeWeight(1);
       p.translate(p.width / 2, p.height / 2);
+      p.rotate(rotate);
 
       let selectedLines = parent.data.selectedLines;
 
@@ -172,14 +174,15 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     // angle, index
     function drawLine(angle, index) {
-      let x0 = getXVal(angle, index, -p.height/2);
-      let x1 = getXVal(angle, index, p.height/2);
-      if (!isNaN(x0) && !isNaN(x1)) {
-        p.line(x0, -p.height/2, x1, p.height/2);
+      let x0 = getXVal(angle, index, -p.height);
+      let x1 = getXVal(angle, index, p.height);
+      //console.log(x0);
+      if (!isNaN(x0) && !isNaN(x1) && Math.abs(x0) < 1000000 && Math.abs(x1) < 1000000) {
+        p.line(x0, -p.height, x1, p.height);
       } else {
-        let y0 = getYVal(angle, index, -p.width/2);
-        let y1 = getYVal(angle, index, p.width/2);
-        p.line(-p.width/2, y0, p.width/2, y1);
+        let y0 = getYVal(angle, index, -p.width);
+        let y1 = getYVal(angle, index, p.width);
+        p.line(-p.width, y0, p.width, y1);
       }
     }
 
