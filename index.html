@@ -116,16 +116,26 @@
       </div>
 
       <div>
-        <div>Change Tile Color</div>
-        <div style="display: flex; flex-direction: row;">
-          <span v-for="tile in protoTiles">
-            <label>
-              <svg height = "50" width="50" @click="protoTileClicked(tile)">
-                <polygon :points="tile.points" :style="tile.style">
-              </svg>
-              <input type="color" class="colorpicker" value="#ff0000"> 
-            </label>
-          </span>
+        <div>Fill</div>
+        <div class="row">
+          <label v-for="tile in visibleTiles">
+            <svg height = "50" width="50">
+              <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
+            </svg>
+            <input type="color" class="colorpicker" v-model="tile.fill"> 
+          </label>
+        </div>
+      </div>
+
+      <div>
+        <div>Stroke</div>
+        <div class="row">
+          <label v-for="tile in visibleTiles">
+            <svg height = "50" width="50">
+              <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
+            </svg>
+            <input type="color" class="colorpicker" v-model="tile.stroke"> 
+          </label>
         </div>
       </div>
 

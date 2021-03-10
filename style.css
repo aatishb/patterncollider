@@ -1,7 +1,3 @@
-* {
-  outline: 1px solid white;
-}
-
 html, body {
   width: 100vw;
   height: 100vh;
@@ -162,7 +158,6 @@ button:hover {
   color: rgb(254, 199, 81);
 }
 
-
 .grid {
   width: 100%;
 	display: flex;
@@ -203,7 +198,14 @@ button:hover {
 }
 
 .colorpicker {
-  visibility: hidden;
+  display: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center
 }
 
 /* screens under 600 px width OR height */

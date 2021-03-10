@@ -1,20 +1,18 @@
 TODO
 
--- try to remove protoTiles and just use the colors array instead
-	-- i.e. why do we need two data structures? one is simpler.
-
 - [x] hover and click on lines
 - [x] hover and click on tiles
 - [x] randomize colors button
 - [x] rescale tiles slider
 - [x] select colors
-- [ ] better default colors
-- [ ] keep size constant across symmetry
-- [ ] fix for even # lines
+- [ ] download PNG button
 - [ ] download SVG button
-- [ ] get shareable link?
 - [x] reset selection button
 
 maybe
+- [ ] better default colors
+- [ ] keep size constant across symmetry
+- [ ] fix for even # lines
+- [ ] get shareable link?
 - [ ] show ribbon edges view
 - [ ] hold mouse to select multiple tiles

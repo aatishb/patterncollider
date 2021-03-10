@@ -79,14 +79,56 @@ var app = new Vue({
         let b = (255 - 50) * Math.random() + 50;
         let o = 50;
 
-        color.fill = [(r + 255) / 2, (g + 255) / 2, (b + 255) / 2];
-        color.stroke = [(r + o) / 2, (g + o) / 2, (b + o) / 2];
+        color.fill = this.rgbToHex(...[(r + 255) / 2, (g + 255) / 2, (b + 255) / 2]);
+        color.stroke = this.rgbToHex(...[(r + o) / 2, (g + o) / 2, (b + o) / 2]);
 
       }
 
       // force a deep copy to trigger the data watcher in the p5 component
       this.colors = JSON.parse(JSON.stringify(this.colors));
 
+    },
+
+    normalize(points) {
+
+      let numPts = points.length;
+
+      let xbar = 0;
+      let ybar = 0;
+      let dist = 0;
+
+      // find longest diagonal
+      for (let i = 0; i < numPts; i++) {
+        xbar += points[i].x;
+        ybar += points[i].y;
+        for (let j = i; j < numPts; j++) {
+          let d = this.dist(points[i].x, points[i].y, points[j].x, points[j].y);
+          if (d > dist) {
+            dist = d;
+            //angle = Math.atan2(points[j].y - points[i].y, points[j].x - points[i].x);
+          }
+        }
+      }
+
+      // calculate mean point
+      xbar /= numPts;
+      ybar /= numPts;
+
+      // subtract mean and normalize based on length of longest diagonal
+      return points.map(e => [50 * (e.x - xbar) / dist, 50 * (e.y - ybar) / dist]);
+
+    },
+
+    convertPointstoString(points) {
+      return points.map(e => String(e[0] + 25) + ',' + String(e[1] + 25)).reduce((a,b) => a + ' ' + b)
+    },
+
+    SVGPoints(color) {
+      return color.points.map(e => String(e[0] + 25) + ',' + String(e[1] + 25)).reduce((a,b) => a + ' ' + b);
+    },
+
+    SVGStyle(color) {
+      return 'fill: ' + color.fill + '; stroke: ' + color.stroke + '; stroke-width: 1;';
     },
 
     clearSelection() {
@@ -97,8 +139,13 @@ var app = new Vue({
     downloadPattern() {
     },
 
-    protoTileClicked(tile) {
-      this.selectedProtoTile = tile;
+    // from stack exchange https://stackoverflow.com/a/5624139
+    rgbToHex(r, g, b) {
+      let R = Math.round(r);
+      let G = Math.round(g);
+      let B = Math.round(b);
+
+      return '#' + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1);
     },
 
     generateTiles() {
@@ -237,13 +284,14 @@ var app = new Vue({
           let o = 50;
 
           this.colors.push({
-            fill: [(r + 255) / 2, (g + 255) / 2, (b + 255) / 2],
-            stroke: [(r + o) / 2, (g + o) / 2, (b + o) / 2],
-            points: dualPts,
+            fill: this.rgbToHex(...[(r + 255) / 2, (g + 255) / 2, (b + 255) / 2]),
+            stroke: this.rgbToHex(...[(r + o) / 2, (g + o) / 2, (b + o) / 2]),
+            points: this.normalize(dualPts),
             symmetry: this.numGrids,
             area: area,
             onScreen: true
           });
+
         } else {
           this.colors[colorIndex].onScreen = true;
         }
@@ -332,51 +380,8 @@ var app = new Vue({
       }
     },
 
-    protoTiles() {
-      
-      let arr = [];
-      let dist = 0;
-      let angle = 0;
-
-      for (let color of this.colors.filter(e => e.symmetry == this.numGrids && e.onScreen)) {
-        let points = color.points;
-        let numPts = points.length;
-
-        let xbar = 0;
-        let ybar = 0;
-
-        // find angle of longest diagonal
-        for (let i = 0; i < numPts; i++) {
-          xbar += points[i].x;
-          ybar += points[i].y;
-          for (let j = i; j < numPts; j++) {
-            let d = this.dist(points[i].x, points[i].y, points[j].x, points[j].y);
-            if (d > dist) {
-              dist = d;
-              angle = Math.atan2(points[j].y - points[i].y, points[j].x - points[i].x);
-            }
-          }
-        }
-
-        xbar /= numPts;
-        ybar /= numPts;
-
-        let normalPts = points.map(e => [50 * (e.x - xbar) / dist, 50 * (e.y - ybar) / dist]);
-        arr.push(
-        {
-          points: normalPts.map(e => String(e[0] + 25) + ',' + String(e[1] + 25)).reduce((a,b) => a + ' ' + b),
-          style: 'fill:rgb(' + color.fill.reduce((a,b) => a + ',' + b)
-          + ');stroke:rgb(' + color.stroke.reduce((a,b) => a + ',' + b) 
-          + ');stroke-width:1;',
-          color: color,
-        });
-      }
-
-      return arr;
-    },
-
-    selectedProtoTileIndex() {
-      return this.colors.findIndex(e => e.symmetry == this.selectedProtoTile.color.symmetry && e.area == this.selectedProtoTile.color.area);
+    visibleTiles() {
+      return this.colors.filter(e => e.onScreen && e.symmetry == this.numGrids);
     },
 
   },
@@ -409,7 +414,6 @@ var app = new Vue({
     colors: [],
     selectedLines: [],
     selectedTiles: [],
-    selectedProtoTile: {},
     epsilon: Math.pow(10, -6),
     inverseEpsilon: Math.pow(10, 6),
     mode: 'settings',
