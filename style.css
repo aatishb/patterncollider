@@ -200,10 +200,6 @@ button:hover {
   height: 100%;
 }
 
-.colorpicker {
-  display: none;
-}
-
 .row {
   display: flex;
   flex-direction: row;
@@ -239,10 +235,6 @@ button:hover {
   footer {
     flex-shrink: 0;
     flex-direction: column-reverse;
-  }
-
-  .colorpicker {
-    display: '';
   }
 
 } 
