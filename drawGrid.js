@@ -5,7 +5,7 @@ function sketch(parent) { // we pass the sketch data from the parent
   return function( p ) { // p could be any variable name
     // p5 sketch goes here
     let canvas;
-    let grid, spacing, multiplier;
+    let grid, spacing, multiplier, rotate;
     let recentHover = false;
     let selectedLine = [];
 
@@ -53,12 +53,16 @@ function sketch(parent) { // we pass the sketch data from the parent
         recentHover = true;
         drawLines(parent.data);
         
-        let minLine = getNearestLine(p.mouseX, p.mouseY);
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+
+        let minLine = getNearestLine(xprime, yprime);
 
         if (minLine.length > 0) {
           p.push();
             p.translate(p.width / 2, p.height / 2);
             p.stroke(0, 255, 0);
+            p.rotate(rotate);
             drawLine(multiplier * minLine[0], spacing * minLine[1]);
           p.pop();
 
@@ -133,7 +137,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       multiplier = data.multiplier;
       spacing = p.min(p.width, p.height) / (steps);
       spacing = spacing * data.zoom; // zoom out to show parallel lines
-      let rotate = p.radians(data.rotate);
+      rotate = p.radians(data.rotate);
 
       p.push();
       p.background(0, 0, 0.2 * 255);

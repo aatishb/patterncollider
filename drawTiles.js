@@ -8,6 +8,7 @@ function sketch(parent) { // we pass the sketch data from the parent
     let preFactor;
     let selectedTile = {};
     let recentHover = true;
+    let rotate;
 
     p.setup = function() {
 
@@ -53,7 +54,11 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         recentHover = true;
-        selectedTile = getSelectedTile(p.mouseX, p.mouseY);
+
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+
+        selectedTile = getSelectedTile(xprime, yprime);
       } else if (recentHover) {
         recentHover = false;
         selectedTile = {};
@@ -65,6 +70,7 @@ function sketch(parent) { // we pass the sketch data from the parent
         p.push();
           p.translate(p.width/2, p.height/2);
           p.fill(0, 255, 0);
+          p.rotate(rotate);
           p.beginShape();
           for (let pt of selectedTile.dualPts) {
             p.vertex(preFactor * pt.x, preFactor * pt.y);
@@ -135,7 +141,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       preFactor = spacing * data.multiplier / Math.PI;
       preFactor = preFactor * data.zoom;
       let stroke = data.stroke;
-      let rotate = p.radians(data.rotate);
+      rotate = p.radians(data.rotate);
 
       let onScreenColors = data.colors.filter(e => e.onScreen && e.symmetry == data.symmetry);
 
