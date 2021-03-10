@@ -228,17 +228,20 @@ button:hover {
 
   header {
     flex-shrink: 0;
+    background-color: pink;
   }
 
   main {
     flex-shrink: 0;
     padding-left: 0.5rem;
     padding-right: 0.5rem;    
+    background-color: pink;
   }
 
   footer {
     flex-shrink: 0;
     flex-direction: column-reverse;
+    background-color: pink;
   }
 
 } 
