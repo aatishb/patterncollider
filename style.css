@@ -200,6 +200,10 @@ button:hover {
   height: 100%;
 }
 
+.colorpicker {
+  display: none;
+}
+
 .row {
   display: flex;
   flex-direction: row;
