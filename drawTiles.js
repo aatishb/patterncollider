@@ -134,6 +134,9 @@ function sketch(parent) { // we pass the sketch data from the parent
       let spacing = p.min(p.width, p.height) / (steps);
       preFactor = spacing * data.multiplier / Math.PI;
       preFactor = preFactor * data.zoom;
+      let stroke = data.stroke;
+
+      let onScreenColors = data.colors.filter(e => e.onScreen && e.symmetry == data.symmetry);
 
       p.push();
       p.background(0, 0, 0.2 * 255);
@@ -149,11 +152,10 @@ function sketch(parent) { // we pass the sketch data from the parent
         }
 
         if (data.colorTiles) {
-          let color = data.colors.filter(e => e.area == tile.area && e.symmetry == data.symmetry)[0].fill;
-          p.fill(color);
+          let color = onScreenColors.filter(e => e.area == tile.area)[0];
 
-          let stroke = data.colors.filter(e => e.area == tile.area && e.symmetry == data.symmetry)[0].stroke;
-          p.stroke(stroke);
+          p.fill(color.fill);
+          p.stroke(stroke, stroke, stroke);
 
           if (selected || data.selectedTiles.filter(e => e.x == tile.x && e.y == tile.y).length > 0) {
             p.fill(0, 255, 0);

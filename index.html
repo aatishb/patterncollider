@@ -15,6 +15,7 @@
   <!-- Load in libraries here -->
   <script src="libraries/vue.dev.js"></script>
   <script src="libraries/p5.min.js"></script>
+  <script src="libraries/hsluv.min.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,300;1,600&family=Raleway:wght@200;300;400;700&display=swap" rel="stylesheet"> 
 </head>
@@ -68,7 +69,8 @@
           selectedLines: selectedLines,
           selectedTiles: selectedTiles,
           display: canvasDisplaySetting,
-          symmetry: numGrids
+          symmetry: numGrids,
+          stroke: stroke
         }"
         v-on:update:selected-tiles="selectedTiles = $event"
         v-on:update:resize-completed="canvas2Resized = true"
@@ -128,15 +130,8 @@
       </div>
 
       <div>
-        <div>Stroke</div>
-        <div class="row">
-          <label v-for="tile in visibleTiles">
-            <svg height = "50" width="50">
-              <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
-            </svg>
-            <input type="color" class="colorpicker" v-model="tile.stroke"> 
-          </label>
-        </div>
+        <label for="numGrids">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
+        <input class="slider" type="range" id="numGrids" v-model="stroke" min="0" max="255" step="1"></input>
       </div>
 
       <div>

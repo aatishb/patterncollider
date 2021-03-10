@@ -71,22 +71,14 @@ var app = new Vue({
       return Math.sqrt(dx * dx + dy * dy);
     },
 
+    randomColor() {
+      return hsluv.hsluvToRgb([360 * Math.random(), 100, 75]).map(e => 255 * e);
+    },
+
     randomizeColors() {
       for (let color of this.colors) {
-
-        let r = (255 - 50) * Math.random() + 50;
-        let g = (255 - 50) * Math.random() + 50;
-        let b = (255 - 50) * Math.random() + 50;
-        let o = 50;
-
-        color.fill = this.rgbToHex(...[(r + 255) / 2, (g + 255) / 2, (b + 255) / 2]);
-        color.stroke = this.rgbToHex(...[(r + o) / 2, (g + o) / 2, (b + o) / 2]);
-
+        color.fill = this.rgbToHex(...this.randomColor());
       }
-
-      // force a deep copy to trigger the data watcher in the p5 component
-      this.colors = JSON.parse(JSON.stringify(this.colors));
-
     },
 
     normalize(points) {
@@ -278,14 +270,9 @@ var app = new Vue({
         let colorIndex = this.colors.findIndex(e => e.symmetry == this.numGrids && e.area == area);
 
         if (colorIndex < 0) {
-          let r = (255 - 50) * Math.random() + 50;
-          let g = (255 - 50) * Math.random() + 50;
-          let b = (255 - 50) * Math.random() + 50;
-          let o = 50;
 
           this.colors.push({
-            fill: this.rgbToHex(...[(r + 255) / 2, (g + 255) / 2, (b + 255) / 2]),
-            stroke: this.rgbToHex(...[(r + o) / 2, (g + o) / 2, (b + o) / 2]),
+            fill: this.rgbToHex(...this.randomColor()),
             points: this.normalize(dualPts),
             symmetry: this.numGrids,
             area: area,
@@ -412,13 +399,14 @@ var app = new Vue({
     intersectionPoints: {},
     tiles: [],
     colors: [],
+    stroke: 70,
     selectedLines: [],
     selectedTiles: [],
     epsilon: Math.pow(10, -6),
     inverseEpsilon: Math.pow(10, 6),
     mode: 'settings',
     canvas1Resized: false,
-    canvas2Resized: false, 
+    canvas2Resized: false,
   }
 
 });

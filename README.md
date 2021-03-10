@@ -5,12 +5,12 @@ TODO
 - [x] randomize colors button
 - [x] rescale tiles slider
 - [x] select colors
+- [ ] better default colors
 - [ ] download PNG button
 - [ ] download SVG button
 - [x] reset selection button
 
 maybe
-- [ ] better default colors
 - [ ] keep size constant across symmetry
 - [ ] fix for even # lines
 - [ ] get shareable link?
