@@ -215,7 +215,6 @@ var app = new Vue({
           });
           //ellipse(x,y,5);
         }
-        
         //fill(255,255,0);
         
         // calculate medians of these offset points
@@ -248,7 +247,8 @@ var app = new Vue({
             let ci = this.sinCosTable[i].cos;
             let si = this.sinCosTable[i].sin;
 
-            let k = Math.floor(myPt.x * ci + myPt.y * si - this.offsets[i]);
+
+            let k = this.steps % 2 == 0 ? Math.floor(myPt.x * ci + myPt.y * si - this.offsets[i] - 1/2) : Math.floor(myPt.x * ci + myPt.y * si - this.offsets[i]);
 
             xd += k * ci;
             yd += k * si;
