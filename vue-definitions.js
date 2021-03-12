@@ -72,7 +72,7 @@ var app = new Vue({
     },
 
     randomColor() {
-      return [0.5 * Math.random(), 0.5 * Math.random(), Math.random()].map(e => 255 * e).map(e => (e + 255)/2);
+      return [Math.random(), Math.random(), Math.random()].map(e => 255 * e).map(e => (e + 255)/2);
     },
 
     randomizeColors() {
