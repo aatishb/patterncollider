@@ -95,7 +95,7 @@
         <label for="numGrids">Symmetry:  <span class="dotted">{{ numGrids }}</span></label>       
       </div>
       <div>
-        <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.5" max="2" step="0.01"></input>
+        <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.25" max="2" step="0.01"></input>
         <label for="sum">Zoom</label>        
       </div>
       <div>
@@ -103,8 +103,8 @@
         <label for="sum">Rotate: {{rotate}}°</label>        
       </div>
       <div>
-        <input class="slider" type="range" id="steps" v-model.number="steps" min="1" max="15" step="2"></input>
-        <label for="steps">Pieces</label>        
+        <input class="slider" type="range" id="radius" v-model.number="radius" min="0" max="3" step="0.1"></input>
+        <label for="steps">Radius</label>        
       </div>
       <div>
         <input class="slider" type="range" id="sum" v-model.number="sum" min="0" max="1" step="0.01"></input>

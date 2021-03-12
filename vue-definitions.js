@@ -172,7 +172,7 @@ var app = new Vue({
             let yprime = - x * s1 + y * c1;
             */
 
-            if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * this.steps - 0.5) {
+            if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
 
               let index = JSON.stringify([this.approx(x), this.approx(y)]);
               if (pts[index]) {
@@ -327,6 +327,12 @@ var app = new Vue({
       return 2 * Math.PI / this.numGrids;
     },
 
+    steps() {
+      // find nearest odd number to radius / (numGrids - 1)
+      // normalized so that a pentagrid with radius 1 has 9 steps
+      return 2* Math.round((36 * this.radius / (this.numGrids - 1) - 1)/2) + 1;
+    },
+
     make1Dgrid() {
       return Array(this.steps).fill(0).map((e,i) => i - (this.steps-1)/2);
     },
@@ -391,7 +397,7 @@ var app = new Vue({
 
   data: {
     numGrids: 5,
-    steps: 9,
+    radius: 1.5,
     offset: 0.2,
     sum: 0,
     zoom: 0.75,
