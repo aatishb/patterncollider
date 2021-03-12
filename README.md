@@ -8,6 +8,7 @@ TODO
 - [x] reset selection button
 - [x] keep size constant across symmetry
 - [ ] better default colors
+- [ ] click and drag
 - [ ] download PNG button
 - [ ] download SVG button
 
