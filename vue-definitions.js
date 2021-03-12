@@ -247,8 +247,7 @@ var app = new Vue({
             let ci = this.sinCosTable[i].cos;
             let si = this.sinCosTable[i].sin;
 
-
-            let k = this.steps % 2 == 0 ? Math.floor(myPt.x * ci + myPt.y * si - this.offsets[i] - 1/2) : Math.floor(myPt.x * ci + myPt.y * si - this.offsets[i]);
+            let k = Math.floor(myPt.x * ci + myPt.y * si - this.offsets[i]);
 
             xd += k * ci;
             yd += k * si;
