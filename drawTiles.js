@@ -59,25 +59,28 @@ function sketch(parent) { // we pass the sketch data from the parent
         let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
 
         selectedTile = getSelectedTile(xprime, yprime);
+
+        drawTiles(parent.data);
+
+        if (Object.keys(selectedTile).length > 0) {
+          p.push();
+            p.translate(p.width/2, p.height/2);
+            p.fill(0, 255, 0);
+            p.rotate(rotate);
+            p.beginShape();
+            for (let pt of selectedTile.dualPts) {
+              p.vertex(preFactor * pt.x, preFactor * pt.y);
+            }
+            p.endShape(p.CLOSE);
+          p.pop();
+        } 
+
       } else if (recentHover) {
         recentHover = false;
         selectedTile = {};
-      } 
+        drawTiles(parent.data);
+      }
 
-      drawTiles(parent.data);
-
-      if (Object.keys(selectedTile).length > 0) {
-        p.push();
-          p.translate(p.width/2, p.height/2);
-          p.fill(0, 255, 0);
-          p.rotate(rotate);
-          p.beginShape();
-          for (let pt of selectedTile.dualPts) {
-            p.vertex(preFactor * pt.x, preFactor * pt.y);
-          }
-          p.endShape(p.CLOSE);
-        p.pop();
-      } 
 
     };
 
