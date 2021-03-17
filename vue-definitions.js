@@ -397,10 +397,10 @@ var app = new Vue({
 
   data: {
     numGrids: 5,
-    radius: 1.5,
+    radius: 1,
     offset: 0.2,
     sum: 0,
-    zoom: 0.75,
+    zoom: 1,
     showIntersections: true,
     colorTiles: true,
     showRibbons: true,

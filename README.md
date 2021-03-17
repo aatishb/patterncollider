@@ -7,7 +7,8 @@ TODO
 - [x] select colors
 - [x] reset selection button
 - [x] keep size constant across symmetry
-- [ ] better default colors
+- [ ] better default colors / color palettes
+- [ ] tiles for all intersections?
 - [ ] click and drag
 - [ ] download PNG button
 - [ ] download SVG button

@@ -65,7 +65,7 @@ function sketch(parent) { // we pass the sketch data from the parent
         if (Object.keys(selectedTile).length > 0) {
           p.push();
             p.translate(p.width/2, p.height/2);
-            p.fill(0, 255, 0);
+            p.fill(128, 215, 255);
             p.rotate(rotate);
             p.beginShape();
             for (let pt of selectedTile.dualPts) {
@@ -155,10 +155,20 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       for (let tile of Object.values(data.tiles)) {
 
-        let selected = false;
-        for (let l of tile.lines) {
-          if (data.selectedLines.filter(e => e[0] == l[0] && e[1] == l[1]).length > 0) {
-            selected = true;
+        let tileIsSelected = false;
+        if (data.selectedTiles.length > 0) {
+          tileIsSelected = data.selectedTiles.filter(e => e.x == tile.x && e.y == tile.y).length > 0;
+        }
+
+        let tileInSelectedLine = false;
+        let numLinesPassingThroughTile = 0;
+
+        if (data.selectedLines.length > 0) {
+          for (let l of tile.lines) {
+            if (data.selectedLines.filter(e => e[0] == l[0] && e[1] == l[1]).length > 0) {
+              tileInSelectedLine = true;
+              numLinesPassingThroughTile++;
+            }
           }
         }
 
@@ -166,19 +176,32 @@ function sketch(parent) { // we pass the sketch data from the parent
           let color = onScreenColors.filter(e => e.area == tile.area)[0];
 
           p.fill(color.fill);
-          p.stroke(stroke, stroke, stroke);
+          p.stroke(stroke);
 
-          if (selected || data.selectedTiles.filter(e => e.x == tile.x && e.y == tile.y).length > 0) {
+          if (tileInSelectedLine) {
             p.fill(0, 255, 0);
-          } 
+            if (numLinesPassingThroughTile > 1) {
+              p.fill(60, 179, 113);
+            }
+          }
+          if (tileIsSelected) {
+            p.fill(128, 215, 255);
+          }
 
         } else {
           p.stroke(0, 255, 0);
           p.noFill();
 
-          if (selected || data.selectedTiles.filter(e => e.x == tile.x && e.y == tile.y).length > 0) {
+          if (tileInSelectedLine) {
             p.fill(0, 255, 0, 150);
-          } 
+            if (numLinesPassingThroughTile > 1) {
+              p.fill(60, 179, 113, 150);
+            }
+          }
+          if (tileIsSelected) {
+            p.fill(110, 110, 255);
+          }
+
         }
 
         p.beginShape();

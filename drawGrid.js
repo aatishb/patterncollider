@@ -167,7 +167,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       // intersections corresponding to selected tiles
       p.strokeWeight(2);
-      p.stroke(0, 255, 0);
+      p.stroke(0, 191, 255);
       p.noFill();
       for (let tile of data.selectedTiles) {
         p.ellipse(tile.x * spacing, tile.y * spacing, 10);
