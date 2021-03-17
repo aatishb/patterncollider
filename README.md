@@ -15,6 +15,7 @@
 - [ ] allow different colors for different orientations
 	- this can be accomplished by identifying tile with its area + a sorted list of the line orientations that generate it
 - [ ] can clicking be more obvious?
+- [ ] improve settings UI
 
 ## Optional
 - [ ] ribbon mode?
