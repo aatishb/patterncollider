@@ -16,5 +16,5 @@
 	- this can be accomplished by identifying tile with its area + a sorted list of the line orientations that generate it
 - [ ] can clicking be more obvious?
 
-maybe
+## Optional
 - [ ] ribbon mode?
