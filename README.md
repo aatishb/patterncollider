@@ -7,14 +7,14 @@ TODO
 - [x] select colors
 - [x] reset selection button
 - [x] keep size constant across symmetry
-- [ ] better default colors / color palettes
-- [ ] tiles for all intersections?
 - [ ] click and drag
 - [ ] download PNG button
 - [ ] download SVG button
+- [ ] make shareable
+- [ ] better default colors / color palettes
+- [ ] allow different colors for different orientations
+	- this can be accomplished by identifying tile with its area + a sorted list of the line orientations that generate it
+- [ ] can clicking be more obvious?
 
 maybe
-- [ ] fix for even # lines
-- [ ] get shareable link?
-- [ ] show ribbon edges view
-- [ ] hold mouse to select multiple tiles
+- [ ] ribbon mode?
