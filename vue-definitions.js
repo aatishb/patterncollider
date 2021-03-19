@@ -179,10 +179,14 @@ var app = new Vue({
 
                 let index = JSON.stringify([this.approx(x), this.approx(y)]);
                 if (pts[index]) {
-                  pts[index].angles.push(angle1);
-                  pts[index].angles.push(angle2);
-                  pts[index].lines.push([angle1, index1]);
-                  pts[index].lines.push([angle2, index2]);
+                  if (!pts[index].angles.includes(angle1)) {
+                    pts[index].angles.push(angle1);
+                    pts[index].lines.push([angle1, index1]);
+                  }
+                  if (!pts[index].angles.includes(angle2)) {
+                    pts[index].angles.push(angle2);
+                    pts[index].lines.push([angle2, index2]);
+                  }
                 } else {
                   pts[index] = {};
                   pts[index].x = x;
