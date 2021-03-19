@@ -175,7 +175,7 @@ var app = new Vue({
               let yprime = - x * s1 + y * c1;
               */
 
-              if (this.approx(s12) !== 0 && (this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
+              if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
 
                 let index = JSON.stringify([this.approx(x), this.approx(y)]);
                 if (pts[index]) {
