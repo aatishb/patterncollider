@@ -176,8 +176,8 @@ var app = new Vue({
 
               let index = JSON.stringify([this.approx(x), this.approx(y)]);
               if (pts[index]) {
-                pts[index].angles.push(angle2);
                 pts[index].angles.push(angle1);
+                pts[index].angles.push(angle2);
                 pts[index].lines.push([angle1, index1]);
                 pts[index].lines.push([angle2, index2]);
               } else {
@@ -200,10 +200,11 @@ var app = new Vue({
       for (let pt of Object.values(pts)) {
 
         // sort angles of all edges that meet at an intersection point
-        let angles = pt.angles.filter((e, i, arr) => arr.indexOf(e) == i).map(e => e * this.multiplier);
+        let angles = pt.angles.map(e => e * this.multiplier);
         let angles2 = angles.map(e => (e + Math.PI) % (2 * Math.PI));
-        angles = [...angles, ...angles2].sort((a,b) => a - b); // numerical sort
-        
+        // numerical sort angles and remove duplicates (e.g. due to degeneracy when offset = 0)
+        angles = [...angles, ...angles2].map(e => this.approx(e)).sort((a,b) => a - b).filter((e, i, arr) => arr.indexOf(e) == i);
+
         // calculate points offset along these edges
         let offsetPts = [];
         for (let angle of angles) {

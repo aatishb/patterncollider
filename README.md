@@ -7,6 +7,9 @@
 - [x] select colors
 - [x] reset selection button
 - [x] keep size constant across symmetry
+- [ ] fix select bugs for offset 0
+	- symmetry 6, offset 0, can't click on tile
+	- symmetry 5, offset 0, clicking on 1 line creates dark green tiles
 - [ ] click and drag
 - [ ] download PNG button
 - [ ] download SVG button
@@ -19,3 +22,4 @@
 
 ## Optional
 - [ ] ribbon mode?
+
