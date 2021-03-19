@@ -164,29 +164,34 @@ var app = new Vue({
             let s12 = s1 * c2 - c1 * s2;
             let s21 = -s12;
 
-            let x = (index2 * s1 - index1 * s2)/s12;
-            let y = (index2 * c1 - index1 * c2)/s21;
+            // avoid edge case where angle difference = 60 degrees
+            if (Math.abs(s12) > this.epsilon) {
 
-            /*
-            let xprime = x * c1 + y * s1;
-            let yprime = - x * s1 + y * c1;
-            */
+              let x = (index2 * s1 - index1 * s2)/s12;
+              let y = (index2 * c1 - index1 * c2)/s21;
 
-            if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
+              /*
+              let xprime = x * c1 + y * s1;
+              let yprime = - x * s1 + y * c1;
+              */
 
-              let index = JSON.stringify([this.approx(x), this.approx(y)]);
-              if (pts[index]) {
-                pts[index].angles.push(angle1);
-                pts[index].angles.push(angle2);
-                pts[index].lines.push([angle1, index1]);
-                pts[index].lines.push([angle2, index2]);
-              } else {
-                pts[index] = {};
-                pts[index].x = x;
-                pts[index].y = y;
-                pts[index].angles = [angle1, angle2];
-                pts[index].lines = [[angle1, index1], [angle2, index2]];
+              if (this.approx(s12) !== 0 && (this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
+
+                let index = JSON.stringify([this.approx(x), this.approx(y)]);
+                if (pts[index]) {
+                  pts[index].angles.push(angle1);
+                  pts[index].angles.push(angle2);
+                  pts[index].lines.push([angle1, index1]);
+                  pts[index].lines.push([angle2, index2]);
+                } else {
+                  pts[index] = {};
+                  pts[index].x = x;
+                  pts[index].y = y;
+                  pts[index].angles = [angle1, angle2];
+                  pts[index].lines = [[angle1, index1], [angle2, index2]];
+                }
               }
+
             }
           }
         }
