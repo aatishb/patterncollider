@@ -71,7 +71,8 @@
           display: canvasDisplaySetting,
           symmetry: numGrids,
           stroke: stroke,
-          rotate: rotate
+          rotate: rotate,
+          orientationColoring: orientationColoring
         }"
         v-on:update:selected-tiles="selectedTiles = $event"
         v-on:update:resize-completed="canvas2Resized = true"
@@ -150,6 +151,13 @@
         <div>
           <label for="showIntersections">Intersections</label>
           <input type="checkbox" id="showIntersections" v-model="showIntersections" class="checkbox">
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label for="orientationColoring">Color Using Tile Orientation</label>
+          <input type="checkbox" id="orientationColoring" v-model="orientationColoring" class="checkbox">
         </div>
       </div>
 

@@ -146,6 +146,8 @@ var app = new Vue({
       this.selectedLines = [];
       this.selectedTiles = [];
 
+      this.colors = [];
+
       // calculate intersection points of lines on grid
       let pts = {};
       
@@ -275,7 +277,7 @@ var app = new Vue({
 
         area = String(Math.round(1000 * area) / 1000);
 
-        let colorIndex = this.colors.findIndex(e => e.symmetry == this.numGrids && e.area == area);
+        let colorIndex = this.colors.findIndex(e => e.symmetry == this.numGrids && e.area == area && (this.orientationColoring ? JSON.stringify(e.angles) == JSON.stringify(angles) : true));
 
         if (colorIndex < 0) {
 
@@ -284,6 +286,7 @@ var app = new Vue({
             points: this.normalize(dualPts),
             symmetry: this.numGrids,
             area: area,
+            angles: angles,
             onScreen: true
           });
           colorPaletteIndex = (colorPaletteIndex + 1) % colorPaletteLength;
@@ -292,6 +295,7 @@ var app = new Vue({
           this.colors[colorIndex].onScreen = true;
         }
 
+        pt.angles = angles;
         pt.area = area;
         pt.dualPts = dualPts;
         /*
@@ -405,7 +409,10 @@ var app = new Vue({
     },
     showRibbons() {
       this.generateTiles();
-    }
+    },
+    orientationColoring() {
+      this.generateTiles();      
+    },
   },
 
   data: {
@@ -416,6 +423,7 @@ var app = new Vue({
     zoom: 1,
     showIntersections: true,
     colorTiles: true,
+    orientationColoring: false,
     showRibbons: true,
     intersectionPoints: {},
     tiles: [],

@@ -10,13 +10,13 @@
 - [x] fix select bugs for offset 0
 	- issue with selecting lines for symmetry 10
 - [x] fix stroke bug
+- [x] allow orientation based coloring
 - [ ] click and drag
 - [ ] download PNG button
 - [ ] download SVG button
 - [ ] make shareable
+- [ ] random colors should persist on settings change
 - [ ] better default colors / color palettes
-- [ ] allow different colors for different orientations
-	- this can be accomplished by identifying tile with its area + a sorted list of the line orientations that generate it
 - [ ] can clicking be more obvious?
 - [ ] improve settings UI
 

@@ -173,7 +173,7 @@ function sketch(parent) { // we pass the sketch data from the parent
         }
 
         if (data.colorTiles) {
-          let color = onScreenColors.filter(e => e.area == tile.area)[0];
+          let color = onScreenColors.filter(e => e.area == tile.area && (data.orientationColoring ? JSON.stringify(e.angles) == JSON.stringify(tile.angles) : true))[0];
 
           p.fill(color.fill);
           p.stroke(stroke, stroke, stroke);
