@@ -176,7 +176,7 @@ function sketch(parent) { // we pass the sketch data from the parent
           let color = onScreenColors.filter(e => e.area == tile.area)[0];
 
           p.fill(color.fill);
-          p.stroke(stroke);
+          p.stroke(stroke, stroke, stroke);
 
           if (tileInSelectedLine) {
             p.fill(0, 255, 0);

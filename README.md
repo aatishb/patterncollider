@@ -9,6 +9,7 @@
 - [x] keep size constant across symmetry
 - [x] fix select bugs for offset 0
 	- issue with selecting lines for symmetry 10
+- [x] fix stroke bug
 - [ ] click and drag
 - [ ] download PNG button
 - [ ] download SVG button
