@@ -58,12 +58,12 @@ function sketch(parent) { // we pass the sketch data from the parent
 
         let minLine = getNearestLine(xprime, yprime);
 
-        if (minLine.length > 0) {
+        if (JSON.stringify(minLine) !== JSON.stringify({})) {
           p.push();
             p.translate(p.width / 2, p.height / 2);
             p.stroke(0, 255, 0);
             p.rotate(rotate);
-            drawLine(multiplier * minLine[0], spacing * minLine[1]);
+            drawLine(multiplier * minLine.angle, spacing * minLine.index);
           p.pop();
 
           selectedLine = minLine;
@@ -71,14 +71,14 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       } else if (recentHover) {
         recentHover = false;
-        selectedLine = [];
+        selectedLine = {};
         drawLines(parent.data);
       }
 
     };
 
     p.mouseClicked = function() {
-      if (selectedLine.length > 0) {
+      if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
         updateSelectedLines(selectedLine);
       }
     };
@@ -90,12 +90,18 @@ function sketch(parent) { // we pass the sketch data from the parent
       let minDist = spacing;
       let minLine = [];
 
-      for (let [angle, index] of grid) {
+      for (let line of grid) {
+
+        let angle = line.angle;
+        let index = line.index;
         let dist = p.abs(getXVal(multiplier * angle, spacing * index, mouseY - p.height/2) - (mouseX - p.width/2));
 
         if (!isNaN(dist)) {
           if (dist < minDist) {
-            minLine = [angle, index];
+            minLine = {
+              angle: angle, 
+              index: index
+            };
             minDist = dist;
           }
         } 
@@ -103,7 +109,10 @@ function sketch(parent) { // we pass the sketch data from the parent
         dist = p.abs(getYVal(multiplier * angle, spacing * index, mouseX - p.width/2) - (mouseY - p.height/2));
         if (!isNaN(dist)) {
           if (dist < minDist) {
-            minLine = [angle, index];
+            minLine = {
+              angle: angle, 
+              index: index
+            };
             minDist = dist;
           }
         }        
@@ -112,13 +121,13 @@ function sketch(parent) { // we pass the sketch data from the parent
       if (minDist < 10 && minDist < spacing) {
         return minLine;
       } else {
-        return [];
+        return {};
       }
     }
 
     function updateSelectedLines(line) {
 
-      let index = parent.data.selectedLines.findIndex(e => e[0] == line[0] && e[1] == line[1]);
+      let index = parent.data.selectedLines.findIndex(e => e.angle == line.angle && e.index == line.index);
 
       if (index < 0) {
         let selectedLines = [...parent.data.selectedLines];
@@ -147,13 +156,14 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       let selectedLines = parent.data.selectedLines;
 
-      for (let [angle, index] of grid) {
-        if (selectedLines.filter(e => e[0] == angle && e[1] == index).length > 0) {
+      for (let line of grid) {
+
+        if (selectedLines.filter(e => e.angle == line.angle && e.index == line.index).length > 0) {
           p.stroke(0, 255, 0);
         } else {
           p.stroke(255, 0, 0);
         }
-        drawLine(multiplier * angle, spacing * index);
+        drawLine(multiplier * line.angle, spacing * line.index);
       }
 
 

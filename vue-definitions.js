@@ -149,15 +149,15 @@ var app = new Vue({
       // calculate intersection points of lines on grid
       let pts = {};
       
-      for (let [angle1, index1] of this.grid) {
-        for (let [angle2, index2] of this.grid) {
-          if (angle1 < angle2) {
+      for (let line1 of this.grid) {
+        for (let line2 of this.grid) {
+          if (line1.angle < line2.angle) {
 
-            let sc1 = this.sinCosTable[angle1];
+            let sc1 = this.sinCosTable[line1.angle];
             let s1 = sc1.sin;
             let c1 = sc1.cos;
 
-            let sc2 = this.sinCosTable[angle2];
+            let sc2 = this.sinCosTable[line2.angle];
             let s2 = sc2.sin;
             let c2 = sc2.cos;
 
@@ -167,8 +167,8 @@ var app = new Vue({
             // avoid edge case where angle difference = 60 degrees
             if (Math.abs(s12) > this.epsilon) {
 
-              let x = (index2 * s1 - index1 * s2)/s12;
-              let y = (index2 * c1 - index1 * c2)/s21;
+              let x = (line2.index * s1 - line1.index * s2) / s12;
+              let y = (line2.index * c1 - line1.index * c2) / s21;
 
               /*
               let xprime = x * c1 + y * s1;
@@ -179,20 +179,17 @@ var app = new Vue({
 
                 let index = JSON.stringify([this.approx(x), this.approx(y)]);
                 if (pts[index]) {
-                  if (!pts[index].angles.includes(angle1)) {
-                    pts[index].angles.push(angle1);
-                    pts[index].lines.push([angle1, index1]);
+                  if (!pts[index].lines.includes(line1)) {
+                    pts[index].lines.push(line1);
                   }
-                  if (!pts[index].angles.includes(angle2)) {
-                    pts[index].angles.push(angle2);
-                    pts[index].lines.push([angle2, index2]);
+                  if (!pts[index].lines.includes(line2)) {
+                    pts[index].lines.push(line2);
                   }
                 } else {
                   pts[index] = {};
                   pts[index].x = x;
                   pts[index].y = y;
-                  pts[index].angles = [angle1, angle2];
-                  pts[index].lines = [[angle1, index1], [angle2, index2]];
+                  pts[index].lines = [line1, line2];
                 }
               }
 
@@ -209,7 +206,7 @@ var app = new Vue({
       for (let pt of Object.values(pts)) {
 
         // sort angles of all edges that meet at an intersection point
-        let angles = pt.angles.map(e => e * this.multiplier);
+        let angles = pt.lines.map(e => e.angle * this.multiplier);
         let angles2 = angles.map(e => (e + Math.PI) % (2 * Math.PI));
         // numerical sort angles and remove duplicates (e.g. due to degeneracy when offset = 0)
         angles = [...angles, ...angles2].map(e => this.approx(e)).sort((a,b) => a - b).filter((e, i, arr) => arr.indexOf(e) == i);
@@ -350,16 +347,22 @@ var app = new Vue({
     grid() { // dependencies: numGrids, steps, multiplier, offsets
 
 
-      let table = [];
+      let lines = [];
 
       for (let i = 0; i < this.numGrids; i++) {
         for (let n of this.make1Dgrid) {
-          // grid is a set of tuples of [angle, index] for each grid line
-          table.push([ i, (n + this.offsets[i]) ]);
+
+          // grid is a set of tuples of {angle: angle, index: index} for each grid line
+          // TODO fix degeneracy issue: there can be multiple lines that coincide
+          lines.push({
+            angle: i,
+            index: n + this.offsets[i]
+          });
+
         }
       }
 
-      return table;
+      return lines;
     },
 
     // returns a table with sin & cos values for 2*PI*i/numGrids

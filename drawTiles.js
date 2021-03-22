@@ -165,7 +165,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
         if (data.selectedLines.length > 0) {
           for (let l of tile.lines) {
-            if (data.selectedLines.filter(e => e[0] == l[0] && e[1] == l[1]).length > 0) {
+            if (data.selectedLines.filter(e => e.angle == l.angle && e.index == l.index).length > 0) {
               tileInSelectedLine = true;
               numLinesPassingThroughTile++;
             }
