@@ -14,12 +14,12 @@
 - [x] click and drag
 - [x] group symmetry sum offset vs zoom, rotate
 - [x] instead of offset, what about ratio of sum / offset (mod 1) as a slider
-- [ ] mobile interaction
+- [ ] better default colors / color palettes
+- [ ] random colors should persist on settings change
 - [ ] download PNG button
 - [ ] download SVG button
+- [ ] mobile interaction
 - [ ] make shareable
-- [ ] random colors should persist on settings change
-- [ ] better default colors / color palettes
 - [ ] can clicking be more obvious?
 - [ ] improve settings UI
 
