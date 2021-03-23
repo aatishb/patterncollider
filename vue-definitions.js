@@ -322,14 +322,16 @@ var app = new Vue({
 
   computed: {
 
-    offsets() { // dependencies: numGrids, offset, sum
+    offsets() { // dependencies: numGrids, offset, ratio
 
       // create array
       let array =  Array(this.numGrids).fill(this.offset);
       // sum all but last element
       let normalize = array.slice(0, -1).reduce((a,b) => a + b, 0);
+      // calculate desired sum based on ratio
+      let sum = this.ratio + (this.numGrids * this.offset ) % 1;
       // set last element to enforce sum
-      array[array.length - 1] = (this.sum - normalize) % 1;
+      array[array.length - 1] = (sum - normalize) % 1;
 
       return array;
     },
@@ -419,7 +421,7 @@ var app = new Vue({
     numGrids: 5,
     radius: 1,
     offset: 0.2,
-    sum: 0,
+    ratio: 1,
     zoom: 1,
     showIntersections: true,
     colorTiles: true,
