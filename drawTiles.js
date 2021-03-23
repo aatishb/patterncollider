@@ -13,6 +13,8 @@ function sketch(parent) { // we pass the sketch data from the parent
     let recentlySelectedTiles = [];
     let adding = true;
 
+    let mouseIsPressed = false;
+
     p.setup = function() {
 
       let target = parent.$el.parentElement;
@@ -21,6 +23,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
+      document.addEventListener('mousemove', mouseMoved);
       parent.$emit('update:resize-completed'); 
 
       p.noLoop();
@@ -28,24 +31,6 @@ function sketch(parent) { // we pass the sketch data from the parent
     };
 
     p.draw = function() {
-
-      if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
-
-        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
-        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
-
-        selectedTile = getSelectedTile(xprime, yprime);
-
-        drawTiles(parent.data);
-
-        let tileAsString = JSON.stringify(selectedTile);
-        if (Object.keys(selectedTile).length > 0 && !recentlySelectedTiles.includes(tileAsString)) {
-          let index = parent.data.selectedTiles.findIndex(e => e.x == selectedTile.x && e.y == selectedTile.y);
-          updateSelectedTiles(selectedTile, index, adding);
-          recentlySelectedTiles.push(tileAsString);
-        } 
-
-      }
 
     };
 
@@ -72,7 +57,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       return Math.sign((yp - y1) * (x2 -x1) - (xp - x1) * (y2 - y1));
     }
 
-    p.mouseMoved = function() {
+    function mouseMoved(mousePos) {
 
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         recentHover = true;
@@ -85,45 +70,71 @@ function sketch(parent) { // we pass the sketch data from the parent
         drawTiles(parent.data);
 
         if (Object.keys(selectedTile).length > 0) {
-          p.push();
-            p.translate(p.width/2, p.height/2);
-            p.fill(128, 215, 255);
-            p.rotate(rotate);
-            p.beginShape();
-            for (let pt of selectedTile.dualPts) {
-              p.vertex(preFactor * pt.x, preFactor * pt.y);
-            }
-            p.endShape(p.CLOSE);
-          p.pop();
+
+
+          if (mouseIsPressed) {
+            let tileString = JSON.stringify(selectedTile);
+            if (!recentlySelectedTiles.includes(tileString)) {
+              let index = parent.data.selectedTiles.findIndex(e => e.x == selectedTile.x && e.y == selectedTile.y);
+              updateSelectedTiles(selectedTile, index, adding);
+              recentlySelectedTiles.push(tileString);
+            }            
+          } else {
+            p.push();
+              p.translate(p.width/2, p.height/2);
+              p.fill(128, 215, 255);
+              p.rotate(rotate);
+              p.beginShape();
+              for (let pt of selectedTile.dualPts) {
+                p.vertex(preFactor * pt.x, preFactor * pt.y);
+              }
+              p.endShape(p.CLOSE);
+            p.pop();
+          }
+
         } 
 
       } else if (recentHover) {
         recentHover = false;
         drawTiles(parent.data);
       }
-    };
-    
+    }
+
     p.mousePressed = function() {
 
-      recentlySelectedTiles = [];
-
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+
+        selectedTile = getSelectedTile(xprime, yprime);
+
         if (Object.keys(selectedTile).length > 0) {
-          let index = parent.data.selectedTiles.findIndex(e => e.x == selectedTile.x && e.y == selectedTile.y);
-          updateSelectedTiles(selectedTile, index, index < 0);
-          adding = (index < 0);
-          recentlySelectedTiles.push(JSON.stringify(selectedTile));
-        }
-        p.loop();
+
+          let tileString = JSON.stringify(selectedTile);
+
+          if (!recentlySelectedTiles.includes(tileString)) {
+            let index = parent.data.selectedTiles.findIndex(e => e.x == selectedTile.x && e.y == selectedTile.y);
+            adding = index < 0;
+            updateSelectedTiles(selectedTile, index, adding);
+            recentlySelectedTiles.push(tileString);
+          }            
+
+        } 
+
       }
 
+      mouseIsPressed = true;
+
+      return false;
     };
 
     p.mouseReleased = function() {
-      selectedTile = {};
-      p.noLoop();
-      drawTiles(parent.data);
+      recentlySelectedTiles = [];
+      mouseIsPressed = false;
+
+      return false;
     };
+
 
     function getSelectedTile(mouseX, mouseY) {
       let x = (mouseX - p.width/2)/preFactor;
@@ -157,9 +168,9 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     }
 
-    function updateSelectedTiles(tile, index, addingMode) {
+    function updateSelectedTiles(tile, index, addMode) {
 
-      if (addingMode) {
+      if (addMode) {
         let selectedTiles = [...parent.data.selectedTiles];
         selectedTiles.push(tile);
         parent.$emit('update:selected-tiles', selectedTiles); 

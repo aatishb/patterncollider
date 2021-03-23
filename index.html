@@ -93,7 +93,7 @@
     <div v-if="mode == 'settings'" class="grid">
       <div>
         <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="19" step="1"></input>
-        <label for="numGrids">Symmetry:  <span class="dotted">{{ numGrids }}</span></label>       
+        <label for="numGrids"><span class="dotted">{{ numGrids }}</span> Fold Symmetry</label>       
       </div>
       <div>
         <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
