@@ -11,7 +11,12 @@
 	- issue with selecting lines for symmetry 10
 - [x] fix stroke bug
 - [x] allow orientation based coloring
-- [ ] click and drag
+- [ ] editable numbers for sliders
+- [ ] sound tab?
+- [ ] mobile interaction
+- [ ] instead of offset, what about ratio of sum / offset (mod 1) as a slider
+- [ ] group symmetry sum offset vs zoom, rotate
+- [x] click and drag
 - [ ] download PNG button
 - [ ] download SVG button
 - [ ] make shareable
