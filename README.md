@@ -19,11 +19,12 @@
 - [ ] download PNG button
 - [ ] download SVG button
 - [ ] mobile interaction
+- [ ] click and drag on fast mouse movement
 - [ ] make shareable
-- [ ] can clicking be more obvious?
-- [ ] improve settings UI
 
 ## Optional
 - [ ] ribbon mode?
 - [ ] sound tab?
 - [ ] editable numbers for sliders
+- [ ] can clicking be more obvious?
+- [ ] improve settings UI

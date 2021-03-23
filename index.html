@@ -97,23 +97,23 @@
       </div>
       <div>
         <input class="slider" type="range" id="offset" v-model.number="offset" min="0" max="1" step="0.01"></input>
-        <label for="offset">Focus:  <span class="dotted">{{ offset }}</span></label>        
+        <label for="offset">Pattern:  <span class="dotted">{{ offset }}</span></label>        
       </div>
       <div>
-        <input class="slider" type="range" id="ratio" v-model.number="ratio" min="0" max="1" step="0.01"></input>
-        <label for="sum">Shift:  <span class="dotted">{{ ratio }}</span></label>        
+        <input class="slider" type="range" id="phase" v-model.number="phase" min="0" max="1" step="0.01"></input>
+        <label for="phase">Offset:  <span class="dotted">{{ phase }}</span></label>        
       </div>
       <div>
         <input class="slider" type="range" id="radius" v-model.number="radius" min="0" max="3.5" step="0.1"></input>
-        <label for="steps">Radius</label>        
+        <label for="radius">Radius</label>        
       </div>
       <div>
         <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.25" max="2" step="0.01"></input>
-        <label for="sum">Zoom</label>        
+        <label for="zoom">Zoom</label>        
       </div>
       <div>
         <input class="slider" type="range" id="rotate" v-model.number="rotate" min="-180" max="180" step="1"></input>
-        <label for="sum">Rotate: {{rotate}}°</label>        
+        <label for="rotate">Rotate: {{rotate}}°</label>        
       </div>
     </div>
 

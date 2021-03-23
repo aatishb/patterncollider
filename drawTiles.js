@@ -23,7 +23,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
-      document.addEventListener('mousemove', mouseMoved);
+      window.addEventListener('mousemove', mouseMoved);
       parent.$emit('update:resize-completed'); 
 
       p.noLoop();
@@ -100,6 +100,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       }
     }
 
+
     p.mousePressed = function() {
 
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
@@ -120,19 +121,16 @@ function sketch(parent) { // we pass the sketch data from the parent
           }            
 
         } 
+  
+        mouseIsPressed = true;
 
       }
 
-      mouseIsPressed = true;
-
-      return false;
     };
 
     p.mouseReleased = function() {
       recentlySelectedTiles = [];
       mouseIsPressed = false;
-
-      return false;
     };
 
 
