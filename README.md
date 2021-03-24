@@ -14,6 +14,8 @@
 - [x] click and drag
 - [x] group symmetry sum offset vs zoom, rotate
 - [x] instead of offset, what about ratio of sum / offset (mod 1) as a slider
+- [ ] check that new sliders reproduce settings of old
+	- i.e. prove that they span the same space
 - [ ] better default colors / color palettes
 - [ ] random colors should persist on settings change
 - [ ] download PNG button

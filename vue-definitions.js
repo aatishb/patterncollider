@@ -328,7 +328,7 @@ var app = new Vue({
       let array =  Array(this.numGrids).fill(this.offset);
       // sum all but last element
       let normalize = array.slice(0, -1).reduce((a,b) => a + b, 0);
-      // calculate desired sum based on ratio
+      // calculate desired sum based on phase
       let sum = this.phase + this.numGrids * this.offset;
       // set last element to enforce sum
       array[array.length - 1] = (sum - normalize) % 1;
