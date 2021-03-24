@@ -14,8 +14,11 @@
 - [x] click and drag
 - [x] group symmetry sum offset vs zoom, rotate
 - [x] instead of offset, what about ratio of sum / offset (mod 1) as a slider
+- [ ] selectedLines is getting an empty array pushed to it when you doubleclick on a tile
 - [ ] check that new sliders reproduce settings of old
 	- i.e. prove that they span the same space
+- [ ] red lines could be sharper
+- [ ] clear selection button should appear when needed, more visibly
 - [ ] better default colors / color palettes
 - [ ] random colors should persist on settings change
 - [ ] download PNG button

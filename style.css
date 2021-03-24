@@ -27,6 +27,13 @@ canvas {
 	flex-direction: column;
 }
 
+#corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1rem;
+}
+
 header {
   display: flex;
   flex-shrink: 0;
@@ -44,6 +51,7 @@ main {
 	padding-top: 0rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  position: relative;
 }
 
 .half {

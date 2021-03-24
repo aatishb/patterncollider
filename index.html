@@ -79,6 +79,10 @@
       </div>
     </div>
 
+    <div id="corner" v-if="selectedTiles.length > 0 || selectedLines.length > 0">
+        <button @click="clearSelection">Clear Selection</button>
+    </div>
+
   </main>
 
   <footer>
@@ -100,7 +104,7 @@
       </div>
       <div>
         <input class="slider" type="range" id="phase" v-model.number="phase" min="0" max="1" step="0.01"></input>
-        <label for="phase">Offset:  <span class="dotted">{{ phase }}</span></label>        
+        <label for="phase">Shift:  <span class="dotted">{{ phase }}</span></label>        
       </div>
       <div>
         <input class="slider" type="range" id="radius" v-model.number="radius" min="0" max="3.5" step="0.1"></input>
@@ -158,10 +162,6 @@
           <label for="orientationColoring">Color Using Tile Orientation</label>
           <input type="checkbox" id="orientationColoring" v-model="orientationColoring" class="checkbox">
         </div>
-      </div>
-
-      <div v-if="selectedTiles.length > 0 || selectedLines.length > 0">
-        <button @click="clearSelection">Deselect All</button>
       </div>
 
     </div>
