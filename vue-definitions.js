@@ -342,21 +342,6 @@ var app = new Vue({
         }
 
         area = String(Math.round(1000 * area) / 1000);
-
-        let colorIndex = this.colors.findIndex(e => e.symmetry == this.numGrids && e.area == area && (this.orientationColoring ? JSON.stringify(e.angles) == JSON.stringify(angles) : true));
-
-        if (colorIndex < 0) {
-
-          this.colors.push({
-            fill: this.rgbToHex(...this.colorPalette[colorPaletteIndex]),
-            points: this.normalize(dualPts),
-            symmetry: this.numGrids,
-            area: area,
-            angles: angles,
-            onScreen: true
-          });
-          colorPaletteIndex = (colorPaletteIndex + 1) % colorPaletteLength;
-
         pt.area = area;
         pt.angles = angles;
         pt.dualPts = dualPts;
