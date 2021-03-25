@@ -44,7 +44,7 @@ Vue.component('p5', {
   watch: {
     data: {
       handler: function(val, oldVal) {
-        if(this.myp5.dataChanged) {
+        if(this.myp5.dataChanged && this.myp5._setupDone) {
           this.myp5.dataChanged(val, oldVal);
         }
       },

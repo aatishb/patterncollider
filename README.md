@@ -16,16 +16,17 @@
 - [x] instead of offset, what about ratio of sum / offset (mod 1) as a slider
 - [x] click and drag on fast mouse movement
 - [x] selectedLines is getting an empty array pushed to it when you doubleclick on a tile
-- [ ] check that new sliders reproduce settings of old
-	- i.e. prove that they span the same space
-- [ ] red lines could be sharper
-- [ ] clear selection button should appear when needed, more visibly
+- [x] clear selection button should appear when needed, more visibly
+- [x] p5 is being called on data change before it has finished loading
 - [ ] better default colors / color palettes
 - [ ] random colors should persist on settings change
 - [ ] download PNG button
 - [ ] download SVG button
 - [ ] mobile interaction
 - [ ] make shareable
+- [ ] check that new sliders reproduce settings of old
+	- i.e. prove that they span the same space
+- [ ] red lines could be sharper
 
 ## Optional
 - [ ] ribbon mode?
