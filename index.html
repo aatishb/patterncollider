@@ -48,6 +48,8 @@
           rotate: rotate
         }"
         v-on:update:selected-lines="selectedLines = $event"
+        v-on:update:add-line="selectedLines = [...selectedLines, $event]"
+        v-on:update:remove-line="selectedLines = selectedLines.filter(e => e.angle !== $event.angle && e.index !== $event.index)"
         v-on:update:resize-completed="canvas1Resized = true"
         ></p5>
       </div>
