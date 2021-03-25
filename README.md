@@ -26,7 +26,9 @@
 - [ ] make shareable
 - [ ] check that new sliders reproduce settings of old
 	- i.e. prove that they span the same space
-- [ ] red lines could be sharper
+- [ ] 1 pixel width lines could be sharper
+- [ ] increase slider button size (esp. on mobile)
+- [ ] improve efficiency on checking if mouse is in tile
 
 ## Optional
 - [ ] ribbon mode?

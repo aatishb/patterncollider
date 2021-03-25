@@ -168,7 +168,6 @@ function sketch(parent) { // we pass the sketch data from the parent
       mouseIsPressed = false;
     };
 
-
     function getSelectedTile(mouseX, mouseY) {
       let x = (mouseX - p.width/2)/preFactor;
       let y = (mouseY - p.height/2)/preFactor;
@@ -220,7 +219,6 @@ function sketch(parent) { // we pass the sketch data from the parent
       let stroke = data.stroke;
       rotate = p.radians(data.rotate);
 
-      let onScreenColors = data.colors.filter(e => e.onScreen && e.symmetry == data.symmetry);
 
       p.push();
       p.background(0, 0, 0.2 * 255);
@@ -247,7 +245,8 @@ function sketch(parent) { // we pass the sketch data from the parent
         }
 
         if (data.colorTiles) {
-          let color = onScreenColors.filter(e => e.area == tile.area && (data.orientationColoring ? JSON.stringify(e.angles) == JSON.stringify(tile.angles) : true))[0];
+          //let onScreenColors = data.colors.filter(e => e.onScreen && e.symmetry == data.symmetry);
+          let color = data.colors.filter(e => e.area == tile.area && (data.orientationColoring ? JSON.stringify(e.angles) == JSON.stringify(tile.angles) : true))[0];
 
           p.fill(color.fill);
           p.stroke(stroke, stroke, stroke);

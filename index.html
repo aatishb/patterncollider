@@ -124,7 +124,14 @@
     </div>
 
     <div v-if="mode == 'design'" class="grid">
-      
+
+      <!--
+      <div>
+        <button @click="generateColorPalette">Random Palette</button>
+      </div>
+
+      -->
+
       <div>
         <button @click="randomizeColors">Random Colors</button>
       </div>
@@ -132,12 +139,9 @@
       <div>
         <div>Fill</div>
         <div class="row">
-          <label v-for="tile in visibleTiles">
-            <svg height = "50" width="50">
-              <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
-            </svg>
-            <input type="color" class="colorpicker" v-model="tile.fill"> 
-          </label>
+          <svg v-for="tile in colors" height = "50" width="50">
+            <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
+          </svg>
         </div>
       </div>
 

@@ -71,16 +71,6 @@ var app = new Vue({
       return Math.sqrt(dx * dx + dy * dy);
     },
 
-    randomColor() {
-      return [Math.random(), Math.random(), Math.random()].map(e => 255 * e).map(e => (e + 255)/2);
-    },
-
-    randomizeColors() {
-      for (let color of this.colors) {
-        color.fill = this.rgbToHex(...this.randomColor());
-      }
-    },
-
     normalize(points) {
 
       let numPts = points.length;
@@ -116,11 +106,11 @@ var app = new Vue({
     },
 
     SVGPoints(color) {
-      return color.points.map(e => String(e[0] + 25) + ',' + String(e[1] + 25)).reduce((a,b) => a + ' ' + b);
+      return this.convertPointstoString(color.points);
     },
 
     SVGStyle(color) {
-      return 'fill: ' + color.fill + '; stroke: ' + color.stroke + '; stroke-width: 1;';
+      return 'fill: ' + color.fill + '; stroke: ' + this.rgbToHex(this.stroke, this.stroke, this.stroke) + '; stroke-width: 1;';
     },
 
     clearSelection() {
@@ -140,13 +130,93 @@ var app = new Vue({
       return '#' + ((1 << 24) + (R << 16) + (G << 8) + B).toString(16).slice(1);
     },
 
-    generateTiles() {
+    onResize() {
+      this.canvas1Resized = false;
+      this.canvas2Resized = false;
+    },
+
+    lerp(start, stop, x) {
+      return start + x * (stop - start);
+    },
+
+    randomizeColors() {
+      this.startColor = [Math.random(), Math.random(), Math.random()].map(e => 255  * e);
+      this.endColor = [Math.random(), Math.random(), Math.random()].map(e => 255  * e);
+    }
+
+  },
+
+  computed: {
+
+    offsets() { // dependencies: numGrids, offset, ratio
+
+      // create array
+      let array =  Array(this.numGrids).fill(this.offset);
+      // sum all but last element
+      let normalize = array.slice(0, -1).reduce((a,b) => a + b, 0);
+      // calculate desired sum based on phase
+      let sum = this.phase + this.numGrids * this.offset;
+      // set last element to enforce sum
+      array[array.length - 1] = (sum - normalize) % 1;
+
+      return array;
+    },
+
+    multiplier() { // dependencies: numGrids
+      return 2 * Math.PI / this.numGrids;
+    },
+
+    steps() {
+      // find nearest odd number to radius / (numGrids - 1)
+      // normalized so that a pentagrid with radius 1 has 9 steps
+      return 2* Math.round((36 * this.radius / (this.numGrids - 1) - 1)/2) + 1;
+    },
+
+    make1Dgrid() {
+      return Array(this.steps).fill(0).map((e,i) => i - (this.steps-1)/2);
+    },
+
+    grid() { // dependencies: numGrids, steps, multiplier, offsets
+
+
+      let lines = [];
+
+      for (let i = 0; i < this.numGrids; i++) {
+        for (let n of this.make1Dgrid) {
+
+          // grid is a set of tuples of {angle: angle, index: index} for each grid line
+          // TODO fix degeneracy issue: there can be multiple lines that coincide
+          lines.push({
+            angle: i,
+            index: n + this.offsets[i]
+          });
+
+        }
+      }
+
+      return lines;
+    },
+
+    // returns a table with sin & cos values for 2*PI*i/numGrids
+    sinCosTable() {  // dependencies: numGrids, multiplier
+
+      let table = [];
+  
+      for (let i = 0; i < this.numGrids; i++) {
+        table.push({
+          sin: Math.sin(i * this.multiplier), 
+          cos: Math.cos(i * this.multiplier)
+        });
+      }
+
+      return table;
+    },
+
+    intersectionPoints() {
 
       // reset selections
       this.selectedLines = [];
       this.selectedTiles = [];
-
-      this.colors = [];
 
       // calculate intersection points of lines on grid
       let pts = {};
@@ -199,10 +269,6 @@ var app = new Vue({
           }
         }
       }
-
-      this.colors.forEach(e => e.onScreen = false);
-      let colorPaletteIndex = 0;
-      let colorPaletteLength = this.colorPalette.length;
 
       // calculate dual points to intersection points
       for (let pt of Object.values(pts)) {
@@ -291,99 +357,49 @@ var app = new Vue({
           });
           colorPaletteIndex = (colorPaletteIndex + 1) % colorPaletteLength;
 
-        } else {
-          this.colors[colorIndex].onScreen = true;
-        }
-
-        pt.angles = angles;
         pt.area = area;
+        pt.angles = angles;
         pt.dualPts = dualPts;
-        /*
-        tiles.push({
-          points: dualPts,
-          area: area
-        })
-        */
 
       }
 
-      //this.tiles = tiles;
-      
-      this.intersectionPoints = pts;
+      return pts;
 
     },
 
-    onResize() {
-      this.canvas1Resized = false;
-      this.canvas2Resized = false;
-    },
+    colors() {
 
-  },
+      // filter tiles to protoTiles, i.e. exactly one of each type of tile that needs to be colored
+      // here we'll use the area property to do this
+      let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => (e.area == f.area) && (this.orientationColoring ? JSON.stringify(e.angles) == JSON.stringify(f.angles) : true)) == i);
 
-  computed: {
-
-    offsets() { // dependencies: numGrids, offset, ratio
-
-      // create array
-      let array =  Array(this.numGrids).fill(this.offset);
-      // sum all but last element
-      let normalize = array.slice(0, -1).reduce((a,b) => a + b, 0);
-      // calculate desired sum based on phase
-      let sum = this.phase + this.numGrids * this.offset;
-      // set last element to enforce sum
-      array[array.length - 1] = (sum - normalize) % 1;
-
-      return array;
-    },
-
-    multiplier() { // dependencies: numGrids
-      return 2 * Math.PI / this.numGrids;
-    },
-
-    steps() {
-      // find nearest odd number to radius / (numGrids - 1)
-      // normalized so that a pentagrid with radius 1 has 9 steps
-      return 2* Math.round((36 * this.radius / (this.numGrids - 1) - 1)/2) + 1;
-    },
-
-    make1Dgrid() {
-      return Array(this.steps).fill(0).map((e,i) => i - (this.steps-1)/2);
-    },
-
-    grid() { // dependencies: numGrids, steps, multiplier, offsets
+      let start = hsluv.rgbToHsluv(this.startColor.map(e => e/255));
+      let end = hsluv.rgbToHsluv(this.endColor.map(e => e/255));
+      start[0] -= 360 * Math.trunc((start[0] - end[0]) / 180);
 
 
-      let lines = [];
+      let numColors = protoTiles.length;
+      let colorPalette = [];
+      let i = 0;
 
-      for (let i = 0; i < this.numGrids; i++) {
-        for (let n of this.make1Dgrid) {
+      for (let tile of protoTiles) {
+        let h = this.lerp(start[0], end[0], i / (numColors - 1)) % 360;
+        let s = this.lerp(start[1], end[1], i / (numColors - 1));
+        let l = this.lerp(start[2], end[2], i / (numColors - 1));
+        let color = hsluv.hsluvToRgb([h, s, l]).map(e => Math.round(255 * e));
 
-          // grid is a set of tuples of {angle: angle, index: index} for each grid line
-          // TODO fix degeneracy issue: there can be multiple lines that coincide
-          lines.push({
-            angle: i,
-            index: n + this.offsets[i]
-          });
-
-        }
-      }
-
-      return lines;
-    },
-
-    // returns a table with sin & cos values for 2*PI*i/numGrids
-    sinCosTable() {  // dependencies: numGrids, multiplier
-
-      let table = [];
-  
-      for (let i = 0; i < this.numGrids; i++) {
-        table.push({
-          sin: Math.sin(i * this.multiplier), 
-          cos: Math.cos(i * this.multiplier)
+        colorPalette.push({
+          fill: this.rgbToHex(...color),
+          points: this.normalize(tile.dualPts),
+          area: tile.area,
+          angles: tile.angles,
         });
+
+        i++;
       }
 
-      return table;
+      return colorPalette;
+
     },
 
     canvasDisplaySetting() {
@@ -394,27 +410,11 @@ var app = new Vue({
       }
     },
 
-    visibleTiles() {
-      return this.colors.filter(e => e.onScreen && e.symmetry == this.numGrids);
-    },
-
   },
 
   mounted() {
-    this.generateTiles();
+    //this.generateTiles();
     window.addEventListener("resize", this.onResize);
-  },
-
-  watch: {
-    grid() {
-      this.generateTiles();
-    },
-    showRibbons() {
-      this.generateTiles();
-    },
-    orientationColoring() {
-      this.generateTiles();      
-    },
   },
 
   data: {
@@ -427,9 +427,7 @@ var app = new Vue({
     colorTiles: true,
     orientationColoring: false,
     showRibbons: true,
-    intersectionPoints: {},
     tiles: [],
-    colors: [],
     stroke: 70,
     rotate: 0,
     selectedLines: [],
@@ -439,14 +437,8 @@ var app = new Vue({
     mode: 'settings',
     canvas1Resized: false,
     canvas2Resized: false,
-    colorPalette: [[255, 190, 137],
-                   [255, 161, 155],
-                   [202, 124, 152],
-                   [141, 92, 131],
-                   [85, 56, 100],
-                   [55, 42, 80],
-                   [40, 32, 68]
-                   ]
+    startColor: [255, 190, 137],
+    endColor: [40, 32, 68]
   }
 
 });
