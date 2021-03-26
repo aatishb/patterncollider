@@ -36,6 +36,7 @@
 	- the tiles dual to these intersection points are the ones to select
 - [ ] improve efficiency on checking if mouse is in tile
 - [ ] color using tile orientation is slow
+        - stringify angles when creating prototile
 
 # visual
 - [ ] red lines could be sharper
