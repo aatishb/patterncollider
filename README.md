@@ -39,6 +39,7 @@
         - stringify angles when creating prototile
 
 # visual
+- [ ] fix resizing glitches on page load
 - [ ] red lines could be sharper
 - [ ] better default colors / color palettes
 - [ ] random colors should persist on settings change
