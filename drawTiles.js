@@ -89,9 +89,10 @@ function sketch(parent) { // we pass the sketch data from the parent
             }            
 
             let mouseDistance = p.dist(p.mouseX, p.mouseY, prevX, prevY);
-            if (mouseDistance > preFactor) {
-              //console.log('fast!');
-              for (let i = preFactor/2; i < mouseDistance; i += preFactor/2) {
+            let stepSize = p.max(1, preFactor/10);
+
+            if (mouseDistance > stepSize) {
+              for (let i = 0; i <= mouseDistance; i += stepSize) {
                 let cursorX = p.map(i, 0, mouseDistance, p.mouseX, prevX, true);
                 let cursorY = p.map(i, 0, mouseDistance, p.mouseY, prevY, true);
 
@@ -175,7 +176,9 @@ function sketch(parent) { // we pass the sketch data from the parent
       let inside = false;
       let mySelectedTile = {};
 
-      for (let tile of Object.values(parent.data.tiles)) {
+      let nearbyTiles = Object.values(parent.data.tiles).filter(e => p.dist(x, y, e.mean.x, e.mean.y) < 1);
+
+      for (let tile of nearbyTiles) {
 
         if (!inside) {
           let vertices = tile.dualPts;
