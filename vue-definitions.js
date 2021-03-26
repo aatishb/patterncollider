@@ -362,8 +362,7 @@ var app = new Vue({
       let end = hsluv.rgbToHsluv(this.endColor.map(e => e/255));
       start[0] -= 360 * Math.trunc((start[0] - end[0]) / 180);
 
-
-      let numColors = protoTiles.length;
+      let numColors = Math.max(7, protoTiles.length);
       let colorPalette = [];
       let i = 0;
 
@@ -372,7 +371,6 @@ var app = new Vue({
         let s = this.lerp(start[1], end[1], i / (numColors - 1));
         let l = this.lerp(start[2], end[2], i / (numColors - 1));
         let color = hsluv.hsluvToRgb([h, s, l]).map(e => Math.round(255 * e));
-
         colorPalette.push({
           fill: this.rgbToHex(...color),
           points: this.normalize(tile.dualPts),
@@ -398,7 +396,6 @@ var app = new Vue({
   },
 
   mounted() {
-    //this.generateTiles();
     window.addEventListener("resize", this.onResize);
   },
 
@@ -423,7 +420,7 @@ var app = new Vue({
     canvas1Resized: false,
     canvas2Resized: false,
     startColor: [255, 190, 137],
-    endColor: [40, 32, 68]
+    endColor: [38, 36, 47]
   }
 
 });
