@@ -18,23 +18,33 @@
 - [x] selectedLines is getting an empty array pushed to it when you doubleclick on a tile
 - [x] clear selection button should appear when needed, more visibly
 - [x] p5 is being called on data change before it has finished loading
+
+# export
+- [ ] download PNG button
+- [ ] download SVG button
+- [ ] make shareable
+
+# mobile
+- [ ] mobile interaction
+- [ ] bigger knobs on sliders
+
+# optimize
+- [ ] only draw tiles in viewable area of canvas
 - [ ] get rid of interpolation
 	- look up dual location of start and stop point
 	- find nearest intersection points to a line connecting these points
 	- the tiles dual to these intersection points are the ones to select
+
+# visual
+- [ ] red lines could be sharper
 - [ ] better default colors / color palettes
 - [ ] random colors should persist on settings change
-- [ ] download PNG button
-- [ ] download SVG button
-- [ ] mobile interaction
-- [ ] make shareable
-- [ ] check that new sliders reproduce settings of old
-	- i.e. prove that they span the same space
-- [ ] red lines could be sharper
 
-## Optional
+# Optional
 - [ ] ribbon mode?
 - [ ] sound tab?
 - [ ] editable numbers for sliders
 - [ ] can clicking be more obvious?
 - [ ] improve settings UI
+- [ ] check that new sliders reproduce settings of old
+	- i.e. prove that they span the same space
