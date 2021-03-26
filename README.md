@@ -18,6 +18,10 @@
 - [x] selectedLines is getting an empty array pushed to it when you doubleclick on a tile
 - [x] clear selection button should appear when needed, more visibly
 - [x] p5 is being called on data change before it has finished loading
+- [ ] get rid of interpolation
+	- look up dual location of start and stop point
+	- find nearest intersection points to a line connecting these points
+	- the tiles dual to these intersection points are the ones to select
 - [ ] better default colors / color palettes
 - [ ] random colors should persist on settings change
 - [ ] download PNG button
