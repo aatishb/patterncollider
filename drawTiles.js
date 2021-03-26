@@ -177,7 +177,8 @@ function sketch(parent) { // we pass the sketch data from the parent
       let inside = false;
       let mySelectedTile = {};
 
-      let nearbyTiles = Object.values(parent.data.tiles).filter(e => p.dist(x, y, e.dualPts[0].x, e.dualPts[0].y) < 2);
+      let nearbyTiles = Object.values(parent.data.tiles).filter(e => p.dist(x, y, e.mean.x, e.mean.y) < 1);
+
       for (let tile of nearbyTiles) {
 
         if (!inside) {

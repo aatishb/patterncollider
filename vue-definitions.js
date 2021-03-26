@@ -247,6 +247,7 @@ var app = new Vue({
 
         // calculate dual of these median points      
         let dualPts = [];
+        let mean = {x: 0, y: 0};
           
         for (let myPt of medianPts) {
           let xd = 0;
@@ -266,11 +267,17 @@ var app = new Vue({
             x: xd, 
             y: yd
           });
+          mean.x += xd;
+          mean.y += yd;
+
         }
+
+        let dMax = dualPts.length;
+        mean.x /= dMax;
+        mean.y /= dMax;
 
         // compute area using determinant method
         let area = 0;
-        let dMax = dualPts.length;
         for (let i = 0; i < dMax; i++) {
           area += 0.5 * (dualPts[i].x * dualPts[(i+1) % dMax].y - dualPts[i].y * dualPts[(i+1) % dMax].x)
         }
@@ -298,6 +305,7 @@ var app = new Vue({
         pt.angles = angles;
         pt.area = area;
         pt.dualPts = dualPts;
+        pt.mean = mean;
         /*
         tiles.push({
           points: dualPts,
