@@ -405,6 +405,10 @@ var app = new Vue({
 
   mounted() {
     window.addEventListener("resize", this.onResize);
+    setTimeout(() => {
+      this.canvas1Resized = false;
+      this.canvas2Resized = false;
+    }, 100);
   },
 
   data: {
