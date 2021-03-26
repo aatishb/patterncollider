@@ -34,13 +34,14 @@
 	- look up dual location of start and stop point
 	- find nearest intersection points to a line connecting these points
 	- the tiles dual to these intersection points are the ones to select
+- [ ] improve efficiency on checking if mouse is in tile
 
 # visual
 - [ ] red lines could be sharper
 - [ ] better default colors / color palettes
 - [ ] random colors should persist on settings change
 
-# Optional
+# optional
 - [ ] ribbon mode?
 - [ ] sound tab?
 - [ ] editable numbers for sliders
