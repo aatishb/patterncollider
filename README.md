@@ -35,6 +35,7 @@
 	- find nearest intersection points to a line connecting these points
 	- the tiles dual to these intersection points are the ones to select
 - [ ] improve efficiency on checking if mouse is in tile
+- [ ] color using tile orientation is slow
 
 # visual
 - [ ] red lines could be sharper
