@@ -27,6 +27,7 @@
 # mobile
 - [ ] mobile interaction
 - [ ] bigger knobs on sliders
+- [ ] don't scroll on canvas interaction
 
 # optimize
 - [ ] only draw tiles in viewable area of canvas
@@ -43,6 +44,11 @@
 - [ ] red lines could be sharper
 - [ ] better default colors / color palettes
 - [ ] random colors should persist on settings change
+- [ ] use full color range
+- [ ] color selection
+
+# ui
+- [ ] smoother radius slider
 
 # optional
 - [ ] ribbon mode?
