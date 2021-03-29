@@ -7,10 +7,11 @@ priority: 🍅🍊🍋🍏
 - [ ] download SVG button 🍋
 - [ ] make shareable 🍋
 
-# mobile
+# mobile / ui
 - [ ] mobile interaction 🍊
 - [ ] bigger knobs on sliders 🍊
 - [ ] don't scroll on canvas interaction 🍊
+- [ ] smoother radius slider
 
 # optimize
 - [ ] only draw tiles in viewable area of canvas 🍅
@@ -28,9 +29,6 @@ priority: 🍅🍊🍋🍏
 - [ ] better default colors / color palettes 🍏
 - [ ] use full color range 🍏
 - [ ] color selection 🍏
-
-# ui
-- [ ] smoother radius slider
 
 # optional
 - [ ] ribbon mode?
