@@ -8,9 +8,9 @@ priority: 🍅🍊🍋🍏
 - [ ] make shareable 🍋
 
 # mobile / ui
-- [ ] mobile interaction 🍊
+- [x] mobile interaction 🍊
 - [x] bigger knobs on sliders 🍊
-- [x] don't scroll on canvas interaction 🍊
+- [ ] don't scroll on canvas interaction 🍊
 - [ ] smoother radius slider
 - [ ] deselect and drag is glitchy
 

@@ -19,7 +19,6 @@ body {
 
 canvas {
 	display: block;
-  touch-action: none;
 }
 
 #root {
@@ -257,13 +256,13 @@ button:hover {
 
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
   }
 
   .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
   }
 
 } 
