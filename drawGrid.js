@@ -81,6 +81,41 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     };
 
+    p.touchMoved = function() {
+
+      if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+
+        recentHover = true;
+        drawLines(parent.data);
+        
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+
+        let minLine = getNearestLine(xprime, yprime);
+
+        if (JSON.stringify(minLine) !== JSON.stringify({})) {
+          p.push();
+            p.translate(p.width / 2, p.height / 2);
+            p.stroke(0, 255, 0);
+            p.rotate(rotate);
+            drawLine(multiplier * minLine.angle, spacing * minLine.index);
+          p.pop();
+
+          selectedLine = minLine;
+        }
+
+      }
+
+    };
+
+    p.touchEnded = function() {
+      if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+        if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
+          updateSelectedLines(selectedLine);
+        }
+      }
+    };
+
     p.mouseClicked = function() {
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
