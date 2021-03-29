@@ -14,10 +14,6 @@ priority: 🍅🍊🍋🍏
 - [ ] smoother radius slider
 
 # optimize
-- [ ] get rid of interpolation 🍅
-	- look up dual location of start and stop point
-	- find nearest intersection points to a line connecting these points
-	- the tiles dual to these intersection points are the ones to select
 - [ ] improve efficiency on checking if mouse is in tile
 
 # visual
