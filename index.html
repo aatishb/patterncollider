@@ -37,11 +37,10 @@
         :style="{display: canvasDisplaySetting}"
         :data="{
           grid: grid,
-          steps: steps,
           multiplier: multiplier,
+          spacing: spacing,
           intersectionPoints: intersectionPoints,
           showIntersections: showIntersections,
-          zoom: zoom,
           selectedLines: selectedLines,
           selectedTiles: selectedTiles,
           display: canvasDisplaySetting,
@@ -51,6 +50,8 @@
         v-on:update:add-line="selectedLines = [...selectedLines, $event]"
         v-on:update:remove-line="selectedLines = selectedLines.filter(e => e.angle !== $event.angle && e.index !== $event.index)"
         v-on:update:resize-completed="canvas1Resized = true"
+        v-on:update:width="width = $event"
+        v-on:update:height="height = $event"
         ></p5>
       </div>
     </div>
@@ -114,7 +115,7 @@
         <label for="radius">Radius</label>        
       </div>
       <div>
-        <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.25" max="2" step="0.01"></input>
+        <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.25" max="3" step="0.01"></input>
         <label for="zoom">Zoom</label>        
       </div>
       <div>

@@ -18,6 +18,8 @@ function sketch(parent) { // we pass the sketch data from the parent
       canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
       parent.$emit('update:resize-completed'); 
+      parent.$emit('update:width', width); 
+      parent.$emit('update:height', height); 
 
       p.stroke(255,0,0);
       p.noLoop();
@@ -41,6 +43,8 @@ function sketch(parent) { // we pass the sketch data from the parent
         // resize canvas
         p.resizeCanvas(width, height);
         parent.$emit('update:resize-completed'); 
+        parent.$emit('update:width', width); 
+        parent.$emit('update:height', height); 
       }
 
       drawLines(data);
@@ -144,10 +148,8 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     function drawLines(data) {
       grid = data.grid;
-      let steps = data.steps;
+      spacing = data.spacing;
       multiplier = data.multiplier;
-      spacing = p.min(p.width, p.height) / (steps);
-      spacing = spacing * data.zoom; // zoom out to show parallel lines
       rotate = p.radians(data.rotate);
 
       p.push();

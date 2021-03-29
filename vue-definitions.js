@@ -172,6 +172,10 @@ var app = new Vue({
       return 2* Math.round((36 * this.radius / (this.numGrids - 1) - 1)/2) + 1;
     },
 
+    spacing() {
+      return this.zoom * Math.min(this.width, this.height) / (this.steps);
+    },
+
     make1Dgrid() {
       return Array(this.steps).fill(0).map((e,i) => i - (this.steps-1)/2);
     },
@@ -220,142 +224,153 @@ var app = new Vue({
 
       // calculate intersection points of lines on grid
       let pts = {};
-      
-      for (let line1 of this.grid) {
-        for (let line2 of this.grid) {
-          if (line1.angle < line2.angle) {
 
-            let sc1 = this.sinCosTable[line1.angle];
-            let s1 = sc1.sin;
-            let c1 = sc1.cos;
+      if (this.width && this.height) {
 
-            let sc2 = this.sinCosTable[line2.angle];
-            let s2 = sc2.sin;
-            let c2 = sc2.cos;
+        for (let line1 of this.grid) {
+          for (let line2 of this.grid) {
+            if (line1.angle < line2.angle) {
 
-            let s12 = s1 * c2 - c1 * s2;
-            let s21 = -s12;
+              let sc1 = this.sinCosTable[line1.angle];
+              let s1 = sc1.sin;
+              let c1 = sc1.cos;
 
-            // avoid edge case where angle difference = 60 degrees
-            if (Math.abs(s12) > this.epsilon) {
+              let sc2 = this.sinCosTable[line2.angle];
+              let s2 = sc2.sin;
+              let c2 = sc2.cos;
 
-              let x = (line2.index * s1 - line1.index * s2) / s12;
-              let y = (line2.index * c1 - line1.index * c2) / s21;
+              let s12 = s1 * c2 - c1 * s2;
+              let s21 = -s12;
 
-              /*
-              let xprime = x * c1 + y * s1;
-              let yprime = - x * s1 + y * c1;
-              */
+              // avoid edge case where angle difference = 60 degrees
+              if (Math.abs(s12) > this.epsilon) {
 
-              if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
+                let x = (line2.index * s1 - line1.index * s2) / s12;
+                let y = (line2.index * c1 - line1.index * c2) / s21;
 
-                let index = JSON.stringify([this.approx(x), this.approx(y)]);
-                if (pts[index]) {
-                  if (!pts[index].lines.includes(line1)) {
-                    pts[index].lines.push(line1);
+                /*
+                let xprime = x * c1 + y * s1;
+                let yprime = - x * s1 + y * c1;
+                */
+
+                // check if lines intersect on screen
+
+                let rotationAngle = this.rotate * Math.PI / 180;
+                let xprime = (x - 1/2) * Math.cos(-rotationAngle) - (y - 1/2) * Math.sin(-rotationAngle) + 1/2;
+                let yprime = (x - 1/2) * Math.sin(-rotationAngle) + (y - 1/2) * Math.cos(-rotationAngle) + 1/2;
+
+                if (Math.abs(xprime * this.spacing) < this.width/2 + this.spacing && Math.abs(yprime * this.spacing) < this.height/2 + this.spacing) {
+
+                if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
+
+                    let index = JSON.stringify([this.approx(x), this.approx(y)]);
+                    if (pts[index]) {
+                      if (!pts[index].lines.includes(line1)) {
+                        pts[index].lines.push(line1);
+                      }
+                      if (!pts[index].lines.includes(line2)) {
+                        pts[index].lines.push(line2);
+                      }
+                    } else {
+                      pts[index] = {};
+                      pts[index].x = x;
+                      pts[index].y = y;
+                      pts[index].lines = [line1, line2];
+                    }
                   }
-                  if (!pts[index].lines.includes(line2)) {
-                    pts[index].lines.push(line2);
-                  }
-                } else {
-                  pts[index] = {};
-                  pts[index].x = x;
-                  pts[index].y = y;
-                  pts[index].lines = [line1, line2];
                 }
               }
-
             }
           }
         }
-      }
 
-      // calculate dual points to intersection points
-      for (let pt of Object.values(pts)) {
+        // calculate dual points to intersection points
+        for (let pt of Object.values(pts)) {
 
-        // sort angles of all edges that meet at an intersection point
-        let angles = pt.lines.map(e => e.angle * this.multiplier);
-        let angles2 = angles.map(e => (e + Math.PI) % (2 * Math.PI));
-        // numerical sort angles and remove duplicates (e.g. due to degeneracy when offset = 0)
-        angles = [...angles, ...angles2].map(e => this.approx(e)).sort((a,b) => a - b).filter((e, i, arr) => arr.indexOf(e) == i);
+          // sort angles of all edges that meet at an intersection point
+          let angles = pt.lines.map(e => e.angle * this.multiplier);
+          let angles2 = angles.map(e => (e + Math.PI) % (2 * Math.PI));
+          // numerical sort angles and remove duplicates (e.g. due to degeneracy when offset = 0)
+          angles = [...angles, ...angles2].map(e => this.approx(e)).sort((a,b) => a - b).filter((e, i, arr) => arr.indexOf(e) == i);
 
-        // calculate points offset along these edges
-        let offsetPts = [];
-        for (let angle of angles) {
-          let x = pt.x + this.epsilon * -Math.sin(angle);
-          let y = pt.y + this.epsilon * Math.cos(angle);
-          offsetPts.push({
-            x:x,
-            y:y
-          });
-          //ellipse(x,y,5);
-        }
-        //fill(255,255,0);
-        
-        // calculate medians of these offset points
-        let medianPts = [];
-        let iMax = offsetPts.length;
-        for (let i = 0; i < iMax; i++) {
-          let x0 = offsetPts[i].x;
-          let y0 = offsetPts[i].y;
-          let x1 = offsetPts[ (i+1) % iMax ].x;
-          let y1 = offsetPts[ (i+1) % iMax ].y;
-          //line(x0,y0,x1,y1);
+          // calculate points offset along these edges
+          let offsetPts = [];
+          for (let angle of angles) {
+            let x = pt.x + this.epsilon * -Math.sin(angle);
+            let y = pt.y + this.epsilon * Math.cos(angle);
+            offsetPts.push({
+              x:x,
+              y:y
+            });
+            //ellipse(x,y,5);
+          }
+          //fill(255,255,0);
           
-          let xm = (x0 + x1) / 2;
-          let ym = (y0 + y1) / 2;
+          // calculate medians of these offset points
+          let medianPts = [];
+          let iMax = offsetPts.length;
+          for (let i = 0; i < iMax; i++) {
+            let x0 = offsetPts[i].x;
+            let y0 = offsetPts[i].y;
+            let x1 = offsetPts[ (i+1) % iMax ].x;
+            let y1 = offsetPts[ (i+1) % iMax ].y;
+            //line(x0,y0,x1,y1);
+            
+            let xm = (x0 + x1) / 2;
+            let ym = (y0 + y1) / 2;
 
-          medianPts.push({
-            x: xm, 
-            y: ym});
-          //ellipse(xm, ym, 5);
-        }
-
-        // calculate dual of these median points      
-        let dualPts = [];
-        let mean = {x: 0, y: 0};
-          
-        for (let myPt of medianPts) {
-          let xd = 0;
-          let yd = 0;
-
-          for (let i = 0; i < this.numGrids; i++) {
-            let ci = this.sinCosTable[i].cos;
-            let si = this.sinCosTable[i].sin;
-
-            let k = Math.floor(myPt.x * ci + myPt.y * si - this.offsets[i]);
-
-            xd += k * ci;
-            yd += k * si;
+            medianPts.push({
+              x: xm, 
+              y: ym});
+            //ellipse(xm, ym, 5);
           }
 
-          dualPts.push({
-            x: xd, 
-            y: yd
-          });
-          mean.x += xd;
-          mean.y += yd;
+          // calculate dual of these median points      
+          let dualPts = [];
+          let mean = {x: 0, y: 0};
+            
+          for (let myPt of medianPts) {
+            let xd = 0;
+            let yd = 0;
 
-        }
+            for (let i = 0; i < this.numGrids; i++) {
+              let ci = this.sinCosTable[i].cos;
+              let si = this.sinCosTable[i].sin;
 
-        let dMax = dualPts.length;
-        mean.x /= dMax;
-        mean.y /= dMax;
+              let k = Math.floor(myPt.x * ci + myPt.y * si - this.offsets[i]);
 
-        // compute area using determinant method
-        let area = 0;
-        for (let i = 0; i < dMax; i++) {
-          area += 0.5 * (dualPts[i].x * dualPts[(i+1) % dMax].y - dualPts[i].y * dualPts[(i+1) % dMax].x)
-        }
+              xd += k * ci;
+              yd += k * si;
+            }
 
-        area = String(Math.round(1000 * area) / 1000);
-        pt.area = area;
-        pt.angles = angles;
-        pt.dualPts = dualPts;
-        pt.mean = mean;
+            dualPts.push({
+              x: xd, 
+              y: yd
+            });
+            mean.x += xd;
+            mean.y += yd;
 
+          }
+
+          let dMax = dualPts.length;
+          mean.x /= dMax;
+          mean.y /= dMax;
+
+          // compute area using determinant method
+          let area = 0;
+          for (let i = 0; i < dMax; i++) {
+            area += 0.5 * (dualPts[i].x * dualPts[(i+1) % dMax].y - dualPts[i].y * dualPts[(i+1) % dMax].x)
+          }
+
+          area = String(Math.round(1000 * area) / 1000);
+          pt.area = area;
+          pt.angles = JSON.stringify(angles);
+          pt.dualPts = dualPts;
+          pt.mean = mean;
+
+        }        
       }
-
+      
       return pts;
 
     },
@@ -364,7 +379,7 @@ var app = new Vue({
 
       // filter tiles to protoTiles, i.e. exactly one of each type of tile that needs to be colored
       // here we'll use the area property to do this
-      let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => (e.area == f.area) && (this.orientationColoring ? JSON.stringify(e.angles) == JSON.stringify(f.angles) : true)) == i);
+      let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => (e.area == f.area) && (this.orientationColoring ? e.angles == f.angles : true)) == i);
 
       let start = hsluv.rgbToHsluv(this.startColor.map(e => e/255));
       let end = hsluv.rgbToHsluv(this.endColor.map(e => e/255));
@@ -432,7 +447,9 @@ var app = new Vue({
     canvas1Resized: false,
     canvas2Resized: false,
     startColor: [255, 190, 137],
-    endColor: [38, 36, 47]
+    endColor: [38, 36, 47],
+    width: 0,
+    height: 0
   }
 
 });

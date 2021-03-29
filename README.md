@@ -14,14 +14,11 @@ priority: 🍅🍊🍋🍏
 - [ ] smoother radius slider
 
 # optimize
-- [ ] only draw tiles in viewable area of canvas 🍅
 - [ ] get rid of interpolation 🍅
 	- look up dual location of start and stop point
 	- find nearest intersection points to a line connecting these points
 	- the tiles dual to these intersection points are the ones to select
 - [ ] improve efficiency on checking if mouse is in tile
-- [ ] color using tile orientation is slow 🍅
-        - stringify angles when creating prototile
 
 # visual
 - [ ] fix resizing glitches on page load
@@ -60,3 +57,5 @@ priority: 🍅🍊🍋🍏
 - [x] clear selection button should appear when needed, more visibly
 - [x] p5 is being called on data change before it has finished loading
 - [x] random colors should persist on settings change
+- [x] only draw tiles in viewable area of canvas
+- [x] color using tile orientation is slow
