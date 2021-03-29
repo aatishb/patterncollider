@@ -18,34 +18,36 @@
 - [x] selectedLines is getting an empty array pushed to it when you doubleclick on a tile
 - [x] clear selection button should appear when needed, more visibly
 - [x] p5 is being called on data change before it has finished loading
+- [x] random colors should persist on settings change
+
+priority: 🍅🍊🍋🍏
 
 # export
-- [ ] download PNG button
-- [ ] download SVG button
-- [ ] make shareable
+- [ ] download PNG button 🍋
+- [ ] download SVG button 🍋
+- [ ] make shareable 🍋
 
 # mobile
-- [ ] mobile interaction
-- [ ] bigger knobs on sliders
-- [ ] don't scroll on canvas interaction
+- [ ] mobile interaction 🍊
+- [ ] bigger knobs on sliders 🍊
+- [ ] don't scroll on canvas interaction 🍊
 
 # optimize
-- [ ] only draw tiles in viewable area of canvas
-- [ ] get rid of interpolation
+- [ ] only draw tiles in viewable area of canvas 🍅
+- [ ] get rid of interpolation 🍅
 	- look up dual location of start and stop point
 	- find nearest intersection points to a line connecting these points
 	- the tiles dual to these intersection points are the ones to select
 - [ ] improve efficiency on checking if mouse is in tile
-- [ ] color using tile orientation is slow
+- [ ] color using tile orientation is slow 🍅
         - stringify angles when creating prototile
 
 # visual
 - [ ] fix resizing glitches on page load
 - [ ] red lines could be sharper
-- [ ] better default colors / color palettes
-- [ ] random colors should persist on settings change
-- [ ] use full color range
-- [ ] color selection
+- [ ] better default colors / color palettes 🍏
+- [ ] use full color range 🍏
+- [ ] color selection 🍏
 
 # ui
 - [ ] smoother radius slider
