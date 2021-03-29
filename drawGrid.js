@@ -7,7 +7,6 @@ function sketch(parent) { // we pass the sketch data from the parent
     let canvas;
     let grid, spacing, multiplier, rotate;
     let recentHover = false;
-    let selectedLine = [];
 
     p.setup = function() {
 
@@ -59,23 +58,19 @@ function sketch(parent) { // we pass the sketch data from the parent
         
         let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
         let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+        let selectedLine = getNearestLine(xprime, yprime);
 
-        let minLine = getNearestLine(xprime, yprime);
-
-        if (JSON.stringify(minLine) !== JSON.stringify({})) {
+        if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
           p.push();
             p.translate(p.width / 2, p.height / 2);
             p.stroke(0, 255, 0);
             p.rotate(rotate);
-            drawLine(multiplier * minLine.angle, spacing * minLine.index);
+            drawLine(multiplier * selectedLine.angle, spacing * selectedLine.index);
           p.pop();
-
-          selectedLine = minLine;
         }
 
       } else if (recentHover) {
         recentHover = false;
-        selectedLine = {};
         drawLines(parent.data);
       }
 
@@ -83,6 +78,11 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     p.mouseReleased = function() {
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+        let selectedLine = getNearestLine(xprime, yprime);
+
         if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
           updateSelectedLines(selectedLine);
         }
@@ -94,7 +94,7 @@ function sketch(parent) { // we pass the sketch data from the parent
     function getNearestLine(mouseX, mouseY) {
 
       let minDist = spacing;
-      let minLine = [];
+      let minLine = {};
 
       for (let line of grid) {
 

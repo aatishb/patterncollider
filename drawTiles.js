@@ -25,7 +25,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       canvas = p.createCanvas(width, height);
       canvas.parent(parent.$el);
-      window.addEventListener('mousemove', mouseMoved);
+      //window.addEventListener('mousemove', mouseMoved);
       parent.$emit('update:resize-completed'); 
 
       p.noLoop();
@@ -66,7 +66,9 @@ function sketch(parent) { // we pass the sketch data from the parent
       });
     }
 
-    function mouseMoved(mousePos) {
+
+
+    p.mouseDragged = function() {
 
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         recentHover = true;
@@ -80,47 +82,65 @@ function sketch(parent) { // we pass the sketch data from the parent
 
         if (Object.keys(selectedTile).length > 0) {
 
-          if (mouseIsPressed) {
+          let tileString = tileToString(selectedTile);
+          if (!recentlySelectedTiles.includes(tileString)) {
+            updateSelectedTiles(selectedTile, adding);
+            recentlySelectedTiles.push(tileString);
+          }            
 
-            let tileString = tileToString(selectedTile);
-            if (!recentlySelectedTiles.includes(tileString)) {
-              updateSelectedTiles(selectedTile, adding);
-              recentlySelectedTiles.push(tileString);
-            }            
+          let mouseDistance = p.dist(p.mouseX, p.mouseY, prevX, prevY);
+          let stepSize = p.max(1, preFactor/10);
 
-            let mouseDistance = p.dist(p.mouseX, p.mouseY, prevX, prevY);
-            let stepSize = p.max(1, preFactor/10);
+          if (mouseDistance > stepSize) {
+            for (let i = 0; i <= mouseDistance; i += stepSize) {
+              let cursorX = p.map(i, 0, mouseDistance, p.mouseX, prevX, true);
+              let cursorY = p.map(i, 0, mouseDistance, p.mouseY, prevY, true);
 
-            if (mouseDistance > stepSize) {
-              for (let i = 0; i <= mouseDistance; i += stepSize) {
-                let cursorX = p.map(i, 0, mouseDistance, p.mouseX, prevX, true);
-                let cursorY = p.map(i, 0, mouseDistance, p.mouseY, prevY, true);
+              let xprime = (cursorX - p.width/2) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate) + p.width/2;
+              let yprime = (cursorX - p.width/2) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate) + p.height/2;
+              let intermediateTile = getSelectedTile(xprime, yprime);
 
-                let xprime = (cursorX - p.width/2) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate) + p.width/2;
-                let yprime = (cursorX - p.width/2) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate) + p.height/2;
-                let intermediateTile = getSelectedTile(xprime, yprime);
-
-                if (Object.keys(intermediateTile).length > 0) {
-                  let tileString = tileToString(intermediateTile);
-                  if (!recentlySelectedTiles.includes(tileString)) {
-                    updateSelectedTiles(intermediateTile, adding);
-                    recentlySelectedTiles.push(tileString);
-                  }            
-                }
+              if (Object.keys(intermediateTile).length > 0) {
+                let tileString = tileToString(intermediateTile);
+                if (!recentlySelectedTiles.includes(tileString)) {
+                  updateSelectedTiles(intermediateTile, adding);
+                  recentlySelectedTiles.push(tileString);
+                }            
               }
             }
-          } else {
-            p.push();
-              p.translate(p.width/2, p.height/2);
-              p.fill(128, 215, 255);
-              p.rotate(rotate);
-              p.beginShape();
-              for (let pt of selectedTile.dualPts) {
-                p.vertex(preFactor * pt.x, preFactor * pt.y);
-              }
-              p.endShape(p.CLOSE);
-            p.pop();
           }
+        } 
+
+        prevX = p.mouseX;
+        prevY = p.mouseY;
+
+      }
+    }
+
+    p.mouseMoved = function() {
+
+      if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+        recentHover = true;
+
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+
+        selectedTile = getSelectedTile(xprime, yprime);
+
+        drawTiles(parent.data);
+
+        if (Object.keys(selectedTile).length > 0) {
+
+          p.push();
+            p.translate(p.width/2, p.height/2);
+            p.fill(128, 215, 255);
+            p.rotate(rotate);
+            p.beginShape();
+            for (let pt of selectedTile.dualPts) {
+              p.vertex(preFactor * pt.x, preFactor * pt.y);
+            }
+            p.endShape(p.CLOSE);
+          p.pop();
 
         } 
 
@@ -132,7 +152,7 @@ function sketch(parent) { // we pass the sketch data from the parent
         drawTiles(parent.data);
       }
 
-    }
+    };
 
 
     p.mousePressed = function() {
