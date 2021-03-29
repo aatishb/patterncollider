@@ -19,6 +19,7 @@ body {
 
 canvas {
 	display: block;
+  touch-action: none;
 }
 
 #root {
@@ -126,8 +127,8 @@ h3 {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%; 
   border-color: rgb(40, 32, 68);
   background: rgb(254, 199, 81);
@@ -135,8 +136,8 @@ h3 {
 }
 
 .slider::-moz-range-thumb {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   border-color: rgb(40, 32, 68);
   background: rgb(254, 199, 81);
@@ -245,6 +246,17 @@ button:hover {
 
   footer {
     flex-direction: column-reverse;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
   }
 
 } 

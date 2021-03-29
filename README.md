@@ -9,8 +9,8 @@ priority: 🍅🍊🍋🍏
 
 # mobile / ui
 - [ ] mobile interaction 🍊
-- [ ] bigger knobs on sliders 🍊
-- [ ] don't scroll on canvas interaction 🍊
+- [x] bigger knobs on sliders 🍊
+- [x] don't scroll on canvas interaction 🍊
 - [ ] smoother radius slider
 
 # optimize
