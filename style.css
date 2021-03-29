@@ -237,6 +237,7 @@ button:hover {
   }
 
   header {
+    display: none;
   }
 
   main {
@@ -247,6 +248,12 @@ button:hover {
   footer {
     flex-direction: column-reverse;
   }
+
+  .slider {
+    height: 18px;
+    border-radius: 4px;  
+  }
+
 
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;

@@ -81,7 +81,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     };
 
-    p.mouseClicked = function() {
+    p.mouseReleased = function() {
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
           updateSelectedLines(selectedLine);
