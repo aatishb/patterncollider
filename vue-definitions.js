@@ -253,16 +253,16 @@ var app = new Vue({
                 let yprime = - x * s1 + y * c1;
                 */
 
-                // check if lines intersect on screen
-
                 let rotationAngle = this.rotate * Math.PI / 180;
-                let xprime = (x - 1/2) * Math.cos(-rotationAngle) - (y - 1/2) * Math.sin(-rotationAngle) + 1/2;
-                let yprime = (x - 1/2) * Math.sin(-rotationAngle) + (y - 1/2) * Math.cos(-rotationAngle) + 1/2;
+                let xprime = x * Math.cos(rotationAngle) - y * Math.sin(rotationAngle);
+                let yprime = x * Math.sin(rotationAngle) + y * Math.cos(rotationAngle);
 
-                if (Math.abs(xprime * this.spacing) < this.width/2 + this.spacing && Math.abs(yprime * this.spacing) < this.height/2 + this.spacing) {
+                // optimization: only list intersection points viewable on screen
+                // this ensures we don't draw or compute tiles that aren't visible
+                if (Math.abs(xprime * this.spacing) <= this.width/2 + this.spacing && Math.abs(yprime * this.spacing) <= this.height/2 + this.spacing) {
 
-                if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
-
+                  // this check ensures that we only draw tiles that are connected to other tiles
+                  if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
                     let index = JSON.stringify([this.approx(x), this.approx(y)]);
                     if (pts[index]) {
                       if (!pts[index].lines.includes(line1)) {
@@ -278,6 +278,7 @@ var app = new Vue({
                       pts[index].lines = [line1, line2];
                     }
                   }
+                  
                 }
               }
             }
