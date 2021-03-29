@@ -12,6 +12,7 @@ priority: 🍅🍊🍋🍏
 - [x] bigger knobs on sliders 🍊
 - [x] don't scroll on canvas interaction 🍊
 - [ ] smoother radius slider
+- [ ] deselect and drag is glitchy
 
 # optimize
 - [ ] improve efficiency on checking if mouse is in tile
