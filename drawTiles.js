@@ -4,7 +4,7 @@
 function sketch(parent) { // we pass the sketch data from the parent
   return function( p ) { // p could be any variable name
     // p5 sketch goes here
-    let canvas;
+    let canvas, target;
     let preFactor;
     let rotate;
 
@@ -21,7 +21,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     p.setup = function() {
 
-      let target = parent.$el.parentElement;
+      target = parent.$el.parentElement;
       let width = target.clientWidth;
       let height = target.clientHeight;
 
@@ -45,7 +45,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       // console.log('x: ', val.x, 'y: ', val.y);
       if (data.display == 'none') {
         // measure parent without canvas
-        let target = parent.$el.parentElement;
+        target = parent.$el.parentElement;
         let width = target.clientWidth;
         let height = target.clientHeight;
 
@@ -175,6 +175,8 @@ function sketch(parent) { // we pass the sketch data from the parent
             updateSelectedTiles(selectedTile, adding);
             recentlySelectedTiles.push(tileString);
             canvas.style('touch-action', 'none'); // disable scroll on mobile when selecting tiles
+            target.style.touchAction = 'none';
+            //console.log(target.style);
             stopScroll = true;
           }            
 
@@ -193,6 +195,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       mouseIsPressed = false;
       if (stopScroll) {
         canvas.style('touch-action', 'auto'); // enable scroll on mobile when no selecting tiles
+        target.style.touchAction = 'auto';
         stropScroll = false;
       }
     };
