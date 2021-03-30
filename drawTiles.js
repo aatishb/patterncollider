@@ -252,7 +252,11 @@ function sketch(parent) { // we pass the sketch data from the parent
 
 
       p.push();
-      p.background(0, 0, 0.2 * 255);
+      if (!stopScroll) {
+        p.background(0, 0, 0.2 * 255);
+      } else {
+        p.background('pink');
+      }
       p.translate(p.width / 2, p.height / 2);
       p.rotate(rotate);
 
