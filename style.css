@@ -87,6 +87,8 @@ footer {
   display: flex;
   flex-direction: row;
 	padding: 1rem;
+  max-height: 5rem;
+  overflow-y: auto;
 }
 
 h1, h2, h3, h4 {
@@ -180,12 +182,11 @@ button:hover {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-around;
-  overflow-y: auto;
-  max-height: 6rem;
 }
 
 .grid > div {
 	width: 8.5rem;
+  height: 3rem;
 	padding: 1rem;
 	text-align: center;
   display: flex;
@@ -253,9 +254,6 @@ button:hover {
   footer {
     flex-direction: column-reverse;
     max-height: none;
-  }
-
-  .grid {
     overflow-y: visible;
   }
 
