@@ -31,7 +31,10 @@
   <main>
 
     <div class="half">
-      <div>Grid</div>
+      <div>
+        Grid
+        <button class="save" @click="gridDownloadCount++">💾</button>
+      </div>
       <div class="stretch">
         <p5 src="./drawGrid.js"
         :style="{display: canvasDisplaySetting}"
@@ -44,7 +47,8 @@
           selectedLines: selectedLines,
           selectedTiles: selectedTiles,
           display: canvasDisplaySetting,
-          rotate: rotate
+          rotate: rotate,
+          download: gridDownloadCount
         }"
         v-on:update:selected-lines="selectedLines = $event"
         v-on:update:add-line="selectedLines = [...selectedLines, $event]"
@@ -57,7 +61,10 @@
     </div>
 
     <div class="half">
-      <div>Tiling</div>
+      <div>
+        Tiling
+        <button class="save" @click="tilingDownloadCount++">💾</button>
+      </div>
       <div class="stretch">
         <p5 src="./drawTiles.js"
         :style="{display: canvasDisplaySetting}"
@@ -74,7 +81,8 @@
           symmetry: numGrids,
           stroke: stroke,
           rotate: rotate,
-          orientationColoring: orientationColoring
+          orientationColoring: orientationColoring,
+          download: tilingDownloadCount
         }"
         v-on:update:add-tile="selectedTiles = [...selectedTiles, $event]"
         v-on:update:remove-tile="selectedTiles = selectedTiles.filter(e => e.x !== $event.x && e.y !== $event.y)"
@@ -91,13 +99,15 @@
 
   <footer>
       
+    <!--
     <div class="menu">
       <button @click="mode = 'settings'">⚙️</button>
       <button @click="mode = 'design'">🖌</button>
       <button @click="mode = 'save'">💾</button>
     </div>
+    -->
 
-    <div v-if="mode == 'settings'" class="grid">
+    <div class="grid">
       <div>
         <input class="slider" type="range" id="numGrids" v-model.number="numGrids" min="3" max="19" step="1"></input>
         <label for="numGrids"><span class="dotted">{{ numGrids }}</span> Fold Symmetry</label>       
@@ -122,28 +132,9 @@
         <input class="slider" type="range" id="rotate" v-model.number="rotate" min="-180" max="180" step="1"></input>
         <label for="rotate">Rotate: {{rotate}}°</label>        
       </div>
-    </div>
-
-    <div v-if="mode == 'design'" class="grid">
-
-      <!--
-      <div>
-        <button @click="generateColorPalette">Random Palette</button>
-      </div>
-
-      -->
 
       <div>
         <button @click="randomizeColors">Random Colors</button>
-      </div>
-
-      <div>
-        <div>Fill</div>
-        <div class="row">
-          <svg v-for="tile in colors" height = "50" width="50">
-            <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
-          </svg>
-        </div>
       </div>
 
       <div>
@@ -172,10 +163,31 @@
         </div>
       </div>
 
+      <div style="width: auto;">
+        <div>Tiles</div>
+        <div class="row" style="display: inline-block;">
+          <svg v-for="tile in colors" height = "50" width="50">
+            <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
+          </svg>
+        </div>
+      </div>
+      
     </div>
 
+
+    <!--
     <div v-if="mode == 'save'" class="grid">
-     </div>
+
+      <div>
+        <button @click="gridDownloadCount++">Save Grid</button>
+      </div>
+
+      <div>
+        <button @click="tilingDownloadCount++">Save Tiling</button>
+      </div>
+
+    </div>
+    -->
 
   </footer>
 

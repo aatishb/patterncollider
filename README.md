@@ -3,15 +3,11 @@
 priority: 🍅🍊🍋🍏
 
 # export
-- [ ] download PNG button 🍋
+- [x] download PNG button 🍋
 - [ ] download SVG button 🍋
 - [ ] make shareable 🍋
 
 # mobile / ui
-- [x] mobile interaction 🍊
-- [x] bigger knobs on sliders 🍊
-- [x] don't scroll on canvas interaction 🍊
-- [ ] smoother radius slider
 - [ ] deselect and drag is glitchy
 
 # optimize
@@ -32,6 +28,8 @@ priority: 🍅🍊🍋🍏
 - [ ] improve settings UI
 - [ ] check that new sliders reproduce settings of old
 	- i.e. prove that they span the same space
+- [ ] smoother radius slider
+
 
 # done
 
@@ -56,3 +54,7 @@ priority: 🍅🍊🍋🍏
 - [x] random colors should persist on settings change
 - [x] only draw tiles in viewable area of canvas
 - [x] color using tile orientation is slow
+- [x] mobile interaction 🍊
+- [x] bigger knobs on sliders 🍊
+- [x] don't scroll on canvas interaction 🍊
+

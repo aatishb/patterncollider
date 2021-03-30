@@ -278,7 +278,7 @@ var app = new Vue({
                       pts[index].lines = [line1, line2];
                     }
                   }
-                  
+
                 }
               }
             }
@@ -450,7 +450,9 @@ var app = new Vue({
     startColor: [255, 190, 137],
     endColor: [38, 36, 47],
     width: 0,
-    height: 0
+    height: 0,
+    gridDownloadCount: 0,
+    tilingDownloadCount: 0
   }
 
 });

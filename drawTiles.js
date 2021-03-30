@@ -52,6 +52,10 @@ function sketch(parent) { // we pass the sketch data from the parent
         parent.$emit('update:resize-completed'); 
       }
 
+      if (data.download !== oldData.download) {
+        p.saveCanvas('TilingPattern', 'png');
+      }
+
       drawTiles(data);
     };
 

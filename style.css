@@ -19,7 +19,6 @@ body {
 
 canvas {
 	display: block;
-  user-select: none;
 }
 
 #root {
@@ -70,8 +69,16 @@ main {
 }
 
 .half > div:nth-child(1) {
+  width: 100%;
 	text-align: center;
 	padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.save {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .half h3 {
@@ -81,7 +88,6 @@ main {
 
 footer {
   display: flex;
-  flex-shrink: 0;
   flex-direction: row;
 	padding: 1rem;
 }
@@ -177,6 +183,8 @@ button:hover {
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-around;
+  overflow-y: auto;
+  max-height: 6rem;
 }
 
 .grid > div {
@@ -242,11 +250,16 @@ button:hover {
 
   main {
     padding-left: 0.5rem;
-    padding-right: 0.5rem;    
+    padding-right: 0.5rem;
   }
 
   footer {
     flex-direction: column-reverse;
+    max-height: none;
+  }
+
+  .grid {
+    overflow-y: visible;
   }
 
   .slider {
