@@ -227,8 +227,8 @@ button:hover {
 }
 
 /* screens under 600 px width OR height */
-@media screen and (max-width: 600px),
-       screen and (max-height: 600px),
+@media screen and (max-width: 670px),
+       screen and (max-height: 670px),
  {
 
   .half {
