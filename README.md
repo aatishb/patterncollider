@@ -3,12 +3,10 @@
 priority: 🍅🍊🍋🍏
 
 # export
-- [x] download PNG button 🍋
-- [ ] download SVG button 🍋
 - [ ] make shareable 🍋
 
 # mobile / ui
-- [ ] deselect and drag is glitchy
+- [ ] deselect and drag is glitchy 🍊
 
 # optimize
 - [ ] improve efficiency on checking if mouse is in tile
@@ -21,15 +19,15 @@ priority: 🍅🍊🍋🍏
 - [ ] color selection 🍏
 
 # optional
-- [ ] ribbon mode?
-- [ ] sound tab?
+- [ ] ribbon mode
+- [ ] sound mode
 - [ ] editable numbers for sliders
 - [ ] can clicking be more obvious?
-- [ ] improve settings UI
+- [ ] improve controls UI
 - [ ] check that new sliders reproduce settings of old
 	- i.e. prove that they span the same space
 - [ ] smoother radius slider
-
+- [ ] download SVG button
 
 # done
 
@@ -57,4 +55,5 @@ priority: 🍅🍊🍋🍏
 - [x] mobile interaction 🍊
 - [x] bigger knobs on sliders 🍊
 - [x] don't scroll on canvas interaction 🍊
+- [x] download PNG button 🍋
 
