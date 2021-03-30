@@ -19,6 +19,7 @@ body {
 
 canvas {
 	display: block;
+  user-select: none;
 }
 
 #root {
