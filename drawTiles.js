@@ -12,6 +12,8 @@ function sketch(parent) { // we pass the sketch data from the parent
     let recentHover = true;
     let recentlySelectedTiles = [];
     let adding = true;
+    let stopScroll = false;
+
 
     let mouseIsPressed = false;
     let prevX = 0;
@@ -172,6 +174,8 @@ function sketch(parent) { // we pass the sketch data from the parent
             adding = index < 0;
             updateSelectedTiles(selectedTile, adding);
             recentlySelectedTiles.push(tileString);
+            canvas.style('touch-action', 'none'); // disable scroll on mobile when selecting tiles
+            stopScroll = true;
           }            
 
         } 
@@ -187,6 +191,10 @@ function sketch(parent) { // we pass the sketch data from the parent
     p.mouseReleased = function() {
       recentlySelectedTiles = [];
       mouseIsPressed = false;
+      if (stopScroll) {
+        canvas.style('touch-action', 'auto'); // enable scroll on mobile when no selecting tiles
+        stropScroll = false;
+      }
     };
 
     function getSelectedTile(mouseX, mouseY) {

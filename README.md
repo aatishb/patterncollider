@@ -10,7 +10,7 @@ priority: 🍅🍊🍋🍏
 # mobile / ui
 - [x] mobile interaction 🍊
 - [x] bigger knobs on sliders 🍊
-- [ ] don't scroll on canvas interaction 🍊
+- [x] don't scroll on canvas interaction 🍊
 - [ ] smoother radius slider
 - [ ] deselect and drag is glitchy
 
