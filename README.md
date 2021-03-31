@@ -6,8 +6,6 @@ priority: 🍅🍊🍋🍏
 - [ ] make shareable 🍋
 
 # mobile / ui
-- [x] improve mobile responsiveness on various screen sizes
-- [ ] deselect and drag is glitchy 🍊
 
 # optimize
 - [ ] improve efficiency on checking if mouse is in tile
@@ -53,8 +51,10 @@ priority: 🍅🍊🍋🍏
 - [x] random colors should persist on settings change
 - [x] only draw tiles in viewable area of canvas
 - [x] color using tile orientation is slow
-- [x] mobile interaction 🍊
-- [x] bigger knobs on sliders 🍊
-- [x] don't scroll on canvas interaction 🍊
-- [x] download PNG button 🍋
+- [x] mobile interaction
+- [x] bigger knobs on sliders
+- [x] don't scroll on canvas interaction
+- [x] download PNG button
+- [x] improve mobile responsiveness on various screen sizes
+- [x] deselect and drag is glitchy
 

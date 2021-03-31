@@ -85,7 +85,7 @@
           download: tilingDownloadCount
         }"
         v-on:update:add-tile="selectedTiles = [...selectedTiles, $event]"
-        v-on:update:remove-tile="selectedTiles = selectedTiles.filter(e => e.x !== $event.x && e.y !== $event.y)"
+        v-on:update:remove-tile="selectedTiles = selectedTiles.filter(e => !(e.x == $event.x && e.y == $event.y))"
         v-on:update:resize-completed="canvas2Resized = true"
         ></p5>
       </div>

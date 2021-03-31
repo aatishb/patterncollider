@@ -77,8 +77,8 @@ function sketch(parent) { // we pass the sketch data from the parent
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         recentHover = true;
 
-        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
-        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
 
         selectedTile = getSelectedTile(xprime, yprime);
 
@@ -100,8 +100,8 @@ function sketch(parent) { // we pass the sketch data from the parent
               let cursorX = p.map(i, 0, mouseDistance, p.mouseX, prevX, true);
               let cursorY = p.map(i, 0, mouseDistance, p.mouseY, prevY, true);
 
-              let xprime = (cursorX - p.width/2) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate) + p.width/2;
-              let yprime = (cursorX - p.width/2) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate) + p.height/2;
+              let xprime = (cursorX - p.width/2) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate);
+              let yprime = (cursorX - p.width/2) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate);
               let intermediateTile = getSelectedTile(xprime, yprime);
 
               if (Object.keys(intermediateTile).length > 0) {
@@ -126,8 +126,8 @@ function sketch(parent) { // we pass the sketch data from the parent
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         recentHover = true;
 
-        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
-        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
 
         selectedTile = getSelectedTile(xprime, yprime);
 
@@ -162,8 +162,8 @@ function sketch(parent) { // we pass the sketch data from the parent
     p.mousePressed = function() {
 
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
-        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
-        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
 
         selectedTile = getSelectedTile(xprime, yprime);
 
@@ -194,8 +194,8 @@ function sketch(parent) { // we pass the sketch data from the parent
     };
 
     function getSelectedTile(mouseX, mouseY) {
-      let x = (mouseX - p.width/2)/preFactor;
-      let y = (mouseY - p.height/2)/preFactor;
+      let x = mouseX / preFactor;
+      let y = mouseY / preFactor;
 
       let inside = false;
       let mySelectedTile = {};
