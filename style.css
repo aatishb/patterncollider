@@ -19,6 +19,7 @@ body {
 
 canvas {
 	display: block;
+  touch-action: none;
 }
 
 #root {
@@ -261,6 +262,10 @@ button:hover {
   main {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+
+  canvas {
+    touch-action: auto;
   }
 
   footer {

@@ -8,7 +8,6 @@ priority: 🍅🍊🍋🍏
 # mobile / ui
 
 # optimize
-- [ ] improve efficiency on checking if mouse is in tile
 
 # visual
 - [ ] fix resizing glitches on page load
@@ -27,6 +26,7 @@ priority: 🍅🍊🍋🍏
 	- i.e. prove that they span the same space
 - [ ] smoother radius slider
 - [ ] download SVG button
+- [ ] improve efficiency on checking if mouse is in tile
 
 # done
 
