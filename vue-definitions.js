@@ -140,8 +140,13 @@ var app = new Vue({
     },
 
     randomizeColors() {
-      this.startColor = [Math.random(), Math.random(), Math.random()].map(e => 255  * e);
-      this.endColor = [Math.random(), Math.random(), Math.random()].map(e => 255  * e);
+      // start with a random hue, high saturation and a very light color
+      // end with a random hue & random saturation and a dark color
+      // e.g. startColor: [43, 100, 82],
+      // e.g. endColor: [273, 13, 15],
+
+      this.startColor = [360 * Math.random(), 80 + 20 * Math.random(), 80 + 20 * Math.random()].map(e => Math.round(e));
+      this.endColor   = [360 * Math.random(), 100 * Math.random(), 50 * Math.random()].map(e => Math.round(e));
     }
 
   },
@@ -450,8 +455,6 @@ var app = new Vue({
     startColor: [43, 100, 82],
     endColor: [273, 13, 15],
     /*
-    // end with a random hue & saturation and a dark color (0 - 50)
-    // start with a very light color (80 to 100), with max or very high saturation (80 - 100), and either the same or a random hue
 
     // cool greens
     startColor: [63, 100, 96],
