@@ -91,6 +91,18 @@ footer {
   overflow-y: auto;
 }
 
+/* show scrollbar on ios */
+footer::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+footer::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
 h1, h2, h3, h4 {
   font-family: 'Raleway', 'Tinos', sans-serif;
   line-height: 1.1;
@@ -229,7 +241,7 @@ button:hover {
 
 /* screens under 600 px width OR height */
 @media screen and (max-width: 670px),
-       screen and (max-height: 400px),
+       screen and (max-height: 600px),
  {
 
   .half {
@@ -255,7 +267,6 @@ button:hover {
     flex-direction: column-reverse;
     max-height: none;
     overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
   }
 
   .slider {
