@@ -6,6 +6,7 @@ priority: 🍅🍊🍋🍏
 - [ ] make shareable 🍋
 
 # mobile / ui
+- [x] improve mobile responsiveness on various screen sizes
 - [ ] deselect and drag is glitchy 🍊
 
 # optimize
