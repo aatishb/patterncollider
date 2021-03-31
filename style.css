@@ -90,6 +90,7 @@ footer {
 	padding: 1rem;
   max-height: 5rem;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* show scrollbar on ios */
@@ -253,10 +254,6 @@ button:hover {
     flex-direction: row;
     width: 100%;
     padding-bottom: 0.5rem;
-  }
-
-  header {
-    display: none;
   }
 
   main {
