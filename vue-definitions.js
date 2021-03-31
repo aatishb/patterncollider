@@ -142,11 +142,40 @@ var app = new Vue({
     randomizeColors() {
       // start with a random hue, high saturation and a very light color
       // end with a random hue & random saturation and a dark color
-      // e.g. startColor: [43, 100, 82],
-      // e.g. endColor: [273, 13, 15],
+ 
+      /*
+      // cool greens
+      startColor: [63, 100, 96],
+      endColor: [235, 100, 32],
 
-      this.startColor = [360 * Math.random(), 80 + 20 * Math.random(), 80 + 20 * Math.random()].map(e => Math.round(e));
-      this.endColor   = [360 * Math.random(), 100 * Math.random(), 50 * Math.random()].map(e => Math.round(e));
+      // greens
+      startColor: [59, 70, 94],
+      endColor: [235, 100, 32],
+
+      // oranges
+      startColor: [63, 100, 96],
+      endColor: [20, 100, 54],
+
+      //sunset
+      [273, 13, 15]
+      [43, 100, 82]
+
+      // sunset
+      startColor: [43, 100, 82],
+      endColor: [273, 13, 15],
+
+      // single-hue
+      startColor: [235,100,95],
+      endColor: [235,100,20],
+
+      // multi-hue
+      startColor: [34, 100, 92],
+      endColor: [266, 97, 21],
+      */
+
+      let sat = 80 + 20 * Math.random();
+      this.startColor = [360 * Math.random(), sat, 80 + 20 * Math.random()].map(e => Math.round(e));
+      this.endColor   = [360 * Math.random(), sat, 50 * Math.random()].map(e => Math.round(e));
     }
 
   },
@@ -454,36 +483,6 @@ var app = new Vue({
     canvas2Resized: false,
     startColor: [43, 100, 82],
     endColor: [273, 13, 15],
-    /*
-
-    // cool greens
-    startColor: [63, 100, 96],
-    endColor: [235, 100, 32],
-
-    // oranges
-    startColor: [63, 100, 96],
-    endColor: [20, 100, 54],
-
-    //sunset
-    [273, 13, 15]
-    [43, 100, 82]
-
-    // sunset
-    startColor: [43, 100, 82],
-    endColor: [279, 70, 20],
-    
-    // sunset equal saturation
-    startColor: [43, 70, 82],
-    endColor: [279, 70, 10],
-
-    // single-hue
-    startColor: [235,100,95],
-    endColor: [235,100,20],
-
-    // multi-hue
-    startColor: [34, 100, 92],
-    endColor: [266, 97, 21],
-    */
     width: 0,
     height: 0,
     gridDownloadCount: 0,
