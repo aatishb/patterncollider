@@ -382,8 +382,8 @@ var app = new Vue({
       // here we'll use the area property to do this
       let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => (e.area == f.area) && (this.orientationColoring ? e.angles == f.angles : true)) == i);
 
-      let start = hsluv.rgbToHsluv(this.startColor.map(e => e/255));
-      let end = hsluv.rgbToHsluv(this.endColor.map(e => e/255));
+      let start = this.startColor;
+      let end = this.endColor;
       start[0] -= 360 * Math.trunc((start[0] - end[0]) / 180);
 
       let numColors = Math.max(7, protoTiles.length);
@@ -447,8 +447,40 @@ var app = new Vue({
     mode: 'settings',
     canvas1Resized: false,
     canvas2Resized: false,
-    startColor: [255, 190, 137],
-    endColor: [38, 36, 47],
+    startColor: [43, 100, 82],
+    endColor: [273, 13, 15],
+    /*
+    // end with a random hue & saturation and a dark color (0 - 50)
+    // start with a very light color (80 to 100), with max or very high saturation (80 - 100), and either the same or a random hue
+
+    // cool greens
+    startColor: [63, 100, 96],
+    endColor: [235, 100, 32],
+
+    // oranges
+    startColor: [63, 100, 96],
+    endColor: [20, 100, 54],
+
+    //sunset
+    [273, 13, 15]
+    [43, 100, 82]
+
+    // sunset
+    startColor: [43, 100, 82],
+    endColor: [279, 70, 20],
+    
+    // sunset equal saturation
+    startColor: [43, 70, 82],
+    endColor: [279, 70, 10],
+
+    // single-hue
+    startColor: [235,100,95],
+    endColor: [235,100,20],
+
+    // multi-hue
+    startColor: [34, 100, 92],
+    endColor: [266, 97, 21],
+    */
     width: 0,
     height: 0,
     gridDownloadCount: 0,

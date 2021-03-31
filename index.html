@@ -134,15 +134,6 @@
       </div>
 
       <div>
-        <button @click="randomizeColors">Random Colors</button>
-      </div>
-
-      <div>
-        <label for="numGrids">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
-        <input class="slider" type="range" id="stroke" v-model="stroke" min="0" max="255" step="1"></input>
-      </div>
-
-      <div>
         <div>
           <label for="colorTiles">Color Tiles</label>
           <input type="checkbox" id="colorTiles" v-model="colorTiles" class="checkbox">
@@ -154,6 +145,29 @@
           <label for="showIntersections">Intersections</label>
           <input type="checkbox" id="showIntersections" v-model="showIntersections" class="checkbox">
         </div>
+      </div>
+
+      <div>
+        <button @click="randomizeColors">Random Colors</button>
+      </div>
+
+      <div>
+        <div>
+          <label for="orientationColoring">Single Hue</label>
+          <input type="checkbox" id="orientationColoring" v-model="orientationColoring" class="checkbox">
+        </div>
+      </div>
+
+      <div>
+        <div>
+          <label for="orientationColoring">Reverse Color Palette</label>
+          <input type="checkbox" id="orientationColoring" v-model="orientationColoring" class="checkbox">
+        </div>
+      </div>
+
+      <div>
+        <label for="numGrids">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
+        <input class="slider" type="range" id="stroke" v-model="stroke" min="0" max="255" step="1"></input>
       </div>
 
       <div>
