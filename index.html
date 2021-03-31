@@ -134,11 +134,6 @@
       </div>
 
       <div>
-        <input class="slider" type="range" id="stroke" v-model="stroke" min="0" max="255" step="1"></input>
-        <label for="stroke">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
-      </div>
-
-      <div>
         <div>
           <label for="colorTiles">Color Tiles</label>
           <input type="checkbox" id="colorTiles" v-model="colorTiles" class="checkbox">
@@ -150,6 +145,11 @@
           <label for="showIntersections">Intersections</label>
           <input type="checkbox" id="showIntersections" v-model="showIntersections" class="checkbox">
         </div>
+      </div>
+
+      <div>
+        <input class="slider" type="range" id="stroke" v-model="stroke" min="0" max="255" step="1"></input>
+        <label for="stroke">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
       </div>
 
       <div>
