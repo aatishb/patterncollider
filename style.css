@@ -255,6 +255,7 @@ button:hover {
     flex-direction: column-reverse;
     max-height: none;
     overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
   }
 
   .slider {
