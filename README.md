@@ -12,8 +12,6 @@ priority: 🍅🍊🍋🍏
 # visual
 - [ ] fix resizing glitches on page load
 - [ ] red lines could be sharper
-- [ ] better default colors / color palettes 🍏
-- [ ] use full color range 🍏
 - [ ] color selection 🍏
 
 # optional
@@ -57,4 +55,6 @@ priority: 🍅🍊🍋🍏
 - [x] download PNG button
 - [x] improve mobile responsiveness on various screen sizes
 - [x] deselect and drag is glitchy
+- [x] better default colors / color palettes
+- [x] use full color range
 

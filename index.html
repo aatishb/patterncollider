@@ -134,6 +134,11 @@
       </div>
 
       <div>
+        <input class="slider" type="range" id="stroke" v-model="stroke" min="0" max="255" step="1"></input>
+        <label for="stroke">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
+      </div>
+
+      <div>
         <div>
           <label for="colorTiles">Color Tiles</label>
           <input type="checkbox" id="colorTiles" v-model="colorTiles" class="checkbox">
@@ -153,21 +158,21 @@
 
       <div>
         <div>
-          <label for="orientationColoring">Single Hue</label>
-          <input type="checkbox" id="orientationColoring" v-model="orientationColoring" class="checkbox">
+          <label for="singleHue">Single Hue</label>
+          <input type="checkbox" id="singleHue" v-model="singleHue" class="checkbox">
         </div>
       </div>
 
       <div>
         <div>
-          <label for="orientationColoring">Reverse Color Palette</label>
-          <input type="checkbox" id="orientationColoring" v-model="orientationColoring" class="checkbox">
+          <label for="reverseColors">Reverse Colors</label>
+          <input type="checkbox" id="reverseColors" v-model="reverseColors" class="checkbox">
         </div>
       </div>
 
       <div>
-        <label for="numGrids">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
-        <input class="slider" type="range" id="stroke" v-model="stroke" min="0" max="255" step="1"></input>
+        <input class="slider" type="range" id="colorRange" v-model="colorRange" min="2" max="7" step="1"></input>
+        <label for="colorRange">Color Range</label>       
       </div>
 
       <div>

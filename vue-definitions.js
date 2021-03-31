@@ -416,11 +416,25 @@ var app = new Vue({
       // here we'll use the area property to do this
       let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => (e.area == f.area) && (this.orientationColoring ? e.angles == f.angles : true)) == i);
 
-      let start = this.startColor;
-      let end = this.endColor;
-      start[0] -= 360 * Math.trunc((start[0] - end[0]) / 180);
+      let start = this.startColor.slice();
+      let end;
 
-      let numColors = Math.max(7, protoTiles.length);
+      if (this.singleHue) {
+        end = start.slice();
+        end[2] = 20; // and lighten end
+      } else {
+        end = this.endColor.slice();
+        start[0] -= 360 * Math.trunc((start[0] - end[0]) / 180);
+      }
+
+      if (this.reverseColors) {
+        let copy = start.slice();
+        start = end.slice();
+        end = copy;
+      }
+
+
+      let numColors = Math.max(this.colorRange, protoTiles.length);
       let colorPalette = [];
       let i = 0;
 
@@ -483,6 +497,9 @@ var app = new Vue({
     canvas2Resized: false,
     startColor: [43, 100, 82],
     endColor: [273, 13, 15],
+    singleHue: false,
+    reverseColors: false,
+    colorRange: 7,
     width: 0,
     height: 0,
     gridDownloadCount: 0,
