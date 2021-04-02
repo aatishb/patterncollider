@@ -273,7 +273,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
         if (data.colorTiles) {
           //let onScreenColors = data.colors.filter(e => e.onScreen && e.symmetry == data.symmetry);
-          let color = data.colors.filter(e => e.area == tile.area && (data.orientationColoring ? e.angles == tile.angles : true))[0];
+          let color = data.colors.filter(e => data.orientationColoring ? e.angles == tile.angles : e.area == tile.area)[0];
 
           p.fill(color.fill);
           p.stroke(stroke, stroke, stroke);

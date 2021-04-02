@@ -26,6 +26,7 @@
   <header>
     <!-- Tiloscope / Pattern Scope / Pattern Prism / Pattern Collider / Prismatic / Infini-tile / Tilomatic -->
     <h1>Pattern Collider</h1>
+    <h3>Create & Explore Infinite Tiling Patterns</h3>
   </header>
 
   <main>
@@ -158,13 +159,6 @@
 
       <div>
         <div>
-          <label for="singleHue">Single Hue</label>
-          <input type="checkbox" id="singleHue" v-model="singleHue" class="checkbox">
-        </div>
-      </div>
-
-      <div>
-        <div>
           <label for="reverseColors">Reverse Colors</label>
           <input type="checkbox" id="reverseColors" v-model="reverseColors" class="checkbox">
         </div>
@@ -173,6 +167,13 @@
       <div>
         <input class="slider" type="range" id="colorRange" v-model="colorRange" min="2" max="7" step="1"></input>
         <label for="colorRange">Color Range</label>       
+      </div>
+
+      <div>
+        <div>
+          <label for="singleHue">Single Hue</label>
+          <input type="checkbox" id="singleHue" v-model="singleHue" class="checkbox">
+        </div>
       </div>
 
       <div>

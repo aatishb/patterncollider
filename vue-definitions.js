@@ -414,7 +414,7 @@ var app = new Vue({
 
       // filter tiles to protoTiles, i.e. exactly one of each type of tile that needs to be colored
       // here we'll use the area property to do this
-      let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => (e.area == f.area) && (this.orientationColoring ? e.angles == f.angles : true)) == i);
+      let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => this.orientationColoring ? e.angles == f.angles : e.area == f.area) == i);
 
       let start = this.startColor.slice();
       let end;
@@ -432,7 +432,6 @@ var app = new Vue({
         start = end.slice();
         end = copy;
       }
-
 
       let numColors = Math.max(this.colorRange, protoTiles.length);
       let colorPalette = [];

@@ -256,6 +256,10 @@ button:hover {
     padding-bottom: 0.5rem;
   }
 
+  header > h3 {
+    display: none;
+  }
+
   main {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
