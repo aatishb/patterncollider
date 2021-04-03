@@ -15,6 +15,7 @@ priority: 🍅🍊🍏
 - [ ] lines could be sharper
 - [ ] higher res images
 - [ ] option for no stroke
+- [ ] animate?
 
 # optional (currently low priority)
 - [ ] ability to chose colors
