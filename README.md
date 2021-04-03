@@ -7,6 +7,7 @@ priority: 🍅🍊🍏
 
 # mobile / ui
 - [ ] make scroll bar more obvious
+- [ ] changing zoom & rotation shouldn't deselect
 
 # optimize
 
