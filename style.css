@@ -83,29 +83,12 @@ main {
 	font-weight: 600;
 }
 
-
 footer {
   display: flex;
   flex-direction: row;
 	padding: 1rem;
   max-height: 5rem;
-  overflow-y: auto;
-}
-
-/* show scrollbar on ios */
-.grid::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 8px;
-}
-
-.grid::-webkit-scrollbar-track {
-    background-color: rgba(57,57,57, .6);
-    border-radius: 8px;
-}
-
-.grid::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: rgba(156, 156, 156, .6);
+  overflow-y: scroll;
 }
 
 h1, h2, h3, h4 {
@@ -244,6 +227,26 @@ button:hover {
   justify-content: center
 }
 
+ /* width */
+footer::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+footer::-webkit-scrollbar-track {
+  background: rgba(85, 56, 100);
+}
+
+/* Handle */
+footer::-webkit-scrollbar-thumb {
+  background: rgba(254, 199, 81);
+}
+
+/* Handle on hover */
+footer::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 161, 63);
+} 
+
 /* screens under 600 px width OR height */
 @media screen and (max-width: 670px),
        screen and (max-height: 600px),
@@ -275,14 +278,13 @@ button:hover {
   footer {
     flex-direction: column-reverse;
     max-height: none;
-    overflow-y: scroll;
+    overflow-y: visible;
   }
 
   .slider {
     height: 18px;
     border-radius: 4px;  
   }
-
 
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
