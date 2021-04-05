@@ -92,8 +92,9 @@
       </div>
     </div>
 
-    <div id="corner" v-if="selectedTiles.length > 0 || selectedLines.length > 0">
-        <button @click="clearSelection">Clear Selection</button>
+    <div id="corner">
+        <button @click="clearSelection" v-if="selectedTiles.length > 0 || selectedLines.length > 0">Clear Selection</button>
+        <button @click="reset" v-if="queryURL.length > 0">Reset</button>
     </div>
 
   </main>
@@ -149,7 +150,7 @@
       </div>
 
       <div>
-        <input class="slider" type="range" id="stroke" v-model="stroke" min="0" max="255" step="1"></input>
+        <input class="slider" type="range" id="stroke" v-model.number="stroke" min="0" max="255" step="1"></input>
         <label for="stroke">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
       </div>
 

@@ -176,7 +176,12 @@ var app = new Vue({
       let sat = 80 + 20 * Math.random();
       this.startColor = [360 * Math.random(), sat, 80 + 20 * Math.random()].map(e => Math.round(e));
       this.endColor   = [360 * Math.random(), sat, 50 * Math.random()].map(e => Math.round(e));
-    }
+    },
+
+    reset() {
+      Object.assign(this.$data, this.dataBackup);
+      this.dataBackup = JSON.parse(JSON.stringify(this.$data));
+    },
 
   },
 
@@ -464,6 +469,45 @@ var app = new Vue({
       }
     },
 
+    queryURL() {
+      
+      let queryURL = new URLSearchParams();
+
+      for (let parameter of this.urlParameters) {
+        let value = JSON.stringify(this.$data[parameter]);
+        if (parameter !== 'dataBackup' && value !== JSON.stringify(this.dataBackup[parameter])) {
+          //console.log('changed: ', parameter, value);
+          queryURL.append(parameter, value);
+        }
+      }
+
+      queryURL= queryURL.toString();
+
+      if (queryURL == '') {
+        window.history.replaceState({}, 'Pattern Collider', location.pathname);
+      } else {
+        window.history.replaceState({}, 'Pattern Collider', '?' + queryURL);
+      }
+
+      return queryURL;
+
+    },
+
+
+  },
+
+  created() {
+    this.dataBackup = JSON.parse(JSON.stringify(this.$data));
+
+    let url = window.location.href.split('?');
+    if (url.length > 1) {
+      let urlParameters = new URLSearchParams(url[1]);
+      for (const [parameter, value] of urlParameters) {
+        if (this.urlParameters.includes(parameter)) {
+          this.$data[parameter] = JSON.parse(value);
+        }
+      }      
+    }
   },
 
   mounted() {
@@ -471,10 +515,12 @@ var app = new Vue({
     setTimeout(() => {
       this.canvas1Resized = false;
       this.canvas2Resized = false;
-    }, 100);
+    }, 500);
   },
 
   data: {
+    dataBackup: {},
+    urlParameters: ['numGrids', 'offset', 'phase', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
     numGrids: 5,
     radius: 1,
     offset: 0.2,
@@ -483,22 +529,20 @@ var app = new Vue({
     showIntersections: true,
     colorTiles: true,
     orientationColoring: false,
-    showRibbons: true,
-    tiles: [],
     stroke: 70,
     rotate: 0,
-    selectedLines: [],
-    selectedTiles: [],
-    epsilon: Math.pow(10, -6),
-    inverseEpsilon: Math.pow(10, 6),
-    mode: 'settings',
-    canvas1Resized: false,
-    canvas2Resized: false,
     startColor: [43, 100, 82],
     endColor: [273, 13, 15],
     singleHue: false,
     reverseColors: false,
     colorRange: 7,
+    tiles: [],
+    selectedLines: [],
+    selectedTiles: [],
+    epsilon: Math.pow(10, -6),
+    inverseEpsilon: Math.pow(10, 6),
+    canvas1Resized: false,
+    canvas2Resized: false,
     width: 0,
     height: 0,
     gridDownloadCount: 0,

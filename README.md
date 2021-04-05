@@ -3,16 +3,17 @@
 priority: 🍅🍊🍏
 
 # export
-- [ ] make shareable 🍅
+- [x] make shareable 🍅
 
 # mobile / ui
+- [x] add reset button
 - [ ] make scroll bar more obvious
 - [ ] changing zoom & rotation shouldn't deselect
 
 # optimize
 
 # visual
-- [ ] fix resizing glitches on page load
+- [x] fix resizing glitches on page load
 - [ ] lines could be sharper
 - [ ] higher res images
 - [ ] option for no stroke
