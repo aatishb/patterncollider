@@ -12,7 +12,7 @@ priority: 🍅🍊🍏
 # optimize
 
 # visual
-- [ ] lines could be sharper 🍊
+- [x] lines could be sharper
 - [ ] option for no stroke 🍏
 
 # optional (currently low priority)

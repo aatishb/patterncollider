@@ -28,6 +28,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       //window.addEventListener('mousemove', mouseMoved);
       parent.$emit('update:resize-completed'); 
 
+      p.pixelDensity(2);
       p.noLoop();
       drawTiles(parent.data);
     };

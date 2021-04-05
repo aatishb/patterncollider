@@ -20,6 +20,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       parent.$emit('update:width', width); 
       parent.$emit('update:height', height); 
 
+      p.pixelDensity(2);
       p.stroke(255,0,0);
       p.noLoop();
       drawLines(parent.data);
