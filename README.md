@@ -3,10 +3,9 @@
 priority: 🍅🍊🍏
 
 # export
-- [x] make shareable 🍅
 
 # mobile / ui
-- [x] add reset button
+- [x] more sensitive radius slider
 - [ ] make scroll bar more obvious
 - [ ] changing zoom & rotation shouldn't deselect
 

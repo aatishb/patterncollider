@@ -187,28 +187,27 @@ var app = new Vue({
 
   computed: {
 
-    offsets() { // dependencies: numGrids, offset, ratio
+    offsets() { // dependencies: symmetry, pattern, shift
 
       // create array
-      let array =  Array(this.numGrids).fill(this.offset);
+      let array =  Array(this.symmetry).fill(this.pattern);
       // sum all but last element
       let normalize = array.slice(0, -1).reduce((a,b) => a + b, 0);
-      // calculate desired sum based on phase
-      let sum = this.phase + this.numGrids * this.offset;
+      // calculate desired sum based on shift
+      let sum = this.shift + this.symmetry * this.pattern;
       // set last element to enforce sum
       array[array.length - 1] = (sum - normalize) % 1;
 
       return array;
     },
 
-    multiplier() { // dependencies: numGrids
-      return 2 * Math.PI / this.numGrids;
+    multiplier() { // dependencies: symmetry
+      return 2 * Math.PI / this.symmetry;
     },
 
     steps() {
-      // find nearest odd number to radius / (numGrids - 1)
-      // normalized so that a pentagrid with radius 1 has 9 steps
-      return 2* Math.round((36 * this.radius / (this.numGrids - 1) - 1)/2) + 1;
+      // find nearest odd number to radius / (symmetry - 1)
+      return 2* Math.round((this.radius / (this.symmetry - 1) - 1)/2) + 1;
     },
 
     spacing() {
@@ -219,12 +218,12 @@ var app = new Vue({
       return Array(this.steps).fill(0).map((e,i) => i - (this.steps-1)/2);
     },
 
-    grid() { // dependencies: numGrids, steps, multiplier, offsets
+    grid() { // dependencies: symmetry, steps, multiplier, offsets
 
 
       let lines = [];
 
-      for (let i = 0; i < this.numGrids; i++) {
+      for (let i = 0; i < this.symmetry; i++) {
         for (let n of this.make1Dgrid) {
 
           // grid is a set of tuples of {angle: angle, index: index} for each grid line
@@ -240,12 +239,12 @@ var app = new Vue({
       return lines;
     },
 
-    // returns a table with sin & cos values for 2*PI*i/numGrids
-    sinCosTable() {  // dependencies: numGrids, multiplier
+    // returns a table with sin & cos values for 2*PI*i/symmetry
+    sinCosTable() {  // dependencies: symmetry, multiplier
 
       let table = [];
   
-      for (let i = 0; i < this.numGrids; i++) {
+      for (let i = 0; i < this.symmetry; i++) {
         table.push({
           sin: Math.sin(i * this.multiplier), 
           cos: Math.cos(i * this.multiplier)
@@ -330,7 +329,7 @@ var app = new Vue({
           // sort angles of all edges that meet at an intersection point
           let angles = pt.lines.map(e => e.angle * this.multiplier);
           let angles2 = angles.map(e => (e + Math.PI) % (2 * Math.PI));
-          // numerical sort angles and remove duplicates (e.g. due to degeneracy when offset = 0)
+          // numerical sort angles and remove duplicates (e.g. due to degeneracy when phase = 0)
           angles = [...angles, ...angles2].map(e => this.approx(e)).sort((a,b) => a - b).filter((e, i, arr) => arr.indexOf(e) == i);
 
           // calculate points offset along these edges
@@ -373,7 +372,7 @@ var app = new Vue({
             let xd = 0;
             let yd = 0;
 
-            for (let i = 0; i < this.numGrids; i++) {
+            for (let i = 0; i < this.symmetry; i++) {
               let ci = this.sinCosTable[i].cos;
               let si = this.sinCosTable[i].sin;
 
@@ -520,11 +519,11 @@ var app = new Vue({
 
   data: {
     dataBackup: {},
-    urlParameters: ['numGrids', 'offset', 'phase', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
-    numGrids: 5,
-    radius: 1,
-    offset: 0.2,
-    phase: 1,
+    urlParameters: ['symmetry', 'pattern', 'shift', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
+    symmetry: 5,
+    radius: 36,
+    pattern: 0.2,
+    shift: 1,
     zoom: 1,
     showIntersections: true,
     colorTiles: true,
