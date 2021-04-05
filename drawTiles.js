@@ -53,8 +53,11 @@ function sketch(parent) { // we pass the sketch data from the parent
         parent.$emit('update:resize-completed'); 
       }
 
-      if (data.download !== oldData.download) {
+      if (data.download > oldData.download) {
+        p.pixelDensity(4);
+        drawTiles(data);
         p.saveCanvas('TilingPattern', 'png');
+        p.pixelDensity(2);
       }
 
       drawTiles(data);
@@ -246,6 +249,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       preFactor = preFactor * data.zoom;
       let stroke = data.stroke;
       rotate = p.radians(data.rotate);
+      p.strokeWeight( p.sqrt(preFactor) / 4);
 
 
       p.push();

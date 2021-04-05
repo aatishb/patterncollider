@@ -3,11 +3,11 @@
 priority: 🍅🍊🍏
 
 # export
-- [ ] higher res export 🍊
+- [x] higher res export
 
 # mobile / ui
 - [ ] make scroll bar more obvious 🍊
-- [ ] changing zoom & rotation shouldn't deselect 🍏
+- [x] changing zoom & rotation shouldn't deselect
 
 # optimize
 

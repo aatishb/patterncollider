@@ -183,6 +183,11 @@ var app = new Vue({
       this.dataBackup = JSON.parse(JSON.stringify(this.$data));
     },
 
+    resetSelection() {
+      this.selectedLines = [];
+      this.selectedTiles = [];
+    },
+
   },
 
   computed: {
@@ -255,10 +260,6 @@ var app = new Vue({
     },
 
     intersectionPoints() {
-
-      // reset selections
-      this.selectedLines = [];
-      this.selectedTiles = [];
 
       // calculate intersection points of lines on grid
       let pts = {};
@@ -492,6 +493,22 @@ var app = new Vue({
 
     },
 
+
+  },
+
+  watch: {
+
+    symmetry() {
+      this.resetSelection();
+    },
+
+    pattern() {
+      this.resetSelection();
+    },
+
+    shift() {
+      this.resetSelection();
+    }
 
   },
 

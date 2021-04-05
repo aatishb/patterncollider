@@ -47,8 +47,11 @@ function sketch(parent) { // we pass the sketch data from the parent
         parent.$emit('update:height', height); 
       }
 
-      if (data.download !== oldData.download) {
+      if (data.download > oldData.download) {
+        p.pixelDensity(4);
+        drawLines(parent.data);
         p.saveCanvas('GridPattern', 'png');
+        p.pixelDensity(2);
       }
 
       drawLines(data);
