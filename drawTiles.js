@@ -281,7 +281,12 @@ function sketch(parent) { // we pass the sketch data from the parent
           let color = data.colors.filter(e => data.orientationColoring ? e.angles == tile.angles : e.area == tile.area)[0];
 
           p.fill(color.fill);
-          p.stroke(stroke, stroke, stroke);
+          if (data.showStroke) {
+            p.stroke(stroke, stroke, stroke);
+          } else {
+            p.noStroke();
+          }
+
 
           if (tileInSelectedLine) {
             p.fill(0, 255, 0);

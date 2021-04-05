@@ -86,6 +86,7 @@
           display: canvasDisplaySetting,
           symmetry: symmetry,
           stroke: stroke,
+          showStroke: showStroke,
           rotate: rotate,
           orientationColoring: orientationColoring,
           download: tilingDownloadCount
@@ -149,6 +150,13 @@
       <div>
         <input class="slider" type="range" id="stroke" v-model.number="stroke" min="0" max="255" step="1"></input>
         <label for="stroke">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
+      </div>
+
+      <div>
+        <div>
+          <label for="showStroke">Stroke</label>
+          <input type="checkbox" id="showStroke" v-model="showStroke" class="checkbox">
+        </div>
       </div>
 
       <div>

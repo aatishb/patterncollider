@@ -1,9 +1,6 @@
 # TODO
 
-priority: 🍅🍊🍏
-
-- [ ] make scroll bar more obvious 🍊
-- [ ] option for no stroke 🍏
+- [ ] make scroll bar more obvious
 
 # optional (currently low priority)
 - [ ] animate

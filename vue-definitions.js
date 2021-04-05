@@ -536,7 +536,7 @@ var app = new Vue({
 
   data: {
     dataBackup: {},
-    urlParameters: ['symmetry', 'pattern', 'shift', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
+    urlParameters: ['symmetry', 'pattern', 'shift', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
     symmetry: 5,
     radius: 36,
     pattern: 0.2,
@@ -546,6 +546,7 @@ var app = new Vue({
     colorTiles: true,
     orientationColoring: false,
     stroke: 70,
+    showStroke: true,
     rotate: 0,
     startColor: [43, 100, 82],
     endColor: [273, 13, 15],
