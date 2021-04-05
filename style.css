@@ -93,17 +93,17 @@ footer {
 }
 
 /* show scrollbar on ios */
-footer::-webkit-scrollbar {
+.grid::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 8px;
 }
 
-footer::-webkit-scrollbar-track {
+.grid::-webkit-scrollbar-track {
     background-color: rgba(57,57,57, .6);
     border-radius: 8px;
 }
 
-footer::-webkit-scrollbar-thumb {
+.grid::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background-color: rgba(156, 156, 156, .6);
 }
@@ -275,7 +275,7 @@ button:hover {
   footer {
     flex-direction: column-reverse;
     max-height: none;
-    overflow-y: visible;
+    overflow-y: scroll;
   }
 
   .slider {
