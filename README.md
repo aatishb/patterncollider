@@ -2,17 +2,7 @@
 
 priority: 🍅🍊🍏
 
-# export
-- [x] higher res export
-
-# mobile / ui
 - [ ] make scroll bar more obvious 🍊
-- [x] changing zoom & rotation shouldn't deselect
-
-# optimize
-
-# visual
-- [x] lines could be sharper
 - [ ] option for no stroke 🍏
 
 # optional (currently low priority)
