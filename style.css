@@ -90,19 +90,22 @@ footer {
 	padding: 1rem;
   max-height: 5rem;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* show scrollbar on ios */
 footer::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 7px;
+    -webkit-appearance: none;
+    width: 8px;
+}
+
+footer::-webkit-scrollbar-track {
+    background-color: rgba(57,57,57, .6);
+    border-radius: 8px;
 }
 
 footer::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, .5);
-  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+    border-radius: 8px;
+    background-color: rgba(156, 156, 156, .6);
 }
 
 h1, h2, h3, h4 {
