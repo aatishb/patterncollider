@@ -2,6 +2,7 @@
 
 - [ ] make scroll bar more obvious
 - [ ] click and drag on lines selects all parallel lines
+- [ ] debounce URL updates (mobile crash bugfix)
 
 # optional (currently low priority)
 - [ ] animate
