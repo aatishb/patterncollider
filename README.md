@@ -1,8 +1,6 @@
 # TODO
 
 - [ ] make scroll bar more obvious
-- [ ] randomize button
-- [ ] randomness strength slider
 - [ ] click and drag on lines selects all parallel lines
 
 # optional (currently low priority)
