@@ -171,7 +171,7 @@
       </div>
 
       <div>
-        <button @click="randomizeColors">Random Colors</button>
+        <button @click="randomizeColors">Change Colors</button>
       </div>
 
       <div>
@@ -207,6 +207,10 @@
             <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
           </svg>
         </div>
+      </div>
+
+      <div>
+        <button v-if="queryURL.length > 0" @click="submitPattern">Submit Pattern to Gallery</button>
       </div>
 
     </div>

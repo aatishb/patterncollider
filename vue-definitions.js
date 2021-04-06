@@ -188,6 +188,14 @@ var app = new Vue({
       this.selectedTiles = [];
     },
 
+    submitPattern() {
+      let pageURL = window.location.href.replaceAll('&', '%26');
+      if (pageURL.includes('?')) {
+        let submissionURL = 'https://docs.google.com/forms/d/e/1FAIpQLScen7v68Ba7DKnSyaRKcIyleu5jf3Ypyh--UzzJsO1np01I-A/formResponse?usp=pp_url&entry.206687101=';
+        window.open(submissionURL + pageURL + '&submit=Submit');
+      }
+    },
+
   },
 
   computed: {
