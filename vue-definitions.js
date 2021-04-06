@@ -192,12 +192,12 @@ var app = new Vue({
 
   computed: {
 
-    offsets() { // dependencies: symmetry, pattern, randomness, randomSeed
+    offsets() { // dependencies: symmetry, pattern, disorder, randomSeed
 
       let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
 
       // create array
-      let array =  Array(this.symmetry).fill(this.pattern).map(e => e + this.randomness * (random() - 0.5));
+      let array =  Array(this.symmetry).fill(this.pattern).map(e => e + this.disorder * (random() - 0.5));
 
       return array;
     },
@@ -502,7 +502,7 @@ var app = new Vue({
       this.resetSelection();
     },
 
-    randomness() {
+    disorder() {
       this.resetSelection();
     },
 
@@ -536,11 +536,11 @@ var app = new Vue({
 
   data: {
     dataBackup: {},
-    urlParameters: ['symmetry', 'pattern', 'randomness', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
+    urlParameters: ['symmetry', 'pattern', 'disorder', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
     symmetry: 5,
     radius: 36,
     pattern: 0.2,
-    randomness: 0,
+    disorder: 0,
     randomSeed: 0.01,
     zoom: 1,
     showIntersections: true,
