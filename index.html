@@ -20,6 +20,7 @@
   <script src="libraries/vue.dev.js"></script>
   <script src="libraries/p5.min.js"></script>
   <script src="libraries/hsluv.min.js"></script>
+  <script src="libraries/seedrandom.min.js"></script>
 
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;1,300;1,600&family=Raleway:wght@200;300;400;700&display=swap" rel="stylesheet"> 
 </head>
@@ -108,26 +109,36 @@
   <footer>
 
     <div class="grid">
+
       <div>
         <input class="slider" type="range" id="symmetry" v-model.number="symmetry" min="3" max="20" step="1"></input>
         <label for="symmetry"><span class="dotted">{{ symmetry }}</span> Fold Symmetry</label>       
       </div>
+
       <div>
         <input class="slider" type="range" id="pattern" v-model.number="pattern" min="0" max="1" step="0.01"></input>
         <label for="pattern">Pattern:  <span class="dotted">{{ pattern }}</span></label>        
       </div>
+
       <div>
-        <input class="slider" type="range" id="shift" v-model.number="shift" min="0" max="1" step="0.01"></input>
-        <label for="shift">Shift:  <span class="dotted">{{ shift }}</span></label>        
+        <input class="slider" type="range" id="randomness" v-model.number="randomness" min="0" max="1" step="0.01"></input>
+        <label for="randomness">Randomness:  <span class="dotted">{{ randomness }}</span></label>        
       </div>
+
+      <div>
+        <button @click="randomSeed = Math.round(100 * (randomSeed + 0.01)) / 100">Randomize</button>
+      </div>
+
       <div>
         <input class="slider" type="range" id="radius" v-model.number="radius" min="0" max="150" step="1"></input>
         <label for="radius">Radius</label>        
       </div>
+
       <div>
         <input class="slider" type="range" id="zoom" v-model.number="zoom" min="0.25" max="3" step="0.01"></input>
         <label for="zoom">Zoom</label>        
       </div>
+
       <div>
         <input class="slider" type="range" id="rotate" v-model.number="rotate" min="-180" max="180" step="1"></input>
         <label for="rotate">Rotate: {{rotate}}°</label>        

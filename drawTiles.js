@@ -249,7 +249,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       preFactor = preFactor * data.zoom;
       let stroke = data.stroke;
       rotate = p.radians(data.rotate);
-      p.strokeWeight( p.sqrt(preFactor) / 4);
+      p.strokeWeight( p.sqrt(preFactor) / 4.5);
 
 
       p.push();

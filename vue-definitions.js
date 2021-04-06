@@ -192,16 +192,12 @@ var app = new Vue({
 
   computed: {
 
-    offsets() { // dependencies: symmetry, pattern, shift
+    offsets() { // dependencies: symmetry, pattern, randomness, randomSeed
+
+      let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
 
       // create array
-      let array =  Array(this.symmetry).fill(this.pattern);
-      // sum all but last element
-      let normalize = array.slice(0, -1).reduce((a,b) => a + b, 0);
-      // calculate desired sum based on shift
-      let sum = this.shift + this.symmetry * this.pattern;
-      // set last element to enforce sum
-      array[array.length - 1] = (sum - normalize) % 1;
+      let array =  Array(this.symmetry).fill(this.pattern).map(e => e + this.randomness * (random() - 0.5));
 
       return array;
     },
@@ -506,9 +502,13 @@ var app = new Vue({
       this.resetSelection();
     },
 
-    shift() {
+    randomness() {
       this.resetSelection();
-    }
+    },
+
+    randomSeed() {
+      this.resetSelection();
+    },
 
   },
 
@@ -536,11 +536,12 @@ var app = new Vue({
 
   data: {
     dataBackup: {},
-    urlParameters: ['symmetry', 'pattern', 'shift', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
+    urlParameters: ['symmetry', 'pattern', 'randomness', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
     symmetry: 5,
     radius: 36,
     pattern: 0.2,
-    shift: 1,
+    randomness: 0,
+    randomSeed: 0.01,
     zoom: 1,
     showIntersections: true,
     colorTiles: true,
