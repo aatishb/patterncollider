@@ -203,11 +203,7 @@ var app = new Vue({
     offsets() { // dependencies: symmetry, pattern, disorder, randomSeed
 
       let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
-
-      // create array
-      let array =  Array(this.symmetry).fill(this.pattern).map(e => e + this.disorder * (random() - 0.5));
-
-      return array;
+      return Array(this.symmetry).fill(this.pattern).map(e => (e + this.disorder * (random() - 0.5)) % 1);
     },
 
     multiplier() { // dependencies: symmetry
