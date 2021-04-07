@@ -89,7 +89,21 @@ footer {
 	padding: 1rem;
   max-height: 5rem;
   overflow-y: scroll;
+  position: relative;
 }
+
+#wrapper {
+  position: absolute;
+}
+
+#bottomrightcorner {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+}
+
 
 h1, h2, h3, h4 {
   font-family: 'Raleway', 'Tinos', sans-serif;
@@ -279,6 +293,10 @@ footer::-webkit-scrollbar-thumb:hover {
     flex-direction: column-reverse;
     max-height: none;
     overflow-y: visible;
+  }
+
+  #wrapper {
+    display: none;
   }
 
   .slider {

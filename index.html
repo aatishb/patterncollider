@@ -215,6 +215,11 @@
 
     </div>
 
+    <div id="wrapper">
+      <!--<div @click="scroll('up')" id="toprightcorner">☝️</div>-->
+      <div v-if="scrollValue < 0.5 * footerHeight" @click="scroll('down')" id="bottomrightcorner">👇</div>
+    </div>
+
   </footer>
 
 

@@ -196,12 +196,21 @@ var app = new Vue({
       }
     },
 
+    scroll(direction) {
+      let footer = document.querySelector('footer');
+      let height = 5 * parseFloat(getComputedStyle(footer).fontSize);
+      if (direction == 'down') {
+        footer.scrollBy(0, height);
+      } else {
+        footer.scrollBy(0, -height);
+      }
+    },
+
   },
 
   computed: {
 
     offsets() { // dependencies: symmetry, pattern, disorder, randomSeed
-
       let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
       return Array(this.symmetry).fill(this.pattern).map(e => (e + this.disorder * (random() - 0.5)) % 1);
     },
@@ -536,6 +545,15 @@ var app = new Vue({
       this.canvas1Resized = false;
       this.canvas2Resized = false;
     }, 500);
+
+    
+    let footer = document.querySelector('footer');
+    footer.addEventListener("scroll", e => {
+      this.scrollValue = e.target.scrollTop;
+    });
+
+    this.footerHeight = footer.offsetHeight;
+    
   },
 
   data: {
@@ -568,7 +586,9 @@ var app = new Vue({
     width: 0,
     height: 0,
     gridDownloadCount: 0,
-    tilingDownloadCount: 0
+    tilingDownloadCount: 0,
+    scrollValue: 0,
+    footerHeight: 0,
   }
 
 });
