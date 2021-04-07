@@ -89,7 +89,6 @@ footer {
 	padding: 1rem;
   max-height: 5rem;
   overflow-y: scroll;
-  position: relative;
 }
 
 #wrapper {

@@ -133,6 +133,7 @@ var app = new Vue({
     onResize() {
       this.canvas1Resized = false;
       this.canvas2Resized = false;
+      this.footerHeight = this.footerElement.offsetHeight;
     },
 
     lerp(start, stop, x) {
@@ -197,12 +198,11 @@ var app = new Vue({
     },
 
     scroll(direction) {
-      let footer = document.querySelector('footer');
-      let height = 5 * parseFloat(getComputedStyle(footer).fontSize);
+      let height = 5 * parseFloat(getComputedStyle(this.footerElement).fontSize);
       if (direction == 'down') {
-        footer.scrollBy(0, height);
+        this.footerElement.scrollBy(0, height);
       } else {
-        footer.scrollBy(0, -height);
+        this.footerElement.scrollBy(0, -height);
       }
     },
 
@@ -547,12 +547,12 @@ var app = new Vue({
     }, 500);
 
     
-    let footer = document.querySelector('footer');
-    footer.addEventListener("scroll", e => {
+    this.footerElement = document.querySelector('footer');
+    this.footerElement.addEventListener("scroll", e => {
       this.scrollValue = e.target.scrollTop;
     });
 
-    this.footerHeight = footer.offsetHeight;
+    this.footerHeight = this.footerElement.offsetHeight;
     
   },
 
@@ -589,6 +589,7 @@ var app = new Vue({
     tilingDownloadCount: 0,
     scrollValue: 0,
     footerHeight: 0,
+    footerElement: {},
   }
 
 });
