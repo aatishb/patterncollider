@@ -1,8 +1,8 @@
 # TODO
 
-- [ ] make scroll bar more obvious
 - [ ] click and drag on lines selects all parallel lines
 - [ ] debounce URL updates (mobile crash bugfix)
+- [ ] scrolling should always scroll the settings (even when focus isn't on settings div)
 
 # optional (currently low priority)
 - [ ] animate
