@@ -404,10 +404,13 @@ var app = new Vue({
       let start = this.colors[0].slice();
       let end = this.colors[1].slice();
 
-      let numTiles = protoTiles.length;
+      // if fewer than 6 tiles, create a color palette for 6 tiles
+      // this keeps the color palette looking consistent across patterns of different tile numbers
+      // inspired by https://colorbrewer2.org/
+      let numTiles = Math.max(6, protoTiles.length); 
       let numColors = numTiles; 
       let colorPalette = [];
-      let i = 0;
+      let i = this.reverseColors ? numTiles - protoTiles.length : 0;
 
       for (let tile of protoTiles) {
         let h = this.lerp(start[0], end[0], i / (numColors - 1)) % 360;
