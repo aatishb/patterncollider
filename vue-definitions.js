@@ -133,50 +133,10 @@ var app = new Vue({
     onResize() {
       this.canvas1Resized = false;
       this.canvas2Resized = false;
-      this.footerHeight = this.footerElement.offsetHeight;
     },
 
     lerp(start, stop, x) {
       return start + x * (stop - start);
-    },
-
-    randomizeColors() {
-      // start with a random hue, high saturation and a very light color
-      // end with a random hue & random saturation and a dark color
- 
-      /*
-      // cool greens
-      startColor: [63, 100, 96],
-      endColor: [235, 100, 32],
-
-      // greens
-      startColor: [59, 70, 94],
-      endColor: [235, 100, 32],
-
-      // oranges
-      startColor: [63, 100, 96],
-      endColor: [20, 100, 54],
-
-      //sunset
-      [273, 13, 15]
-      [43, 100, 82]
-
-      // sunset
-      startColor: [43, 100, 82],
-      endColor: [273, 13, 15],
-
-      // single-hue
-      startColor: [235,100,95],
-      endColor: [235,100,20],
-
-      // multi-hue
-      startColor: [34, 100, 92],
-      endColor: [266, 97, 21],
-      */
-
-      let sat = 80 + 20 * Math.random();
-      this.startColor = [360 * Math.random(), sat, 80 + 20 * Math.random()].map(e => Math.round(e));
-      this.endColor   = [360 * Math.random(), sat, 50 * Math.random()].map(e => Math.round(e));
     },
 
     reset() {
@@ -197,13 +157,11 @@ var app = new Vue({
       }
     },
 
-    scroll(direction) {
-      let height = 5 * parseFloat(getComputedStyle(this.footerElement).fontSize);
-      if (direction == 'down') {
-        this.footerElement.scrollBy(0, height);
-      } else {
-        this.footerElement.scrollBy(0, -height);
-      }
+    randomizeColors() {
+      this.hue = Math.round(360 * Math.random());
+      this.hueRange = Math.round(360 * Math.random()) - 180;
+      this.contrast = Math.round(20 * Math.random()) + 30;
+      this.sat = Math.round(30 * Math.random()) + 70;
     },
 
   },
@@ -425,29 +383,29 @@ var app = new Vue({
     },
 
     colors() {
+      let lightness = 50;
+
+      let start = [this.hue + this.hueRange, this.sat, lightness + this.contrast];
+      let end = [this.hue - this.hueRange, this.sat, lightness - this.contrast];
+
+      if (!this.reverseColors) {
+        return [start, end];
+      } else {
+        return [end, start];
+      }
+    },
+
+    colorPalette() {
 
       // filter tiles to protoTiles, i.e. exactly one of each type of tile that needs to be colored
       // here we'll use the area property to do this
       let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => this.orientationColoring ? e.angles == f.angles : e.area == f.area) == i);
 
-      let start = this.startColor.slice();
-      let end;
+      let start = this.colors[0].slice();
+      let end = this.colors[1].slice();
 
-      if (this.singleHue) {
-        end = start.slice();
-        end[2] = 20; // and lighten end
-      } else {
-        end = this.endColor.slice();
-        start[0] -= 360 * Math.trunc((start[0] - end[0]) / 180);
-      }
-
-      if (this.reverseColors) {
-        let copy = start.slice();
-        start = end.slice();
-        end = copy;
-      }
-
-      let numColors = Math.max(this.colorRange, protoTiles.length);
+      let numTiles = protoTiles.length;
+      let numColors = numTiles; 
       let colorPalette = [];
       let i = 0;
 
@@ -485,7 +443,6 @@ var app = new Vue({
       for (let parameter of this.urlParameters) {
         let value = JSON.stringify(this.$data[parameter]);
         if (parameter !== 'dataBackup' && value !== JSON.stringify(this.dataBackup[parameter])) {
-          //console.log('changed: ', parameter, value);
           queryURL.append(parameter, value);
         }
       }
@@ -545,20 +502,11 @@ var app = new Vue({
       this.canvas1Resized = false;
       this.canvas2Resized = false;
     }, 500);
-
-    
-    this.footerElement = document.querySelector('footer');
-    this.footerElement.addEventListener("scroll", e => {
-      this.scrollValue = e.target.scrollTop;
-    });
-
-    this.footerHeight = this.footerElement.offsetHeight;
-    
   },
 
   data: {
     dataBackup: {},
-    urlParameters: ['symmetry', 'pattern', 'disorder', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'startColor', 'endColor', 'reverseColors', 'colorRange', 'singleHue', 'orientationColoring'],
+    urlParameters: ['symmetry', 'pattern', 'disorder', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'hue', 'hueRange', 'contrast', 'sat', 'reverseColors', 'orientationColoring'],
     symmetry: 5,
     radius: 36,
     pattern: 0.2,
@@ -571,11 +519,13 @@ var app = new Vue({
     stroke: 70,
     showStroke: true,
     rotate: 0,
-    startColor: [43, 100, 82],
-    endColor: [273, 13, 15],
-    singleHue: false,
+    hue: 338,
+    hueRange: 65,
+    contrast: 33.5,
+    sat: 80,
+    //startColor: [43, 100, 82],
+    //endColor: [273, 13, 15],
     reverseColors: false,
-    colorRange: 7,
     tiles: [],
     selectedLines: [],
     selectedTiles: [],
@@ -587,9 +537,6 @@ var app = new Vue({
     height: 0,
     gridDownloadCount: 0,
     tilingDownloadCount: 0,
-    scrollValue: 0,
-    footerHeight: 0,
-    footerElement: {},
   }
 
 });

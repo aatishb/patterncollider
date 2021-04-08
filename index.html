@@ -81,7 +81,7 @@
           multiplier: multiplier,
           zoom: zoom,
           colorTiles: colorTiles,
-          colors: colors,
+          colors: colorPalette,
           selectedLines: selectedLines,
           selectedTiles: selectedTiles,
           display: canvasDisplaySetting,
@@ -160,7 +160,7 @@
 
       <div>
         <input class="slider" type="range" id="stroke" v-model.number="stroke" min="0" max="255" step="1"></input>
-        <label for="stroke">Stroke:  <span class="dotted">{{ stroke }}</span></label>       
+        <label for="stroke">Stroke Color</label>       
       </div>
 
       <div>
@@ -175,21 +175,29 @@
       </div>
 
       <div>
+        <input class="slider" type="range" id="hue" v-model.number="hue" min="0" max="360" step="1"></input>
+        <label for="hue">Color</label>       
+      </div>
+
+      <div>
+        <input class="slider" type="range" id="hueRange" v-model.number="hueRange" min="-180" max="180" step="1"></input>
+        <label for="hueRange">Color Range</label>       
+      </div>
+
+      <div>
+        <input class="slider" type="range" id="contrast" v-model.number="contrast" min="30" max="50" step="1"></input>
+        <label for="contrast">Contrast</label>       
+      </div>
+
+      <div>
+        <input class="slider" type="range" id="sat" v-model.number="sat" min="70" max="100" step="1"></input>
+        <label for="sat">Saturation</label>       
+      </div>
+
+      <div>
         <div>
           <label for="reverseColors">Reverse Colors</label>
           <input type="checkbox" id="reverseColors" v-model="reverseColors" class="checkbox">
-        </div>
-      </div>
-
-      <div>
-        <input class="slider" type="range" id="colorRange" v-model="colorRange" min="2" max="7" step="1"></input>
-        <label for="colorRange">Color Range</label>       
-      </div>
-
-      <div>
-        <div>
-          <label for="singleHue">Single Hue</label>
-          <input type="checkbox" id="singleHue" v-model="singleHue" class="checkbox">
         </div>
       </div>
 
@@ -203,7 +211,7 @@
       <div style="width: auto; height: auto;">
         <div>Tiles</div>
         <div class="row" style="display: inline-block;">
-          <svg v-for="tile in colors" height = "50" width="50">
+          <svg v-for="tile in colorPalette" height = "50" width="50">
             <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
           </svg>
         </div>
@@ -213,11 +221,6 @@
         <button v-if="queryURL.length > 0" @click="submitPattern">Submit Pattern to Gallery</button>
       </div>
 
-    </div>
-
-    <div id="wrapper">
-      <!--<div @click="scroll('up')" id="toprightcorner">☝️</div>-->
-      <div v-if="scrollValue < 0.5 * footerHeight" @click="scroll('down')" id="bottomrightcorner">👇</div>
     </div>
 
   </footer>
