@@ -160,12 +160,12 @@
 
       <div>
         <input class="slider" type="range" id="stroke" v-model.number="stroke" min="0" max="255" step="1"></input>
-        <label for="stroke">Stroke Color</label>       
+        <label for="stroke">Edge Brightness</label>       
       </div>
 
       <div>
         <div>
-          <label for="showStroke">Stroke</label>
+          <label for="showStroke">Show Edges</label>
           <input type="checkbox" id="showStroke" v-model="showStroke" class="checkbox">
         </div>
       </div>
@@ -185,12 +185,12 @@
       </div>
 
       <div>
-        <input class="slider" type="range" id="contrast" v-model.number="contrast" min="30" max="50" step="1"></input>
+        <input class="slider" type="range" id="contrast" v-model.number="contrast" min="0" max="50" step="1"></input>
         <label for="contrast">Contrast</label>       
       </div>
 
       <div>
-        <input class="slider" type="range" id="sat" v-model.number="sat" min="70" max="100" step="1"></input>
+        <input class="slider" type="range" id="sat" v-model.number="sat" min="0" max="100" step="1"></input>
         <label for="sat">Saturation</label>       
       </div>
 
