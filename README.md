@@ -3,6 +3,9 @@
 - [ ] click and drag on lines selects all parallel lines
 - [ ] debounce URL updates (mobile crash bugfix)
 - [ ] scrolling should always scroll the settings (even when focus isn't on settings div)
+- [ ] scrollbar should show up on touchpad
+- [ ] show a bit of the next row of sliders
+- [ ] mean hue, hue range, brightness range, maybe fix 'color range'
 
 # optional (currently low priority)
 - [ ] animate
