@@ -7,6 +7,7 @@ function sketch(parent) { // we pass the sketch data from the parent
     let canvas;
     let grid, spacing, multiplier, rotate;
     let recentHover = false;
+    let adding = true;
 
     p.setup = function() {
 
@@ -84,7 +85,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     };
 
-    p.mouseReleased = function() {
+    p.mousePressed = function() {
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
 
         let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
@@ -92,7 +93,11 @@ function sketch(parent) { // we pass the sketch data from the parent
         let selectedLine = getNearestLine(xprime, yprime);
 
         if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
-          updateSelectedLines(selectedLine);
+
+          let index = parent.data.selectedLines.findIndex(e => e.angle == selectedLine.angle && e.index == selectedLine.index);
+          adding = index < 0;
+
+          updateSelectedLines(selectedLine, adding);
         }
       }
     };
@@ -139,17 +144,12 @@ function sketch(parent) { // we pass the sketch data from the parent
       }
     }
 
-    function updateSelectedLines(line) {
+    function updateSelectedLines(line, addMode) {
 
-      let index = parent.data.selectedLines.findIndex(e => e.angle == line.angle && e.index == line.index);
-
-      if (index < 0) {
-        let selectedLines = [...parent.data.selectedLines];
-        selectedLines.push(line);
-        parent.$emit('update:selected-lines', selectedLines); 
+      if (addMode) {
+        parent.$emit('update:add-line', line);
       } else {
-        let selectedLines = parent.data.selectedLines.filter((e,i) => i !== index);
-        parent.$emit('update:selected-lines', selectedLines); 
+        parent.$emit('update:remove-line', line); 
       }
 
     }
