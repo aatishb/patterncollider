@@ -8,6 +8,7 @@ function sketch(parent) { // we pass the sketch data from the parent
     let grid, spacing, multiplier, rotate;
     let recentHover = false;
     let adding = true;
+    let selectedAngle;
 
     p.setup = function() {
 
@@ -96,6 +97,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
           let index = parent.data.selectedLines.findIndex(e => e.angle == selectedLine.angle && e.index == selectedLine.index);
           adding = index < 0;
+          selectedAngle = selectedLine.angle;
 
           updateSelectedLines(selectedLine, adding);
         }
@@ -111,7 +113,13 @@ function sketch(parent) { // we pass the sketch data from the parent
         let selectedLine = getNearestLine(xprime, yprime);
 
         if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
-          updateSelectedLines(selectedLine, adding);
+          if (adding) {
+            if (selectedLine.angle == selectedAngle) {
+              updateSelectedLines(selectedLine, adding);
+            }
+          } else {
+            updateSelectedLines(selectedLine, adding);
+          }
         }
       }
     };
