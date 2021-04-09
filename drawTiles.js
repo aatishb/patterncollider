@@ -13,7 +13,6 @@ function sketch(parent) { // we pass the sketch data from the parent
     let recentlySelectedTiles = [];
     let adding = true;
 
-    let mouseIsPressed = false;
     let prevX = 0;
     let prevY = 0;
 
@@ -96,28 +95,29 @@ function sketch(parent) { // we pass the sketch data from the parent
             recentlySelectedTiles.push(tileString);
           }            
 
-          let mouseDistance = p.dist(p.mouseX, p.mouseY, prevX, prevY);
-          let stepSize = p.max(1, preFactor/10);
+        } 
 
-          if (mouseDistance > stepSize) {
-            for (let i = 0; i <= mouseDistance; i += stepSize) {
-              let cursorX = p.map(i, 0, mouseDistance, p.mouseX, prevX, true);
-              let cursorY = p.map(i, 0, mouseDistance, p.mouseY, prevY, true);
+        let mouseDistance = p.dist(p.mouseX, p.mouseY, prevX, prevY);
+        let stepSize = p.max(1, preFactor/10);
 
-              let xprime = (cursorX - p.width/2) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate);
-              let yprime = (cursorX - p.width/2) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate);
-              let intermediateTile = getSelectedTile(xprime, yprime);
+        if (mouseDistance > stepSize) {
+          for (let i = 0; i <= mouseDistance; i += stepSize) {
+            let cursorX = p.map(i, 0, mouseDistance, p.mouseX, prevX, true);
+            let cursorY = p.map(i, 0, mouseDistance, p.mouseY, prevY, true);
 
-              if (Object.keys(intermediateTile).length > 0) {
-                let tileString = tileToString(intermediateTile);
-                if (!recentlySelectedTiles.includes(tileString)) {
-                  updateSelectedTiles(intermediateTile, adding);
-                  recentlySelectedTiles.push(tileString);
-                }            
-              }
+            let xprime = (cursorX - p.width/2) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate);
+            let yprime = (cursorX - p.width/2) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate);
+            let intermediateTile = getSelectedTile(xprime, yprime);
+
+            if (Object.keys(intermediateTile).length > 0) {
+              let tileString = tileToString(intermediateTile);
+              if (!recentlySelectedTiles.includes(tileString)) {
+                updateSelectedTiles(intermediateTile, adding);
+                recentlySelectedTiles.push(tileString);
+              }            
             }
           }
-        } 
+        }
 
         prevX = p.mouseX;
         prevY = p.mouseY;
@@ -184,7 +184,6 @@ function sketch(parent) { // we pass the sketch data from the parent
 
         } 
   
-        mouseIsPressed = true;
         prevX = p.mouseX;
         prevY = p.mouseY;
 
@@ -194,7 +193,6 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     p.mouseReleased = function() {
       recentlySelectedTiles = [];
-      mouseIsPressed = false;
     };
 
     function getSelectedTile(mouseX, mouseY) {

@@ -7,8 +7,12 @@ function sketch(parent) { // we pass the sketch data from the parent
     let canvas;
     let grid, spacing, multiplier, rotate;
     let recentHover = false;
+    let recentlySelectedLines = [];
     let adding = true;
     let selectedAngle;
+
+    let prevX = 0;
+    let prevY = 0;
 
     p.setup = function() {
 
@@ -79,6 +83,9 @@ function sketch(parent) { // we pass the sketch data from the parent
           p.pop();
         }
 
+        prevX = p.mouseX;
+        prevY = p.mouseY;
+
       } else if (recentHover) {
         recentHover = false;
         drawLines(parent.data);
@@ -100,7 +107,13 @@ function sketch(parent) { // we pass the sketch data from the parent
           selectedAngle = selectedLine.angle;
 
           updateSelectedLines(selectedLine, adding);
+          recentlySelectedLines.push(lineToString(selectedLine));
+
         }
+
+        prevX = p.mouseX;
+        prevY = p.mouseY;
+
       }
     };
 
@@ -111,17 +124,60 @@ function sketch(parent) { // we pass the sketch data from the parent
         let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
         let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
         let selectedLine = getNearestLine(xprime, yprime);
+        let lineString = lineToString(selectedLine);
 
-        if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
-          if (adding) {
-            if (selectedLine.angle == selectedAngle) {
+        if (lineString !== JSON.stringify({})) {
+          if (!recentlySelectedLines.includes(lineString)) {
+            if (adding) {
+              if (selectedLine.angle == selectedAngle) {
+                updateSelectedLines(selectedLine, adding);
+                recentlySelectedLines.push(lineString);
+              }
+            } else {
               updateSelectedLines(selectedLine, adding);
+              recentlySelectedLines.push(lineString);
             }
-          } else {
-            updateSelectedLines(selectedLine, adding);
           }
         }
+
+        let mouseDistance = p.dist(p.mouseX, p.mouseY, prevX, prevY);
+        let stepSize = p.max(1, spacing/10);
+
+        if (mouseDistance > stepSize) {
+          for (let i = 0; i <= mouseDistance; i++) {
+
+            let cursorX = p.map(i, 0, mouseDistance, p.mouseX, prevX, true);
+            let cursorY = p.map(i, 0, mouseDistance, p.mouseY, prevY, true);
+
+            let xprime = (cursorX - p.width/2) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate) + p.width/2;
+            let yprime = (cursorX - p.width/2) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate) + p.height/2;
+            let intermediateLine = getNearestLine(xprime, yprime);
+
+            if (JSON.stringify(intermediateLine) !== JSON.stringify({})) {
+              let lineString = lineToString(intermediateLine);
+              if (!recentlySelectedLines.includes(lineString)) {
+                if (adding) {
+                  if (intermediateLine.angle == selectedAngle) {
+                    updateSelectedLines(intermediateLine, adding);
+                    recentlySelectedLines.push(lineString);
+                  }
+                } else {
+                  updateSelectedLines(intermediateLine, adding);
+                  recentlySelectedLines.push(lineString);
+                }
+              }            
+            }
+          }
+        }
+
+        prevX = p.mouseX;
+        prevY = p.mouseY;
+
       }
+    };
+
+    p.mouseReleased = function() {
+      recentlySelectedLines = [];
     };
 
 
@@ -176,6 +232,11 @@ function sketch(parent) { // we pass the sketch data from the parent
       }
 
     }
+
+    function lineToString(line) {
+      return JSON.stringify(line);
+    }
+
 
     function drawLines(data) {
       grid = data.grid;
