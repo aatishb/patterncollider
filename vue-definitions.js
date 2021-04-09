@@ -533,6 +533,16 @@ var app = new Vue({
       this.canvas1Resized = false;
       this.canvas2Resized = false;
     }, 500);
+
+    // if scroll detected in main window, change zoom
+    let main = document.querySelector('main');
+    main.addEventListener("wheel", e => {
+      let smallscreen = getComputedStyle(document.documentElement).getPropertyValue('--smallscreen') == 'true';
+      if (!smallscreen) {
+        this.zoom = Math.min(Math.max(0.25, this.zoom - e.deltaY/10), 3);
+      }
+    });
+
   },
 
   data: {

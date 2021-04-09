@@ -1,3 +1,7 @@
+:root {
+    --smallscreen:false;
+}
+
 html, body {
   width: 100%;
   height: 100%;
@@ -265,6 +269,10 @@ footer::-webkit-scrollbar-thumb:hover {
 @media screen and (max-width: 670px),
        screen and (max-height: 600px),
  {
+
+  :root {
+      --smallscreen:true;
+  }
 
   .half {
     height: 300px;

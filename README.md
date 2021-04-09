@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] scrolling should always scroll the settings (even when focus isn't on settings div)
 - [ ] put colors in a separate folder?
 
 # optional (currently low priority)
