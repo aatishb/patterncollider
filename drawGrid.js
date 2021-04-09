@@ -102,6 +102,21 @@ function sketch(parent) { // we pass the sketch data from the parent
       }
     };
 
+
+    p.mouseDragged = function() {
+      if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
+
+        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
+        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
+        let selectedLine = getNearestLine(xprime, yprime);
+
+        if (JSON.stringify(selectedLine) !== JSON.stringify({})) {
+          updateSelectedLines(selectedLine, adding);
+        }
+      }
+    };
+
+
     // algorithm for identifying closest line
     // needs testing, could be optimized
     function getNearestLine(mouseX, mouseY) {
