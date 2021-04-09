@@ -164,6 +164,28 @@ var app = new Vue({
       this.sat = Math.round(30 * Math.random()) + 70;
     },
 
+    updateURL(queryURL) {
+
+      if (queryURL == '') {
+        window.history.replaceState({}, 'Pattern Collider', location.pathname);
+      } else {
+        window.history.replaceState({}, 'Pattern Collider', '?' + queryURL);
+      }
+
+    },
+
+    copyURLToClipboard() {
+
+      const el = document.createElement('textarea');
+      el.value = window.location.href;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+
+      alert("✨The link to your pattern is copied to the clipboard!✨");
+    }, 
+
   },
 
   computed: {
@@ -450,13 +472,13 @@ var app = new Vue({
         }
       }
 
-      queryURL= queryURL.toString();
+      queryURL = queryURL.toString();
 
-      if (queryURL == '') {
-        window.history.replaceState({}, 'Pattern Collider', location.pathname);
-      } else {
-        window.history.replaceState({}, 'Pattern Collider', '?' + queryURL);
-      }
+      // debounce URL update: only update URL once every 500ms
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.updateURL(queryURL);
+      }, 200);
 
       return queryURL;
 
