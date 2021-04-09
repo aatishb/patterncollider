@@ -1,7 +1,5 @@
 # TODO
 
-- [ ] put colors in a separate folder?
-
 # optional (currently low priority)
 
 - [ ] improved hue selection

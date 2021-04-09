@@ -47,7 +47,7 @@
 
 <div id="root"> <!-- Vue can only access things contained within this div -->
 
-  <header v-if="headerExpanded">
+  <header v-if="!fullScreen">
     <!-- Tiloscope / Pattern Scope / Pattern Prism / Pattern Collider / Prismatic / Infini-tile / Tilomatic -->
     <div>
       <h1>Pattern Collider</h1>
@@ -56,7 +56,7 @@
 
     <div class="toprightcorner" id="buttons">
       <a href="https://github.com/aatishb/patterncollider#readme"><img src="assets/question.svg" /></a>
-      <img id="shrink" v-if="headerExpanded" @click="shrinkHeader" src="assets/expand.svg" />
+      <img id="shrink" @click="shrinkHeader" src="assets/expand.svg" />
     </div>
 
   </header>
@@ -133,7 +133,12 @@
 
   <footer>
 
-    <div class="grid">
+    <div class="nav">
+      <div @click="mode = 'shape'" :class="mode == 'shape' ? 'lightershade' : ''">Shape</div>
+      <div @click="mode = 'color'" :class="mode == 'color' ? 'lightershade' : ''">Color</div>
+    </div>
+
+    <div v-if="mode == 'shape'" class="grid lightershade">
 
       <div>
         <input class="slider" type="range" id="symmetry" v-model.number="symmetry" min="3" max="19" step="1"></input>
@@ -169,6 +174,14 @@
         <label for="rotate">Rotate: {{rotate}}°</label>        
       </div>
 
+      <div>
+        <button @click="copyURLToClipboard">Share Pattern</button>
+      </div>
+
+    </div>
+
+    <div v-if="mode == 'color'" class="grid lightershade">
+      
       <div>
         <div>
           <label for="colorTiles">Color Tiles</label>
@@ -240,10 +253,6 @@
             <polygon :points="SVGPoints(tile)" :style="SVGStyle(tile)">
           </svg>
         </div>
-      </div>
-
-      <div>
-        <button @click="copyURLToClipboard">Share Pattern</button>
       </div>
 
     </div>

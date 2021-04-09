@@ -187,7 +187,7 @@ var app = new Vue({
     }, 
 
     shrinkHeader() {
-      this.headerExpanded = false;
+      this.fullScreen = true;
       this.canvas1Resized = false;
       this.canvas2Resized = false;
     },
@@ -535,6 +535,7 @@ var app = new Vue({
     }, 500);
 
     // if scroll detected in main window, change zoom
+    /*
     let main = document.querySelector('main');
     main.addEventListener("wheel", e => {
       let smallscreen = getComputedStyle(document.documentElement).getPropertyValue('--smallscreen') == 'true';
@@ -542,6 +543,7 @@ var app = new Vue({
         this.zoom = Math.min(Math.max(0.25, this.zoom - e.deltaY/10), 3);
       }
     });
+    */
 
   },
 
@@ -578,7 +580,8 @@ var app = new Vue({
     height: 0,
     gridDownloadCount: 0,
     tilingDownloadCount: 0,
-    headerExpanded: true
+    fullScreen: false,
+    mode: 'shape',
   }
 
 });
