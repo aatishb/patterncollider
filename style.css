@@ -276,7 +276,11 @@ footer::-webkit-scrollbar-thumb:hover {
     padding-bottom: 0.5rem;
   }
 
-  header > h3 {
+  header h3 {
+    display: none;
+  }
+
+  #shrink {
     display: none;
   }
 
