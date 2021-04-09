@@ -9,10 +9,10 @@
   <meta name="description" content="Create & Share Infinite Tiling Patterns">
   <meta name="author" content="Aatish Bhatia">
 
-  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+  <link rel="manifest" href="assets/site.webmanifest">
 
   <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -29,10 +29,18 @@
 
 <div id="root"> <!-- Vue can only access things contained within this div -->
 
-  <header>
+  <header v-if="headerExpanded">
     <!-- Tiloscope / Pattern Scope / Pattern Prism / Pattern Collider / Prismatic / Infini-tile / Tilomatic -->
-    <h1>Pattern Collider</h1>
-    <h3>Create & Share Infinite Tiling Patterns</h3>
+    <div>
+      <h1>Pattern Collider</h1>
+      <h3>Create & Share Infinite Tiling Patterns</h3>
+    </div>
+
+    <div class="toprightcorner" id="buttons">
+      <a href="https://github.com/aatishb/patterncollider#readme"><img src="assets/question.svg" /></a>
+      <img v-if="headerExpanded" @click="shrinkHeader" src="assets/expand.svg" />
+    </div>
+
   </header>
 
   <main>
@@ -98,7 +106,7 @@
       </div>
     </div>
 
-    <div id="corner">
+    <div class="bottomrightcorner">
         <button @click="clearSelection" v-if="selectedTiles.length > 0 || selectedLines.length > 0">Clear Selection</button>
         <button @click="reset" v-if="queryURL.length > 0">Reset</button>
     </div>
@@ -164,7 +172,7 @@
 
       <div>
         <div>
-          <label for="showStroke">Show Edges</label>
+          <label for="showStroke">Edges</label>
           <input type="checkbox" id="showStroke" v-model="showStroke" class="checkbox">
         </div>
       </div>

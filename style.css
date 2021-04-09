@@ -28,7 +28,7 @@ canvas {
 	flex-direction: column;
 }
 
-#corner {
+.bottomrightcorner {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -40,6 +40,20 @@ header {
   flex-shrink: 0;
   flex-direction: column;
 	padding: 1rem;
+}
+
+#buttons > * {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  color: white;
+}
+
+.toprightcorner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem;
 }
 
 main {

@@ -186,6 +186,12 @@ var app = new Vue({
       alert("✨The link to your pattern is copied to the clipboard!✨");
     }, 
 
+    shrinkHeader() {
+      this.headerExpanded = false;
+      this.canvas1Resized = false;
+      this.canvas2Resized = false;
+    },
+
   },
 
   computed: {
@@ -562,6 +568,7 @@ var app = new Vue({
     height: 0,
     gridDownloadCount: 0,
     tilingDownloadCount: 0,
+    headerExpanded: true
   }
 
 });
