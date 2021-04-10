@@ -163,8 +163,30 @@ h3 {
 }
 
 .slider:hover {
-  background: rgb(69,10,76);;
+  background: rgb(69,10,76);
 }
+
+.slider:disabled {
+  background: rgb(56, 56, 56);
+}
+
+.slider:disabled::-webkit-slider-thumb {
+  background: rgb(220, 220, 220);
+}
+
+.slider:disabled::-moz-range-thumb {
+  background: rgb(220, 220, 220);
+}
+
+.grey {
+  color: rgb(220, 220, 220);
+}
+
+/*
+  background-color: rgb(56, 56, 56);
+  border: 0.125rem solid rgb(56, 56, 56);
+  color: rgb(240, 240, 240);
+*/
 
 button {
   font-size: 1rem;
@@ -187,6 +209,12 @@ button:hover {
   background-color: rgb(69,10,76);
   border: 0.125rem solid rgb(69,10,76);
   color: rgb(254, 199, 81);
+}
+
+button:disabled {
+  background-color: rgb(56, 56, 56);
+  border: 0.125rem solid rgb(56, 56, 56);
+  color: rgb(240, 240, 240);
 }
 
 .nav {

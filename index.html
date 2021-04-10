@@ -135,7 +135,7 @@
   <footer>
 
     <div class="nav">
-      <div @click="mode = 'shape'" :class="mode == 'shape' ? 'lightershade' : ''">Shape</div>
+      <div @click="mode = 'shape'" :class="mode == 'shape' ? 'lightershade' : ''">Pattern</div>
       <div @click="mode = 'color'" :class="mode == 'color' ? 'lightershade' : ''">Color</div>
     </div>
 
@@ -157,7 +157,7 @@
       </div>
 
       <div>
-        <button @click="randomSeed = Math.round(100 * (randomSeed + 0.01)) / 100">Randomize</button>
+        <button @click="randomSeed = Math.round(100 * (randomSeed + 0.01)) / 100" :disabled="disorder == 0">Randomize</button>
       </div>
 
       <div>
@@ -198,52 +198,52 @@
       </div>
 
       <div>
-        <input class="slider" type="range" id="stroke" v-model.number="stroke" min="0" max="255" step="1"></input>
-        <label for="stroke">Edge Brightness</label>       
-      </div>
-
-      <div>
         <div>
-          <label for="showStroke">Edges</label>
-          <input type="checkbox" id="showStroke" v-model="showStroke" class="checkbox">
+          <label for="showStroke" :class="colorTiles ? '' : 'grey'">Edges</label>
+          <input type="checkbox" id="showStroke" v-model="showStroke" class="checkbox" :disabled="!colorTiles">
         </div>
       </div>
 
       <div>
-        <button @click="randomizeColors">Change Colors</button>
+        <input class="slider" type="range" id="stroke" v-model.number="stroke" min="0" max="255" step="1" :disabled="!(showStroke && colorTiles)"></input>
+        <label for="stroke" :class="showStroke && colorTiles ? '' : 'grey'">Edge Brightness</label>       
       </div>
 
       <div>
-        <input class="slider" type="range" id="hue" v-model.number="hue" min="0" max="360" step="1"></input>
-        <label for="hue">Color</label>       
+        <button @click="randomizeColors" :disabled="!colorTiles">Change Colors</button>
       </div>
 
       <div>
-        <input class="slider" type="range" id="hueRange" v-model.number="hueRange" min="-180" max="180" step="1"></input>
-        <label for="hueRange">Color Range</label>       
+        <input class="slider" type="range" id="hue" v-model.number="hue" min="0" max="360" step="1" :disabled="!colorTiles"></input>
+        <label for="hue" :class="colorTiles ? '' : 'grey'">Color</label>       
       </div>
 
       <div>
-        <input class="slider" type="range" id="contrast" v-model.number="contrast" min="0" max="50" step="1"></input>
-        <label for="contrast">Contrast</label>       
+        <input class="slider" type="range" id="hueRange" v-model.number="hueRange" min="-180" max="180" step="1" :disabled="!colorTiles"></input>
+        <label for="hueRange" :class="colorTiles ? '' : 'grey'">Color Range</label>       
       </div>
 
       <div>
-        <input class="slider" type="range" id="sat" v-model.number="sat" min="0" max="100" step="1"></input>
-        <label for="sat">Saturation</label>       
+        <input class="slider" type="range" id="contrast" v-model.number="contrast" min="0" max="50" step="1" :disabled="!colorTiles"></input>
+        <label for="contrast" :class="colorTiles ? '' : 'grey'">Contrast</label>       
+      </div>
+
+      <div>
+        <input class="slider" type="range" id="sat" v-model.number="sat" min="0" max="100" step="1" :disabled="!colorTiles"></input>
+        <label for="sat" :class="colorTiles ? '' : 'grey'">Saturation</label>       
       </div>
 
       <div>
         <div>
-          <label for="reverseColors">Reverse Colors</label>
-          <input type="checkbox" id="reverseColors" v-model="reverseColors" class="checkbox">
+          <label for="reverseColors" :class="colorTiles ? '' : 'grey'">Reverse Colors</label>
+          <input type="checkbox" id="reverseColors" v-model="reverseColors" class="checkbox" :disabled="!colorTiles">
         </div>
       </div>
 
       <div>
         <div>
-          <label for="orientationColoring">Color Using Tile Orientation</label>
-          <input type="checkbox" id="orientationColoring" v-model="orientationColoring" class="checkbox">
+          <label for="orientationColoring" :class="colorTiles ? '' : 'grey'">Color Using Tile Orientation</label>
+          <input type="checkbox" id="orientationColoring" v-model="orientationColoring" class="checkbox" :disabled="!colorTiles">
         </div>
       </div>
 
