@@ -542,13 +542,12 @@ var app = new Vue({
     setTimeout(() => {
       this.canvas1Resized = false;
       this.canvas2Resized = false;
+      this.fullscreenPossible = document.fullscreenEnabled;
     }, 500);
 
     window.addEventListener("fullscreenchange", e => {
       this.fullscreen = document.fullscreenElement ? true : false;
     });
-
-    this.fullscreenPossible = document.fullscreenEnabled;
 
     // if scroll detected in main window, change zoom
     /*
@@ -598,7 +597,7 @@ var app = new Vue({
     tilingDownloadCount: 0,
     mode: 'shape',
     fullscreen: false,
-    fullscreenPossible: false
+    fullscreenPossible: true
   }
 
 });
