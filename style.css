@@ -307,6 +307,7 @@ footer::-webkit-scrollbar-thumb:hover {
   }
 
   main {
+    height: auto;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
