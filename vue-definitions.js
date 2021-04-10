@@ -187,13 +187,16 @@ var app = new Vue({
     }, 
 
     requestFullscreen() {
+
+      let context = this;
+
       if (!this.fullscreen) {
         document.documentElement.requestFullscreen().then(function() {
-          this.fullScreen = true;
+          context.fullscreen = true;
        });
       } else {
         document.exitFullscreen().then(function() {
-          this.fullScreen = false;
+          context.fullscreen = false;
        });
       }
 
@@ -542,12 +545,7 @@ var app = new Vue({
     setTimeout(() => {
       this.canvas1Resized = false;
       this.canvas2Resized = false;
-      this.fullscreenPossible = document.fullscreenEnabled;
     }, 500);
-
-    window.addEventListener("fullscreenchange", e => {
-      this.fullscreen = document.fullscreenElement ? true : false;
-    });
 
     // if scroll detected in main window, change zoom
     /*
@@ -597,7 +595,7 @@ var app = new Vue({
     tilingDownloadCount: 0,
     mode: 'shape',
     fullscreen: false,
-    fullscreenPossible: true
+    fullscreenPossible: document.fullscreenEnabled
   }
 
 });
