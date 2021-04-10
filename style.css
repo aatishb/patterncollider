@@ -287,25 +287,6 @@ button:disabled {
   justify-content: center
 }
 
- /* width */
-footer::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-footer::-webkit-scrollbar-track {
-  background: rgba(85, 56, 100);
-}
-
-/* Handle */
-footer::-webkit-scrollbar-thumb {
-  background: rgba(254, 199, 81);
-}
-
-/* Handle on hover */
-footer::-webkit-scrollbar-thumb:hover {
-  background: rgba(232, 161, 63);
-} 
 
 /* screens under 600 px width OR height */
 @media screen and (max-width: 670px),
