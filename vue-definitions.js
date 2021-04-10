@@ -183,11 +183,20 @@ var app = new Vue({
       document.execCommand('copy');
       document.body.removeChild(el);
 
-      alert("✨The link to your pattern is copied to the clipboard!✨");
+      alert("Link copied to clipboard");
     }, 
 
-    shrinkHeader() {
-      this.fullScreen = true;
+    requestFullscreen() {
+      if (!this.fullscreen) {
+        document.documentElement.requestFullscreen().then(function() {
+          this.fullScreen = true;
+       });
+      } else {
+        document.exitFullscreen().then(function() {
+          this.fullScreen = false;
+       });
+      }
+
       this.canvas1Resized = false;
       this.canvas2Resized = false;
     },
@@ -490,7 +499,6 @@ var app = new Vue({
 
     },
 
-
   },
 
   watch: {
@@ -528,11 +536,19 @@ var app = new Vue({
   },
 
   mounted() {
+
     window.addEventListener("resize", this.onResize);
+
     setTimeout(() => {
       this.canvas1Resized = false;
       this.canvas2Resized = false;
     }, 500);
+
+    window.addEventListener("fullscreenchange", e => {
+      this.fullscreen = document.fullscreenElement ? true : false;
+    });
+
+    this.fullscreenPossible = document.fullscreenEnabled;
 
     // if scroll detected in main window, change zoom
     /*
@@ -580,8 +596,9 @@ var app = new Vue({
     height: 0,
     gridDownloadCount: 0,
     tilingDownloadCount: 0,
-    fullScreen: false,
     mode: 'shape',
+    fullscreen: false,
+    fullscreenPossible: false
   }
 
 });
