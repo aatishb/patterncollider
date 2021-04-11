@@ -160,7 +160,7 @@ var app = new Vue({
     randomizeColors() {
       this.hue = Math.round(360 * Math.random()); // 0 to 360
       this.hueRange = Math.round(360 * Math.random()) - 180; // 0 to 180
-      this.contrast = Math.round(20 * Math.random()) + 30; // 30 to 50
+      this.contrast = Math.round(25 * Math.random()) + 25; // 25 to 50
       this.sat = Math.round(40 * Math.random()) + 60; // 60 to 100
     },
 
@@ -599,7 +599,7 @@ var app = new Vue({
     rotate: 0,
     hue: 342,
     hueRange: 62,
-    contrast: 42,
+    contrast: 36,
     sat: 74,
     reverseColors: false,
     tiles: [],
