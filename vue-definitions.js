@@ -158,10 +158,10 @@ var app = new Vue({
     },
 
     randomizeColors() {
-      this.hue = Math.round(360 * Math.random());
-      this.hueRange = Math.round(360 * Math.random()) - 180;
-      this.contrast = Math.round(20 * Math.random()) + 30;
-      this.sat = Math.round(30 * Math.random()) + 70;
+      this.hue = Math.round(360 * Math.random()); // 0 to 360
+      this.hueRange = Math.round(360 * Math.random()) - 180; // 0 to 180
+      this.contrast = Math.round(20 * Math.random()) + 30; // 30 to 50
+      this.sat = Math.round(40 * Math.random()) + 60; // 60 to 100
     },
 
     updateURL(queryURL) {
@@ -597,13 +597,10 @@ var app = new Vue({
     stroke: 128,
     showStroke: false,
     rotate: 0,
-    hue: 132,
-    hueRange: -81,
-    contrast: 34,
-    sat: 89,
-    // pattern=0.58&radius=45&showStroke=false&hue=132&hueRange=-81&contrast=34&sat=89
-    //startColor: [43, 100, 82],
-    //endColor: [273, 13, 15],
+    hue: 342,
+    hueRange: 62,
+    contrast: 42,
+    sat: 74,
     reverseColors: false,
     tiles: [],
     selectedLines: [],
