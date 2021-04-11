@@ -204,6 +204,22 @@ var app = new Vue({
       this.canvas2Resized = false;
     },
 
+    // evenly spaced samples of an array using Bresenham’s line algorithm!
+    // by Mike Bostock https://observablehq.com/@mbostock/evenly-spaced-sampling
+    samples(array, m) {
+      if (!((m = Math.floor(m)) > 0)) return []; // return nothing
+      const n = array.length;
+      if (!(n > m)) return array.slice(); // return everything
+      const samples = [];
+      for (let i = 0, D = 2 * m - n; i < n; ++i, D += 2 * m) {
+        if (D > 0) {
+          samples.push(array[i]);
+          D -= 2 * n;
+        }
+      }
+      return samples;
+    },
+
   },
 
   computed: {
@@ -427,12 +443,8 @@ var app = new Vue({
 
       let start = [this.hue + this.hueRange, this.sat, lightness + this.contrast];
       let end = [this.hue - this.hueRange, this.sat, lightness - this.contrast];
-
-      if (!this.reverseColors) {
-        return [start, end];
-      } else {
-        return [end, start];
-      }
+      
+      return [start, end];
     },
 
     colorPalette() {
@@ -440,22 +452,27 @@ var app = new Vue({
       // filter tiles to protoTiles, i.e. exactly one of each type of tile that needs to be colored
       // here we'll use the area property to do this
       let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => this.orientationColoring ? e.angles == f.angles : e.area == f.area) == i);
+      let numTiles = protoTiles.length; 
 
       let start = this.colors[0].slice();
       let end = this.colors[1].slice();
 
-      // if fewer than 6 tiles, create a color palette for 6 tiles
-      // this keeps the color palette looking consistent across patterns of different tile numbers
-      // inspired by https://colorbrewer2.org/
-      let numTiles = Math.max(6, protoTiles.length); 
-      let numColors = numTiles; 
+      // evenly interpolate a linear array to chose colors      
+      let linspace = Array(Math.max(numTiles, 100)).fill(0).map((e,i) => i);
+      let interpolate = this.samples(linspace, numTiles);
+
+      // always include starting colors in range
+      let offset = interpolate[0];
+      interpolate = interpolate.map(e => e - offset);
+      let length = linspace.length - offset;
+      
+      let i = 0;
       let colorPalette = [];
-      let i = this.reverseColors ? numTiles - protoTiles.length : 0;
 
       for (let tile of protoTiles) {
-        let h = this.lerp(start[0], end[0], i / (numColors - 1)) % 360;
-        let s = this.lerp(start[1], end[1], i / (numColors - 1));
-        let l = this.lerp(start[2], end[2], i / (numColors - 1));
+        let h = this.lerp(start[0], end[0], interpolate[i] / length) % 360;
+        let s = this.lerp(start[1], end[1], interpolate[i] / length);
+        let l = this.lerp(start[2], end[2], interpolate[i] / length);
         let color = hsluv.hsluvToRgb([h, s, l]).map(e => Math.round(255 * e));
         colorPalette.push({
           fill: this.rgbToHex(...color),
@@ -465,6 +482,11 @@ var app = new Vue({
         });
 
         i++;
+      }
+
+      if (this.reverseColors) {
+        let reversedColorPalette = colorPalette.map(e => e.fill).reverse();
+        colorPalette.forEach((e,i) => e.fill = reversedColorPalette[i]);
       }
 
       return colorPalette;
@@ -564,7 +586,7 @@ var app = new Vue({
     dataBackup: {},
     urlParameters: ['symmetry', 'pattern', 'disorder', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'hue', 'hueRange', 'contrast', 'sat', 'reverseColors', 'orientationColoring'],
     symmetry: 5,
-    radius: 36,
+    radius: 40,
     pattern: 0.2,
     disorder: 0,
     randomSeed: 0.01,
@@ -572,13 +594,14 @@ var app = new Vue({
     showIntersections: true,
     colorTiles: true,
     orientationColoring: false,
-    stroke: 70,
-    showStroke: true,
+    stroke: 128,
+    showStroke: false,
     rotate: 0,
-    hue: 338,
-    hueRange: 65,
-    contrast: 33.5,
-    sat: 80,
+    hue: 132,
+    hueRange: -81,
+    contrast: 34,
+    sat: 89,
+    // pattern=0.58&radius=45&showStroke=false&hue=132&hueRange=-81&contrast=34&sat=89
     //startColor: [43, 100, 82],
     //endColor: [273, 13, 15],
     reverseColors: false,
