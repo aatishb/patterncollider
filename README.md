@@ -1,5 +1,7 @@
 # TODO
 
+- [ ] readme page & references
+
 # optional (currently low priority)
 
 - [ ] improved hue selection

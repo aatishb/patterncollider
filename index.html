@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <!-- Load in libraries here -->
-  <script src="libraries/vue.dev.js"></script>
+  <script src="libraries/vue.min.js"></script>
   <script src="libraries/p5.min.js"></script>
   <script src="libraries/hsluv.min.js"></script>
   <script src="libraries/seedrandom.min.js"></script>
@@ -51,13 +51,13 @@
     <!-- Tiloscope / Pattern Scope / Pattern Prism / Pattern Collider / Prismatic / Infini-tile / Tilomatic -->
     <div v-if="!fullscreen">
       <h1>Pattern Collider</h1>
-      <h3>Create Patterns. Explore Symmetries.</h3>
+      <h2>Create Patterns. Explore Symmetries.</h3>
     </div>
 
     <div class="toprightcorner" id="buttons">
-      <a href="https://github.com/aatishb/patterncollider#readme"><img src="assets/question.svg" /></a>
-      <img v-if="!fullscreen && fullscreenPossible" id="shrink" @click="requestFullscreen" src="assets/expand.svg" />
-      <img v-if="fullscreen && fullscreenPossible" id="shrink" @click="requestFullscreen" src="assets/compress.svg" />
+      <a href="https://github.com/aatishb/patterncollider#readme"><img alt="About" src="assets/question.svg" width="18" height="18" /></a>
+      <img tabindex="0" role="button" alt="Expand to fullscreen" v-if="!fullscreen && fullscreenPossible" id="shrink" @click="requestFullscreen" src="assets/expand.svg" width="18" height="18" />
+      <img tabindex="0" role="button" alt="Exit fullscreen mode" v-if="fullscreen && fullscreenPossible" id="shrink" @click="requestFullscreen" src="assets/compress.svg" width="18" height="18" />
     </div>
 
   </header>
@@ -67,7 +67,7 @@
     <div class="half">
       <div>
         Grid
-        <button class="save" @click="gridDownloadCount++">💾</button>
+        <button alt="Download Grid Image" class="save" @click="gridDownloadCount++">💾</button>
       </div>
       <div class="stretch">
         <p5 src="./drawGrid.js"
@@ -96,7 +96,7 @@
     <div class="half">
       <div>
         Tiling
-        <button class="save" @click="tilingDownloadCount++">💾</button>
+        <button alt="Download Tiling Image" class="save" @click="tilingDownloadCount++">💾</button>
       </div>
       <div class="stretch">
         <p5 src="./drawTiles.js"
@@ -135,8 +135,8 @@
   <footer>
 
     <div class="nav">
-      <div @click="mode = 'shape'" :class="mode == 'shape' ? 'lightershade' : ''">Pattern</div>
-      <div @click="mode = 'color'" :class="mode == 'color' ? 'lightershade' : ''">Color</div>
+      <div tabindex="0" role="button" @click="mode = 'shape'" :class="mode == 'shape' ? 'lightershade' : ''">Pattern</div>
+      <div tabindex="0" role="button" @click="mode = 'color'" :class="mode == 'color' ? 'lightershade' : ''">Color</div>
     </div>
 
     <div v-if="mode == 'shape'" class="grid lightershade">
