@@ -14,7 +14,7 @@ Vue.component('p5', {
       // Adding the script tag to the head as suggested before
       var head = document.head;
       var script = document.createElement('script');
-      script.type = 'text/javascript';
+      //script.type = 'text/javascript';
       script.src = url;
 
       // Then bind the event to the callback function.
