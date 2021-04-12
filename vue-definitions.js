@@ -443,12 +443,12 @@ var app = new Vue({
 
       let i = 0;
       let colorPalette = [];
-      let stepSize = 2 / (2 * numTiles - 1);
+      let range = numTiles - 1/2;
 
       for (let tile of protoTiles) {
-        let h = this.lerp(start[0], end[0], i * stepSize) % 360;
-        let s = this.lerp(start[1], end[1], i * stepSize);
-        let l = this.lerp(start[2], end[2], i * stepSize);
+        let h = this.lerp(start[0], end[0], i / range) % 360;
+        let s = this.lerp(start[1], end[1], i / range);
+        let l = this.lerp(start[2], end[2], i / range);
         let color = hsluv.hsluvToRgb([h, s, l]).map(e => Math.round(255 * e));
         colorPalette.push({
           fill: this.rgbToHex(...color),
