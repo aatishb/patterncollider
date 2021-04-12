@@ -214,12 +214,12 @@
 
       <div>
         <input class="slider" type="range" id="hue" v-model.number="hue" min="0" max="360" step="1" :disabled="!colorTiles"></input>
-        <label for="hue" :class="colorTiles ? '' : 'grey'">Color</label>       
+        <label for="hue" :class="colorTiles ? '' : 'grey'">Hue</label>       
       </div>
 
       <div>
         <input class="slider" type="range" id="hueRange" v-model.number="hueRange" min="-180" max="180" step="1" :disabled="!colorTiles"></input>
-        <label for="hueRange" :class="colorTiles ? '' : 'grey'">Color Range</label>       
+        <label for="hueRange" :class="colorTiles ? '' : 'grey'">Hue Range: <span class="dotted">{{hueRange}}</span></label>       
       </div>
 
       <div>
