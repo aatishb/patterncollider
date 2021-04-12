@@ -51,13 +51,13 @@
     <!-- Tiloscope / Pattern Scope / Pattern Prism / Pattern Collider / Prismatic / Infini-tile / Tilomatic -->
     <div v-if="!fullscreen">
       <h1>Pattern Collider</h1>
-      <h2>Create Patterns. Explore Symmetries.</h3>
+      <h2>Create Patterns. Explore Symmetries.</h2>
     </div>
 
     <div class="toprightcorner" id="buttons">
       <a href="https://github.com/aatishb/patterncollider#readme"><img alt="About" src="assets/question.svg" width="18" height="18" /></a>
-      <img tabindex="0" role="button" alt="Expand to fullscreen" v-if="!fullscreen && fullscreenPossible" id="shrink" @click="requestFullscreen" src="assets/expand.svg" width="18" height="18" />
-      <img tabindex="0" role="button" alt="Exit fullscreen mode" v-if="fullscreen && fullscreenPossible" id="shrink" @click="requestFullscreen" src="assets/compress.svg" width="18" height="18" />
+      <img tabindex="0" role="button" alt="Expand to fullscreen" v-if="!fullscreen && fullscreenPossible" id="hideonmobile" @click="requestFullscreen" src="assets/expand.svg" width="18" height="18" />
+      <img tabindex="0" role="button" alt="Exit fullscreen mode" v-if="fullscreen && fullscreenPossible" id="hideonmobile" @click="requestFullscreen" src="assets/compress.svg" width="18" height="18" />
     </div>
 
   </header>

@@ -188,20 +188,25 @@ var app = new Vue({
 
     requestFullscreen() {
 
-      let context = this;
-
       if (!this.fullscreen) {
-        document.documentElement.requestFullscreen().then(function() {
-          context.fullscreen = true;
-       });
+        let el = document.documentElement;
+
+        if (el.requestFullscreen) { // https://www.w3schools.com/jsref/met_element_requestfullscreen.asp
+          el.requestFullscreen();
+        } else if (el.webkitRequestFullscreen) { /* Safari */
+          el.webkitRequestFullscreen();
+        }
+
       } else {
-        document.exitFullscreen().then(function() {
-          context.fullscreen = false;
-       });
+
+        if (document.exitFullscreen) { // https://www.w3schools.com/jsref/met_element_exitfullscreen.asp
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+          document.webkitExitFullscreen();
+        }
+
       }
 
-      this.canvas1Resized = false;
-      this.canvas2Resized = false;
     },
 
   },
@@ -538,12 +543,28 @@ var app = new Vue({
 
   mounted() {
 
+    let context = this;
+
     window.addEventListener("resize", this.onResize);
 
     setTimeout(() => {
-      this.canvas1Resized = false;
-      this.canvas2Resized = false;
+      context.canvas1Resized = false;
+      context.canvas2Resized = false;
     }, 500);
+
+
+    window.addEventListener("fullscreenchange", e => {
+      context.fullscreen = document.fullscreen;
+      context.canvas1Resized = false;
+      context.canvas2Resized = false;
+    });
+
+    window.addEventListener("webkitfullscreenchange", e => {
+      context.fullscreen = document.webkitCurrentFullScreenElement;
+      context.canvas1Resized = false;
+      context.canvas2Resized = false;
+    });
+
 
     // if scroll detected in main window, change zoom
     /*
@@ -591,7 +612,7 @@ var app = new Vue({
     tilingDownloadCount: 0,
     mode: 'shape',
     fullscreen: false,
-    fullscreenPossible: document.fullscreenEnabled
+    fullscreenPossible: document.fullscreenEnabled || document.webkitFullscreenEnabled
   }
 
 });
