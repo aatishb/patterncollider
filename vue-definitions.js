@@ -118,9 +118,6 @@ var app = new Vue({
       this.selectedTiles = [];
     },
 
-    downloadPattern() {
-    },
-
     // from stack exchange https://stackoverflow.com/a/5624139
     rgbToHex(r, g, b) {
       let R = Math.round(r);
@@ -215,7 +212,17 @@ var app = new Vue({
 
     offsets() { // dependencies: symmetry, pattern, disorder, randomSeed
       let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
-      return Array(this.symmetry).fill(this.pattern).map(e => (e + this.disorder * (random() - 0.5)) % 1);
+      let offsets =  Array(this.symmetry).fill(this.pattern).map(e => (e + this.disorder * (random() - 0.5)) % 1);
+
+      // when disorder slider is used, we normalize the sum to be the same as before
+      // i.e., normalize sum after adding random offsets
+      if (this.disorder > 0) {
+        let sum = offsets.reduce((a,b) => a + b, 0);
+        let desiredSum = this.pattern * this.symmetry;
+        offsets = offsets.map(e => e + (desiredSum - sum)/this.symmetry);
+      }
+
+      return offsets;
     },
 
     multiplier() { // dependencies: symmetry
