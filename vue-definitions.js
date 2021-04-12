@@ -204,22 +204,6 @@ var app = new Vue({
       this.canvas2Resized = false;
     },
 
-    // evenly spaced samples of an array using Bresenham’s line algorithm!
-    // by Mike Bostock https://observablehq.com/@mbostock/evenly-spaced-sampling
-    samples(array, m) {
-      if (!((m = Math.floor(m)) > 0)) return []; // return nothing
-      const n = array.length;
-      if (!(n > m)) return array.slice(); // return everything
-      const samples = [];
-      for (let i = 0, D = 2 * m - n; i < n; ++i, D += 2 * m) {
-        if (D > 0) {
-          samples.push(array[i]);
-          D -= 2 * n;
-        }
-      }
-      return samples;
-    },
-
   },
 
   computed: {
@@ -457,22 +441,14 @@ var app = new Vue({
       let start = this.colors[0].slice();
       let end = this.colors[1].slice();
 
-      // evenly interpolate a linear array to chose colors      
-      let linspace = Array(Math.max(numTiles, 100)).fill(0).map((e,i) => i);
-      let interpolate = this.samples(linspace, numTiles);
-
-      // always include starting colors in range
-      let offset = interpolate[0];
-      interpolate = interpolate.map(e => e - offset);
-      let length = linspace.length - offset;
-      
       let i = 0;
       let colorPalette = [];
+      let stepSize = 2 / (2 * numTiles - 1);
 
       for (let tile of protoTiles) {
-        let h = this.lerp(start[0], end[0], interpolate[i] / length) % 360;
-        let s = this.lerp(start[1], end[1], interpolate[i] / length);
-        let l = this.lerp(start[2], end[2], interpolate[i] / length);
+        let h = this.lerp(start[0], end[0], i * stepSize) % 360;
+        let s = this.lerp(start[1], end[1], i * stepSize);
+        let l = this.lerp(start[2], end[2], i * stepSize);
         let color = hsluv.hsluvToRgb([h, s, l]).map(e => Math.round(255 * e));
         colorPalette.push({
           fill: this.rgbToHex(...color),
