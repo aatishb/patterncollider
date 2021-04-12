@@ -212,7 +212,7 @@ var app = new Vue({
 
     offsets() { // dependencies: symmetry, pattern, disorder, randomSeed
       let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
-      let offsets =  Array(this.symmetry).fill(this.pattern).map(e => (e + this.disorder * (random() - 0.5)) % 1);
+      let offsets =  Array(this.symmetry).fill(this.pattern).map(e => e + this.disorder * (random() - 0.5));
 
       // when disorder slider is used, we normalize the sum to be the same as before
       // i.e., normalize sum after adding random offsets
@@ -222,7 +222,7 @@ var app = new Vue({
         offsets = offsets.map(e => e + (desiredSum - sum)/this.symmetry);
       }
 
-      return offsets;
+      return offsets.map(e => e % 1);
     },
 
     multiplier() { // dependencies: symmetry
