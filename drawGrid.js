@@ -141,7 +141,7 @@ function sketch(parent) { // we pass the sketch data from the parent
         }
 
         let mouseDistance = p.dist(p.mouseX, p.mouseY, prevX, prevY);
-        let stepSize = p.max(1, spacing/10);
+        let stepSize = 1;
 
         if (mouseDistance > stepSize) {
           for (let i = 0; i <= mouseDistance; i++) {
