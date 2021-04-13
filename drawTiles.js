@@ -253,7 +253,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       p.background(0, 0, 0.2 * 255);
       p.translate(p.width / 2, p.height / 2);
       p.rotate(rotate);
-      p.translate(- data.zoom * p.width * data.glide * p.cos(rotate), - data.zoom * p.width * data.glide * p.sin(rotate));
+      p.translate(- data.zoom * p.min(p.width, p.height) * data.glide * p.cos(rotate), - data.zoom * p.min(p.width, p.height) * data.glide * p.sin(rotate));
 
       for (let tile of Object.values(data.tiles)) {
 
