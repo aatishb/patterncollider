@@ -1,5 +1,8 @@
 # TODO
 
+- [x] add glide slider 
+- [x] remove normalization on disorder
+- [x] group radius, zoom into size tab
 - [ ] readme page & references
 
 # optional (currently low priority)

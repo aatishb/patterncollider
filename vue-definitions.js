@@ -214,12 +214,10 @@ var app = new Vue({
       let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
       let offsets =  Array(this.symmetry).fill(this.pattern).map(e => e + this.disorder * (random() - 0.5));
 
-      // when disorder slider is used, we normalize the sum to be the same as before
-      // i.e., normalize sum after adding random offsets
-      if (this.disorder > 0) {
-        let sum = offsets.reduce((a,b) => a + b, 0);
-        let desiredSum = this.pattern * this.symmetry;
-        offsets = offsets.map(e => e + (desiredSum - sum)/this.symmetry);
+      if (this.glide > 0) {
+        // use cosine difference formula with lookup tables for optimization
+        const glideShift = i => this.sinCosTable[i].cos * this.sinCosRotate.cos - this.sinCosTable[i].sin * this.sinCosRotate.sin;
+        offsets = offsets.map((e,i) => e - 2 * this.steps * this.glide * glideShift(i));        
       }
 
       return offsets.map(e => e % 1);
@@ -278,6 +276,17 @@ var app = new Vue({
       return table;
     },
 
+    sinCosRotate() {
+
+      let angle = - this.rotate * Math.PI / 180;
+
+      return {
+        sin: Math.sin(angle),
+        cos: Math.cos(angle)
+      };
+
+    },
+
     intersectionPoints() {
 
       // calculate intersection points of lines on grid
@@ -317,7 +326,7 @@ var app = new Vue({
 
                 // optimization: only list intersection points viewable on screen
                 // this ensures we don't draw or compute tiles that aren't visible
-                if (Math.abs(xprime * this.spacing) <= this.width/2 + this.spacing && Math.abs(yprime * this.spacing) <= this.height/2 + this.spacing) {
+                if (Math.abs(xprime * this.spacing) <= this.width/2 + 1.5*this.spacing && Math.abs(yprime * this.spacing) <= this.height/2 + 1.5*this.spacing) {
 
                   // this check ensures that we only draw tiles that are connected to other tiles
                   if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
@@ -588,10 +597,12 @@ var app = new Vue({
 
   data: {
     dataBackup: {},
-    urlParameters: ['symmetry', 'pattern', 'disorder', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'hue', 'hueRange', 'contrast', 'sat', 'reverseColors', 'orientationColoring'],
+    urlParameters: ['symmetry', 'pattern', 'glide', 'glideAngle', 'disorder', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'hue', 'hueRange', 'contrast', 'sat', 'reverseColors', 'orientationColoring'],
     symmetry: 5,
     radius: 40,
     pattern: 0.2,
+    glide: 0,
+    glideAngle: 0,
     disorder: 0,
     randomSeed: 0.01,
     zoom: 1,
