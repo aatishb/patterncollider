@@ -220,7 +220,7 @@ var app = new Vue({
         offsets = offsets.map((e,i) => e - this.steps * this.glide * glideShift(i));        
       }
 
-      return offsets.map(e => e % 1);
+      return offsets.map(e => e);
     },
 
     multiplier() { // dependencies: symmetry
@@ -252,7 +252,7 @@ var app = new Vue({
           // TODO fix degeneracy issue: there can be multiple lines that coincide
           lines.push({
             angle: i,
-            index: n + this.offsets[i]
+            index: n + this.offsets[i] % 1
           });
 
         }
@@ -427,7 +427,7 @@ var app = new Vue({
           // compute area using determinant method
           let area = 0;
           for (let i = 0; i < dMax; i++) {
-            area += 0.5 * (dualPts[i].x * dualPts[(i+1) % dMax].y - dualPts[i].y * dualPts[(i+1) % dMax].x)
+            area += 0.5 * (dualPts[i].x * dualPts[(i+1) % dMax].y - dualPts[i].y * dualPts[(i+1) % dMax].x);
           }
 
           area = String(Math.round(1000 * area) / 1000);
