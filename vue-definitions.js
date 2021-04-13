@@ -217,7 +217,7 @@ var app = new Vue({
       if (this.glide > 0) {
         // use cosine difference formula with lookup tables for optimization
         const glideShift = i => this.sinCosTable[i].cos * this.sinCosRotate.cos - this.sinCosTable[i].sin * this.sinCosRotate.sin;
-        offsets = offsets.map((e,i) => e - 2 * this.steps * this.glide * glideShift(i));        
+        offsets = offsets.map((e,i) => e - this.steps * this.glide * glideShift(i));        
       }
 
       return offsets.map(e => e % 1);
