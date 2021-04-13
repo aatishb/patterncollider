@@ -1,8 +1,7 @@
 # TODO
 
-- [x] add glide slider 
-- [x] remove normalization on disorder
-- [x] group radius, zoom into size tab
+- [ ] glide selection bug
+- [ ] glide rotation glitch
 - [ ] readme page & references
 
 # optional (currently low priority)
