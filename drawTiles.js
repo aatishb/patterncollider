@@ -80,8 +80,8 @@ function sketch(parent) { // we pass the sketch data from the parent
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         recentHover = true;
 
-        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
-        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
+        let xprime = (p.mouseX - (p.width/2 + glide)) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
+        let yprime = (p.mouseX - (p.width/2 + glide)) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
 
         selectedTile = getSelectedTile(xprime, yprime);
 
@@ -105,8 +105,8 @@ function sketch(parent) { // we pass the sketch data from the parent
             let cursorX = p.map(i, 0, mouseDistance, p.mouseX, prevX, true);
             let cursorY = p.map(i, 0, mouseDistance, p.mouseY, prevY, true);
 
-            let xprime = (cursorX - p.width/2) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate);
-            let yprime = (cursorX - p.width/2) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate);
+            let xprime = (cursorX - (p.width/2 + glide)) * Math.cos(-rotate) - (cursorY - p.height/2) * Math.sin(-rotate);
+            let yprime = (cursorX - (p.width/2 + glide)) * Math.sin(-rotate) + (cursorY - p.height/2) * Math.cos(-rotate);
             let intermediateTile = getSelectedTile(xprime, yprime);
 
             if (Object.keys(intermediateTile).length > 0) {
@@ -130,8 +130,8 @@ function sketch(parent) { // we pass the sketch data from the parent
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
         recentHover = true;
 
-        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
-        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
+        let xprime = (p.mouseX - (p.width/2 + glide)) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
+        let yprime = (p.mouseX - (p.width/2 + glide)) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
 
         selectedTile = getSelectedTile(xprime, yprime);
 
@@ -140,7 +140,7 @@ function sketch(parent) { // we pass the sketch data from the parent
         if (Object.keys(selectedTile).length > 0) {
 
           p.push();
-            p.translate(p.width/2, p.height/2);
+            p.translate(p.width/2 + glide, p.height/2);
             p.fill(128, 215, 255);
             p.rotate(rotate);
             p.beginShape();
@@ -166,8 +166,8 @@ function sketch(parent) { // we pass the sketch data from the parent
     p.mousePressed = function() {
 
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
-        let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
-        let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
+        let xprime = (p.mouseX - (p.width/2 + glide)) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate);
+        let yprime = (p.mouseX - (p.width/2 + glide)) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate);
 
         selectedTile = getSelectedTile(xprime, yprime);
 
@@ -248,12 +248,13 @@ function sketch(parent) { // we pass the sketch data from the parent
       let stroke = data.stroke;
       rotate = p.radians(data.rotate);
       p.strokeWeight( Math.min(p.sqrt(preFactor) / 4.5, 1));
+      glide = - data.zoom * p.min(p.width, p.height) * data.glide;
 
       p.push();
       p.background(0, 0, 0.2 * 255);
-      p.translate(p.width / 2, p.height / 2);
+      p.translate(p.width / 2 + glide, p.height / 2);
       p.rotate(rotate);
-      p.translate(- data.zoom * p.min(p.width, p.height) * data.glide * p.cos(rotate), - data.zoom * p.min(p.width, p.height) * data.glide * p.sin(rotate));
+      //p.translate(- data.zoom * p.min(p.width, p.height) * data.glide * p.cos(-rotate), - data.zoom * p.min(p.width, p.height) * data.glide * p.sin(-rotate));
 
       for (let tile of Object.values(data.tiles)) {
 

@@ -278,9 +278,9 @@ var app = new Vue({
 
     sinCosRotate() {
 
-      let angle = - this.rotate * Math.PI / 180;
+      let angle = this.rotate * Math.PI / 180;
 
-      return {
+      return { 
         sin: Math.sin(angle),
         cos: Math.cos(angle)
       };
@@ -531,6 +531,18 @@ var app = new Vue({
 
     pattern() {
       this.resetSelection();
+    },
+
+    radius() {
+      this.resetSelection();      
+    },
+
+    rotate() {
+      this.resetSelection();      
+    },
+
+    glide() {
+      this.resetSelection();      
     },
 
     disorder() {
