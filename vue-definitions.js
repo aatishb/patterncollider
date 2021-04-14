@@ -146,14 +146,6 @@ var app = new Vue({
       this.selectedTiles = [];
     },
 
-    submitPattern() {
-      let pageURL = window.location.href.replaceAll('&', '%26');
-      if (pageURL.includes('?')) {
-        let submissionURL = 'https://docs.google.com/forms/d/e/1FAIpQLScen7v68Ba7DKnSyaRKcIyleu5jf3Ypyh--UzzJsO1np01I-A/formResponse?usp=pp_url&entry.206687101=';
-        window.open(submissionURL + pageURL + '&submit=Submit');
-      }
-    },
-
     randomizeColors() {
       this.hue = Math.round(360 * Math.random()); // 0 to 360
       this.hueRange = Math.round(360 * Math.random()) - 180; // -180 to 180
@@ -211,13 +203,16 @@ var app = new Vue({
   computed: {
 
     offsets() { // dependencies: symmetry, pattern, disorder, randomSeed
-      let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
-      let offsets =  Array(this.symmetry).fill(this.pattern).map(e => e + this.disorder * (random() - 0.5));
+
+      let offsets =  Array(this.symmetry).fill(this.pattern);
+
+      if (this.disorder > 0) {
+        let random = new Math.seedrandom('random seed ' + this.symmetry + ' and ' + this.randomSeed);
+        offsets = offsets.map(e => e + this.disorder * (random() - 0.5));
+      }
 
       if (this.glide > 0) {
-        // use cosine difference formula with lookup tables for optimization
-        const glideShift = i => this.sinCosTable[i].cos * this.sinCosRotate.cos - this.sinCosTable[i].sin * this.sinCosRotate.sin;
-        offsets = offsets.map((e,i) => e - this.steps * this.glide * glideShift(i));        
+        offsets = offsets.map((e,i) => e - this.steps * this.glide * this.glideShift[i]);
       }
 
       return offsets.map(e => e);
@@ -287,6 +282,11 @@ var app = new Vue({
 
     },
 
+    glideShift() {
+      // use cosine difference formula with lookup tables for optimization
+      return this.sinCosTable.map(e => e.cos * this.sinCosRotate.cos - e.sin * this.sinCosRotate.sin);
+    },
+
     intersectionPoints() {
 
       // calculate intersection points of lines on grid
@@ -315,21 +315,18 @@ var app = new Vue({
                 let x = (line2.index * s1 - line1.index * s2) / s12;
                 let y = (line2.index * c1 - line1.index * c2) / s21;
 
-                /*
-                let xprime = x * c1 + y * s1;
-                let yprime = - x * s1 + y * c1;
-                */
-
                 let rotationAngle = this.rotate * Math.PI / 180;
                 let xprime = x * Math.cos(rotationAngle) - y * Math.sin(rotationAngle);
                 let yprime = x * Math.sin(rotationAngle) + y * Math.cos(rotationAngle);
 
                 // optimization: only list intersection points viewable on screen
                 // this ensures we don't draw or compute tiles that aren't visible
-                if (Math.abs(xprime * this.spacing) <= this.width/2 + 1.5*this.spacing && Math.abs(yprime * this.spacing) <= this.height/2 + 1.5*this.spacing) {
+                if (Math.abs(xprime * this.spacing) <= this.width / 2 + 1.5 * this.spacing 
+                && Math.abs(yprime * this.spacing) <= this.height / 2 + 1.5 * this.spacing) {
 
                   // this check ensures that we only draw tiles that are connected to other tiles
-                  if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
+                  if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) 
+                                       || this.dist(x,y,0,0) <= 0.5 * (this.steps - 1)) {
                     let index = JSON.stringify([this.approx(x), this.approx(y)]);
                     if (pts[index]) {
                       if (!pts[index].lines.includes(line1)) {
@@ -370,9 +367,7 @@ var app = new Vue({
               x:x,
               y:y
             });
-            //ellipse(x,y,5);
           }
-          //fill(255,255,0);
           
           // calculate medians of these offset points
           let medianPts = [];
@@ -382,7 +377,6 @@ var app = new Vue({
             let y0 = offsetPts[i].y;
             let x1 = offsetPts[ (i+1) % iMax ].x;
             let y1 = offsetPts[ (i+1) % iMax ].y;
-            //line(x0,y0,x1,y1);
             
             let xm = (x0 + x1) / 2;
             let ym = (y0 + y1) / 2;
@@ -390,7 +384,6 @@ var app = new Vue({
             medianPts.push({
               x: xm, 
               y: ym});
-            //ellipse(xm, ym, 5);
           }
 
           // calculate dual of these median points      
@@ -455,7 +448,7 @@ var app = new Vue({
     colorPalette() {
 
       // filter tiles to protoTiles, i.e. exactly one of each type of tile that needs to be colored
-      // here we'll use the area property to do this
+      // depending on how we want to color the tiles, filter by area or by orientation
       let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => this.orientationColoring ? e.angles == f.angles : e.area == f.area) == i);
       let numTiles = protoTiles.length; 
 
@@ -504,7 +497,7 @@ var app = new Vue({
 
       for (let parameter of this.urlParameters) {
         let value = JSON.stringify(this.$data[parameter]);
-        if (parameter !== 'dataBackup' && value !== JSON.stringify(this.dataBackup[parameter])) {
+        if (parameter !== 'dataBackup' && value !== JSON.stringify(this.dataBackup[parameter]) && !(parameter == 'randomSeed' && this.$data['disorder'] == 0)) {
           queryURL.append(parameter, value);
         }
       }
@@ -593,18 +586,6 @@ var app = new Vue({
       context.canvas2Resized = false;
     });
 
-
-    // if scroll detected in main window, change zoom
-    /*
-    let main = document.querySelector('main');
-    main.addEventListener("wheel", e => {
-      let smallscreen = getComputedStyle(document.documentElement).getPropertyValue('--smallscreen') == 'true';
-      if (!smallscreen) {
-        this.zoom = Math.min(Math.max(0.25, this.zoom - e.deltaY/10), 3);
-      }
-    });
-    */
-
   },
 
   data: {
@@ -615,7 +596,7 @@ var app = new Vue({
     pattern: 0.2,
     glide: 0,
     disorder: 0,
-    randomSeed: 0.01,
+    randomSeed: 0.00,
     zoom: 1,
     showIntersections: true,
     colorTiles: true,
