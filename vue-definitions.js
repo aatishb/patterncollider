@@ -137,7 +137,16 @@ var app = new Vue({
     },
 
     reset() {
+      // pressing reset shouldn't change mode, fullscreen & show
+      // i.e. it should only reset pattern properties
+      this.dataBackup.mode = this.$data.mode;
+      this.dataBackup.fullscreen = this.$data.fullscreen;
+      this.dataBackup.show = this.$data.show;
+
+      // reset data to backup
       Object.assign(this.$data, this.dataBackup);
+      
+      // and then recreate the backup, because resetting the data also emptied the backup
       this.dataBackup = JSON.parse(JSON.stringify(this.$data));
     },
 
