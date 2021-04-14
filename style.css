@@ -295,6 +295,7 @@ button:disabled {
 }
 
 select {
+  -webkit-appearance: none;
   background-color: rgb(85, 56, 100);
   color: rgb(255, 190, 137);
 }
