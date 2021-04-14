@@ -294,6 +294,10 @@ button:disabled {
   justify-content: center
 }
 
+select {
+  background-color: rgb(85, 56, 100);
+  color: rgb(255, 190, 137);
+}
 
 /* screens under 600 px width OR height */
 @media screen and (max-width: 670px),

@@ -546,6 +546,11 @@ var app = new Vue({
       this.resetSelection();
     },
 
+    show() {
+      this.canvas1Resized = false;
+      this.canvas2Resized = false;
+    },
+
   },
 
   created() {
@@ -609,6 +614,7 @@ var app = new Vue({
     contrast: 36,
     sat: 74,
     reverseColors: false,
+    show: 'Grid & Tiling',
     tiles: [],
     selectedLines: [],
     selectedTiles: [],

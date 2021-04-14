@@ -26,6 +26,8 @@ function sketch(parent) { // we pass the sketch data from the parent
       canvas.parent(parent.$el);
       //window.addEventListener('mousemove', mouseMoved);
       parent.$emit('update:resize-completed'); 
+      parent.$emit('update:width', width); 
+      parent.$emit('update:height', height); 
 
       p.pixelDensity(2);
       p.noLoop();
@@ -50,6 +52,8 @@ function sketch(parent) { // we pass the sketch data from the parent
         // resize canvas
         p.resizeCanvas(width, height);
         parent.$emit('update:resize-completed'); 
+        parent.$emit('update:width', width); 
+        parent.$emit('update:height', height); 
       }
 
       if (data.download > oldData.download) {
