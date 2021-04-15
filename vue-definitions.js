@@ -464,8 +464,8 @@ var app = new Vue({
 
       let numTiles = protoTiles.length; 
 
-      let start = this.colors[0].slice();
-      let end = this.colors[1].slice();
+      let start = this.colors[0];
+      let end = this.colors[1];
 
       let i = 0;
       let colorPalette = [];
