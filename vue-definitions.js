@@ -241,7 +241,7 @@ var app = new Vue({
     },
 
     make1Dgrid() {
-      return Array(this.steps).fill(0).map((e,i) => i - (this.steps-1)/2);
+      return Array(this.steps).fill(0).map((e,i) => i - (this.steps-1)/2).sort((a,b) => Math.abs(a) - Math.abs(b));
     },
 
     grid() { // dependencies: symmetry, steps, multiplier, offsets
@@ -330,8 +330,8 @@ var app = new Vue({
 
                 // optimization: only list intersection points viewable on screen
                 // this ensures we don't draw or compute tiles that aren't visible
-                if (Math.abs(xprime * this.spacing) <= this.width / 2 + 1.5 * this.spacing 
-                && Math.abs(yprime * this.spacing) <= this.height / 2 + 1.5 * this.spacing) {
+                if (Math.abs(xprime * this.spacing) <= this.width / 2 + this.spacing 
+                && Math.abs(yprime * this.spacing) <= this.height / 2 + this.spacing) {
 
                   // this check ensures that we only draw tiles that are connected to other tiles
                   if ((this.steps == 1 && this.dist(x,y,0,0) <= 0.5 * this.steps) 
@@ -434,6 +434,7 @@ var app = new Vue({
 
           area = String(Math.round(1000 * area) / 1000);
           pt.area = area;
+          pt.numVertices = angles.length;
           pt.angles = JSON.stringify(angles);
           pt.dualPts = dualPts;
           pt.mean = mean;
@@ -456,9 +457,11 @@ var app = new Vue({
 
     colorPalette() {
 
-      // filter tiles to protoTiles, i.e. exactly one of each type of tile that needs to be colored
-      // depending on how we want to color the tiles, filter by area or by orientation
-      let protoTiles = Object.values(this.intersectionPoints).filter((e, i, arr) => arr.findIndex(f => this.orientationColoring ? e.angles == f.angles : e.area == f.area) == i);
+      let protoTiles = Object.values(this.intersectionPoints); // get a list of all tiles
+      const filterFunction = (e,f) => this.orientationColoring ? e.angles == f.angles : e.area == f.area; // we can pick tiles by orientation or area
+      protoTiles = protoTiles.filter((e, i, arr) => arr.findIndex(f => filterFunction(e,f)) == i); // pick 1 tile of each type using the function above
+      protoTiles = protoTiles.sort((a,b) => a.numVertices - b.numVertices); // then sort by number of vertices
+
       let numTiles = protoTiles.length; 
 
       let start = this.colors[0].slice();
