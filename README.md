@@ -41,7 +41,7 @@ Now, draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 de
 
 <img src="https://user-images.githubusercontent.com/1878638/115280557-12b2eb00-a116-11eb-902b-cc6d9d21b8cd.png" width="330">
 
-de Bruijn discovered that if you start from this pentagrid and follow his procedure for creating a tiling pattern, you end up with the well-known Penrose tiling.
+de Bruijn discovered that if you start from this pentagrid and follow his procedure for creating a dual tiling pattern, you end up with the well-known Penrose tiling.
 
 <img src="https://user-images.githubusercontent.com/1878638/115281016-8e149c80-a116-11eb-8567-c2a3520e9b16.png" width="660">
 
@@ -53,7 +53,7 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 
 ## Instructions
 
-### Interaction
+## Interaction
 
 - Click the save icon 💾 on the top right of the pattern to save the image 
 
@@ -64,7 +64,7 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 <img src="https://user-images.githubusercontent.com/1878638/115282669-76d6ae80-a118-11eb-92b9-38065b701d4d.gif" width="660">
 
 
-### Pattern Settings
+## Pattern Settings
 
 **Symmetry**: Controls the rotational symmetry of the pattern. Higher = more sets of parallel lines / ribbons. The pattern will be quasiperiodic for all symmetry values except 3, 4, and 6. Patterns with a N-fold symmetry contain points where the tiling looks the same if you rotate it by 360/N degrees.
 
@@ -80,7 +80,7 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 
 **Share Pattern**: Copies the URL of this pattern to the clipboard for easy bookmarking & sharing.
 
-### Size Settings
+## Size Settings
 
 **Number of Pieces**: Sets the radius of the circular patch of tiles. Larger = more pieces, smaller = fewer pieces.
 
@@ -88,7 +88,7 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 
 **Show Grid/Tiling**: Shows or hides the grid or tiling pattern.
 
-### Color Settings
+## Color Settings
 
 **Change Color Palette**: Generates a new color palette for the tiles.
 
