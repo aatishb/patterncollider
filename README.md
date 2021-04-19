@@ -2,7 +2,11 @@
 
 - [Credits](https://github.com/aatishb/patterncollider#credits)
 - [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
-- [Documentation](https://github.com/aatishb/patterncollider#instructions)
+- [Documentation](https://github.com/aatishb/patterncollider#instructions--help)
+	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
+	- [Pattern](https://github.com/aatishb/patterncollider#pattern-settings)
+	- [Size](https://github.com/aatishb/patterncollider#size)
+	- [Color](https://github.com/aatishb/patterncollider#color)	
 - [Famous Patterns](https://github.com/aatishb/patterncollider#famous-patterns)
 - [References](https://github.com/aatishb/patterncollider#references)
 
@@ -63,14 +67,20 @@ Pattern Collider uses this method to create quasiperiodic tiling patterns.
 ### Interaction
 
 Click on a line in the grid to select it & to highlight the corresponding ribbon in the tiling pattern
+
 IMAGE
 
 Click and drag to select parallel lines / ribbons
+
 IMAGE
 
-- Click on a tile to select it & highlight the corresponding intersection point in the grid
-- Click and drag to select multiple tiles
+Click on a tile to select it & highlight the corresponding intersection point in the grid
 
+IMAGE
+
+Click and drag to select multiple tiles
+
+IMAGE
 
 ### Pattern Settings
 
