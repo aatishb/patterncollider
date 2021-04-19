@@ -1,7 +1,7 @@
 # Pattern Collider
 
 - [Credits](https://github.com/aatishb/patterncollider#credits)
-- [About](https://github.com/aatishb/patterncollider#what-is-this)
+- [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
 - [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
 - [Instructions](https://github.com/aatishb/patterncollider#instructions)
 	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
@@ -33,15 +33,9 @@ Pattern Collider uses the multigrid method of creating quasiperiodic patterns di
 
 Say you have a bunch of intersecting lines. This collection of lines is also a tiling pattern in disguise! Here's how to see this.
 
-IMAGE
-
 Draw an [equilateral polygon](https://en.wikipedia.org/wiki/Equilateral_polygon) centered on each intersection point, whose sides are perpendicular to the lines.
 
-IMAGE
-
 Because of the way these shapes are constructed, you can always slide them together and fit them into a seamless tiling pattern. We say that this tiling pattern and grid of lines are *dual* to each other, because they're secretly the same pattern.
-
-IMAGE
 
 Now, draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This special grid of lines is called a *pentagrid*.
 
@@ -55,7 +49,7 @@ If you shift these lines around, but maintain their spacing and orientation, you
 
 <img src="https://user-images.githubusercontent.com/1878638/115281491-1135f280-a117-11eb-92af-9adf13fe47ae.gif" width="660">
 
-You can repeat this procedure for more than different numbers of parallel line sets, to create many other quasiperiodic patterns. Pattern Collider uses this method to create quasiperiodic tiling patterns.
+You can repeat this procedure for different numbers of parallel line sets, to create many other quasiperiodic patterns. Pattern Collider uses this method to create quasiperiodic tiling patterns.
 
 ## Instructions
 
