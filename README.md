@@ -55,23 +55,14 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 
 ### Interaction
 
-Click the save icon 💾 on the top right of the pattern to save the image 
+- Click the save icon 💾 on the top right of the pattern to save the image 
 
-Click on a line in the grid to select it & to highlight the corresponding ribbon in the tiling pattern
+- Click on a line in the grid to select it & to highlight the corresponding ribbon in the tiling pattern. Click and drag to select parallel lines / ribbons.
+<img src="https://user-images.githubusercontent.com/1878638/115282491-455de300-a118-11eb-889c-cfcc6e41fc1e.gif" width="660">
 
-IMAGE
+- Click on a tile to select it & highlight the corresponding intersection point in the grid. Click and drag to select multiple tiles.
+<img src="https://user-images.githubusercontent.com/1878638/115282669-76d6ae80-a118-11eb-92b9-38065b701d4d.gif" width="660">
 
-Click and drag to select parallel lines / ribbons
-
-IMAGE
-
-Click on a tile to select it & highlight the corresponding intersection point in the grid
-
-IMAGE
-
-Click and drag to select multiple tiles
-
-IMAGE
 
 ### Pattern Settings
 
