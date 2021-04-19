@@ -1,7 +1,3 @@
-:root {
-    --smallscreen:false;
-}
-
 * {
   /* for CSS debugging */
   /* outline: 1px solid white; */
@@ -136,11 +132,29 @@ h2 {
   font-size: 1rem;
 }
 
+/*
+.slider {
+  height: 18px;
+  border-radius: 4px;  
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+}
+
+.slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+}
+*/
+
 .slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 12px;
-  border-radius: 3px;  
+  height: 18px;
+  border-radius: 4px;  
   background: rgb(85, 56, 100);
   outline: none;
   opacity: 1;
@@ -152,8 +166,8 @@ h2 {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%; 
   border-color: rgb(40, 32, 68);
   background: rgb(254, 199, 81);
@@ -161,8 +175,8 @@ h2 {
 }
 
 .slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border-color: rgb(40, 32, 68);
   background: rgb(254, 199, 81);
@@ -307,14 +321,11 @@ select { /* modified from https://stackoverflow.com/a/57510283 */
   color: rgb(255, 190, 137);
 }
 
+
 /* screens under 600 px width OR height */
 @media screen and (max-width: 670px),
        screen and (max-height: 600px),
  {
-
-  :root {
-      --smallscreen:true;
-  }
 
   .half {
     height: 300px;
@@ -360,22 +371,6 @@ select { /* modified from https://stackoverflow.com/a/57510283 */
 
   #wrapper {
     display: none;
-  }
-
-  .slider {
-    height: 18px;
-    border-radius: 4px;  
-  }
-
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 28px;
-    height: 28px;
-  }
-
-  .slider::-moz-range-thumb {
-    width: 28px;
-    height: 28px;
   }
 
 } 
