@@ -3,7 +3,7 @@
 - [Credits](https://github.com/aatishb/patterncollider#credits)
 - [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
 - [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
-- [Instructions](https://github.com/aatishb/patterncollider#instructions)
+- [Instructions](https://github.com/aatishb/patterncollider#how-to-use-pattern-collider)
 	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
 	- [Pattern](https://github.com/aatishb/patterncollider#pattern-settings)
 	- [Size](https://github.com/aatishb/patterncollider#size)
@@ -74,7 +74,7 @@ If you shift these lines around, but maintain their spacing and orientation, you
 
 You can repeat this procedure for different numbers of parallel line sets, to create many other quasiperiodic patterns. Pattern Collider uses this method to create quasiperiodic tiling patterns.
 
-## Instructions
+## How to Use Pattern Collider
 
 ## Interaction
 
