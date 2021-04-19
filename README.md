@@ -42,9 +42,9 @@ Here are a few previously discovered tiling patterns that you can recreate with 
 
 ## How It Works
 
-Pattern Collider uses the multigrid method of creating quasiperiodic patterns discovered by the mathematician Nicolaas Govert de Bruijn. 
+Pattern Collider uses the [multigrid method](https://new.math.uiuc.edu/oldnew/quasicrystals/papers/debruijnPenrose.pdf) of creating quasiperiodic patterns discovered by the mathematician [de Bruijn](https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn). 
 
-Say you have a bunch of intersecting lines. This collection of lines is also a tiling pattern in disguise! Here's how to see this. First, find the points where the lines intersect.
+Start with a bunch of intersecting lines. It turns out that collection of lines is also a tiling pattern in disguise! Here's how to see this. First, find the points where the lines intersect.
 
 <img src="https://user-images.githubusercontent.com/1878638/115302783-c88b3300-a130-11eb-8ae6-67ca68248d6d.png" width="440">
 
