@@ -2,7 +2,7 @@
 
 - [Credits](https://github.com/aatishb/patterncollider#credits)
 - [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
-- [Documentation](https://github.com/aatishb/patterncollider#documentation)
+- [Documentation](https://github.com/aatishb/patterncollider#instructions)
 - [Famous Patterns](https://github.com/aatishb/patterncollider#famous-patterns)
 - [References](https://github.com/aatishb/patterncollider#references)
 
@@ -58,23 +58,25 @@ IMAGE
 
 Pattern Collider uses this method to create quasiperiodic tiling patterns.
 
-## Documentation
+## Instructions / Help
 
 ### Interaction
 
-- Click on a line in the grid to select it & to highlight the corresponding ribbon in the tiling pattern
+Click on a line in the grid to select it & to highlight the corresponding ribbon in the tiling pattern
 IMAGE
-- Click and drag to select parallel lines / ribbons
+
+Click and drag to select parallel lines / ribbons
 IMAGE
+
 - Click on a tile to select it & highlight the corresponding intersection point in the grid
 - Click and drag to select multiple tiles
 
 
 ### Pattern Settings
 
-- **Symmetry**: Selects the amount of rotational symmetry of the pattern. Higher = more sets of parallel lines / ribbons. Patterns with a n fold symmetry contain places where the tiling looks the same if you rotate it by 360/n degrees.
+**Symmetry**: Selects the amount of rotational symmetry of the pattern. Higher = more sets of parallel lines / ribbons. Patterns with a n fold symmetry contain places where the tiling looks the same if you rotate it by 360/n degrees.
 
-- **Pattern**: Controls the offset of each family of lines from the center. When pattern = 0 or 1, the pattern is degenerate because more than 2 lines intersect at a point, and this results in polygons with more than four sides in the tiling patterns. Interesting things happen when pattern = 0.5 or pattern = 1 / symmetry.
+**Pattern**: Controls the offset of each family of lines from the center. When pattern = 0 or 1, the pattern is degenerate because more than 2 lines intersect at a point, and this results in polygons with more than four sides in the tiling patterns. Interesting things happen when pattern = 0.5 or pattern = 1 / symmetry.
 
 - **Rotate**: Rotates the entire pattern about its center. (Note that rotations are around the center of the tiling pattern and not around the center of the viewable patch.)
 
