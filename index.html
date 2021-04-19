@@ -260,13 +260,13 @@
       </div>
 
       <div>
-        <input class="slider" type="range" id="contrast" v-model.number="contrast" min="0" max="50" step="1" :disabled="!colorTiles"></input>
-        <label for="contrast" :class="colorTiles ? '' : 'grey'">Contrast</label>       
+        <input class="slider" type="range" id="sat" v-model.number="sat" min="0" max="100" step="1" :disabled="!colorTiles"></input>
+        <label for="sat" :class="colorTiles ? '' : 'grey'">Saturation</label>
       </div>
 
       <div>
-        <input class="slider" type="range" id="sat" v-model.number="sat" min="0" max="100" step="1" :disabled="!colorTiles"></input>
-        <label for="sat" :class="colorTiles ? '' : 'grey'">Saturation</label>       
+        <input class="slider" type="range" id="contrast" v-model.number="contrast" min="0" max="50" step="1" :disabled="!colorTiles"></input>
+        <label for="contrast" :class="colorTiles ? '' : 'grey'">Contrast</label>
       </div>
 
       <div style="width: auto; height: auto;">

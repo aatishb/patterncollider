@@ -15,17 +15,17 @@
 
 Pattern Collider is created by [Aatish Bhatia](https://aatishb.com/) in collaboration with [Henry Reich](https://www.minutephysics.com/).
 
-Special thanks to [Arkarup Bannerjee](https://www.arkarup.com/), [Shefali Nayak](https://shefalinayak.com/), [Vijay Ravikumar](https://this-vijay.github.io/), and [Connie Sun](https://www.cartoonconnie.com/) for their helpful feedback & suggestions.
+Special thanks to [Arkarup Banerjee](https://www.arkarup.com/), [Shefali Nayak](https://shefalinayak.com/), [Vijay Ravikumar](https://this-vijay.github.io/), and [Connie Sun](https://www.cartoonconnie.com/) for their helpful feedback & suggestions.
 
 ## What Is This?
 
-**Pattern Collider is a tool for creating quasiperiodic tiling patterns.** You can think of it like a microscope for exploring a mathematical space of pattern. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+Pattern Collider is a tool for creating quasiperiodic tiling patterns. You can think of it like a microscope for exploring a mathematical space of pattern. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
 
-**Quasiperiodic** patterns are a special type of patterns that don't repeat themselves when you slide the pattern in some direction, and where every motif (i.e. cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they also occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
+Quasiperiodic patterns are patterns that don't repeat themselves when you slide in any direction, and where every motif (i.e. every cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they also occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
 
 IMAGE
 
-Visually, quasiperiodic patterns often appear highly repetitive, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods will never perfectly line up with each other (because their ratio is an irrational number).
+Visually, quasiperiodic patterns often appear highly repetitive, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never line up with each other (because their ratio is an irrational number).
 
 ## How It Works
 
@@ -81,17 +81,17 @@ IMAGE
 
 ### Pattern Settings
 
-**Symmetry**: Selects the amount of rotational symmetry of the pattern. Higher = more sets of parallel lines / ribbons. Patterns with a n fold symmetry contain places where the tiling looks the same if you rotate it by 360/n degrees. The pattern will be quasiperiodic for all symmetry values except 3, 4, and 6.
+**Symmetry**: Controls the rotational symmetry of the pattern. Higher = more sets of parallel lines / ribbons. The pattern will be quasiperiodic for all symmetry values except 3, 4, and 6. Patterns with a N-fold symmetry contain points where the tiling looks the same if you rotate it by 360/N degrees.
 
-**Pattern**: Controls the offset of each family of lines from the center of the grid. When pattern = 0 or 1, more than 2 lines intersect at a point, and this results in polygons with more than four sides in the tiling patterns. Interesting things happen when pattern = 0.5 or pattern = 1 / symmetry.
+**Pattern**: Controls the offset of each family of lines from the center of the grid. When pattern = 0 or 1, more than 2 lines intersect at a point, and this results in polygons with more than four sides in the tiling patterns. Interesting things happen when pattern = 0.5 or when pattern = 1 / symmetry.
 
-**Rotate**: Rotates the pattern about its center. (When used in combination with glide, rotations are about the center of the tiling pattern, not around the center of the viewable patch.)
+**Rotate**: Rotates the pattern about its center. (Rotations are about the center of the tiling pattern, not around the center of the viewable patch. When glide = 0 these are the same.)
 
 **Glide**: Glides the patch sideways along the pattern. You can use glide in combination with rotate to explore the space of the tiling pattern.
 
-**Disorder**: Smoothly interpolates between the chosen offsets for each family of lines, and a random set of offsets. This allows you to explore a wider set of possible tiling patterns with the given symmetry. 
+**Disorder**: Smoothly interpolates the offsets for each family of lines to a random set of offsets. This nudges the grid lines about, allowing you to explore a wider set of tiling patterns than with the pattern slider alone.
 
-**Randomize**: For use with the disorder slider. This button randomizes the offsets, so you jump to a different pattern in the space of possible tiling patterns with the same symmetry.
+**Randomize**: Randomizes the offsets, so you jump to a different pattern in the space of allowed tiling patterns. This is enabled when disorder > 0.
 
 **Share Pattern**: Copies the URL of this pattern to the clipboard for easy bookmarking & sharing.
 
@@ -109,23 +109,23 @@ IMAGE
 
 **Reverse Colors**: Reverses the order of colors in the color palette.
 
-**Color Using Tile Orientation**: Use tile orientation instead of tile area as the basis for coloring the tiles. This is particularly useful for 3 and 6 fold symmetry, which create periodic patterns, and can help visualize ribbons and additional structures for other values of symmetry.
+**Color Using Tile Orientation**: Colors the tiles based on its orientation instead of its area. This is particularly helpful for visualizing 3 and 6 fold symmetry.
 
-**Color Tiles**: Toggle whether to fill in the color of tiles.
+**Color Tiles**: Toggles whether to fill in the color of tiles.
 
-**Intersections**: Toggle whether to identify the intersection points in the grid.
+**Intersections**: Toggles whether to identify the intersection points in the grid.
 
-**Edges**: Toggle whether to outline the edges of the tiles.
+**Edges**: Toggles whether to outline the edges of the tiles.
 
 **Edge Brightness**: Sets the brightness of the edges.
 
-**Hue**: Sets the mean hue of the pattern.
+**Hue**: Sets the average hue of the pattern.
 
 **Hue Range**: Sets the hue range of the pattern. Goes from negative to positive. Setting this to zero will color the pattern in shades of a single hue.
 
-**Contrast**: Controls the contrast of the pattern, i.e. the darkness to brightness range. Higher contrast makes the patterns more visible.
-
 **Saturation**: Controls the saturation of the pattern. Zero = grayscale.
+
+**Contrast**: Controls the contrast of the pattern, i.e. the darkness to brightness range. Higher contrast makes the patterns more easily visible but de-emphasizes the hue.
 
 **Tiles**: Shows one of each type of tile being displayed.
 
