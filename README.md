@@ -71,6 +71,7 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 - Click on a tile to select it & highlight the corresponding intersection point in the grid. Click and drag to select multiple tiles.
 <img src="https://user-images.githubusercontent.com/1878638/115282669-76d6ae80-a118-11eb-92b9-38065b701d4d.gif" width="660">
 
+- The clear selection button clears all selections, and the reset button resets all changes & returns to the default tiling pattern.
 
 ## Pattern Settings
 
@@ -122,6 +123,12 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 
 **Tiles**: Shows one of each type of tile being displayed.
 
-## Famous Patterns
+## "Famous" Patterns
+
+- [5-fold Penrose Tiling](https://aatishb.com/patterncollider/)
+- [6-fold Stepped Plane](https://aatishb.com/patterncollider/?symmetry=6&disorder=1&randomSeed=0.42&radius=76&zoom=2.4&orientationColoring=true) (click randomize to generate variations) ([reference](https://www.sciencedirect.com/science/article/pii/S0012365X10004516))
+- [8-fold Ammann-Beenker Tiling](https://aatishb.com/patterncollider/?symmetry=8&pattern=0.5&radius=140&zoom=2&stroke=255&showStroke=true&hue=250&hueRange=173&contrast=30&reverseColors=true) ([reference](https://tilings.math.uni-bielefeld.de/substitution/ammann-beenker/))
+- [7-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=7&radius=88&zoom=2.13&stroke=44) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolars-7-fold/))
+- [12-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=12&pattern=0&glide=2&radius=150&zoom=2&rotate=15) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolar/))
 
 ## References
