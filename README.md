@@ -1,7 +1,7 @@
 # Pattern Collider
 
 - [Credits](https://github.com/aatishb/patterncollider#credits)
-- [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
+- [About](https://github.com/aatishb/patterncollider#what-is-this)
 - [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
 - [Instructions](https://github.com/aatishb/patterncollider#instructions)
 	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
@@ -19,9 +19,9 @@ Special thanks to [Arkarup Bannerjee](https://www.arkarup.com/), [Shefali Nayak]
 
 ## What Is This?
 
-**Pattern Collider is a tool for creating quasiperiodic tiling patterns.** You can think of it like a kind of a mathematical microscope that lets you explore the space of a pattern. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+**Pattern Collider is a tool for creating quasiperiodic tiling patterns.** You can think of it like a microscope that lets you explore the space of a mathematical pattern. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
 
-**Quasiperiodic** patterns are a special type of patterns that don't repeat themselves when you slide the pattern in some direction, and where every motif (i.e. cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling).
+**Quasiperiodic** patterns are a special type of patterns that don't repeat themselves when you slide the pattern in some direction, and where every motif (i.e. cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they also occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
 
 IMAGE
 
