@@ -44,11 +44,11 @@ Here are a few previously discovered tiling patterns that you can recreate with 
 
 Pattern Collider uses the [multigrid method](https://new.math.uiuc.edu/oldnew/quasicrystals/papers/debruijnPenrose.pdf) of creating quasiperiodic patterns discovered by the mathematician [de Bruijn](https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn). 
 
-Start with a bunch of intersecting lines. It turns out that collection of lines is also a tiling pattern in disguise! Here's how to see this. First, find the points where the lines intersect.
+Start with a bunch of intersecting lines. It turns out that this collection of lines is a tiling pattern in disguise! Here's how to see this. First, find the points where the lines intersect.
 
 <img src="https://user-images.githubusercontent.com/1878638/115302783-c88b3300-a130-11eb-8ae6-67ca68248d6d.png" width="440">
 
-Then, centered on each intersection point, draw an [equilateral polygon](https://en.wikipedia.org/wiki/Equilateral_polygon) whose sides are perpendicular to the lines.
+Then, centered on each intersection point, draw [equilateral polygons](https://en.wikipedia.org/wiki/Equilateral_polygon) whose sides are perpendicular to the lines.
 
 <img src="https://user-images.githubusercontent.com/1878638/115302852-e193e400-a130-11eb-98a5-3f0cc0f77de7.png" width="440">
 
@@ -60,7 +60,7 @@ This tiling pattern and grid of lines are *dual* to each other, i.e. they're sec
 
 ![grid tiles dual](https://user-images.githubusercontent.com/1878638/115303473-ad6cf300-a131-11eb-9072-2de824874768.png)
 
-Now draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This particular grid of lines is known as a *pentagrid*.
+Now that we know how to go between lines and tiles, draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This particular grid of lines is known as a *pentagrid*.
 
 <img src="https://user-images.githubusercontent.com/1878638/115280557-12b2eb00-a116-11eb-902b-cc6d9d21b8cd.png" width="330">
 
