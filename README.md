@@ -46,17 +46,21 @@ Pattern Collider uses the multigrid method of creating quasiperiodic patterns di
 
 Say you have a bunch of intersecting lines. This collection of lines is also a tiling pattern in disguise! Here's how to see this. First, find the points where the lines intersect.
 
-ANIMATION SHOWING POINTS OF INTERSECTION
+<img src="https://user-images.githubusercontent.com/1878638/115302783-c88b3300-a130-11eb-8ae6-67ca68248d6d.png" width="440">
 
 Then, centered on each intersection point, draw an [equilateral polygon](https://en.wikipedia.org/wiki/Equilateral_polygon) whose sides are perpendicular to the lines.
 
-ANIMATION SHOWING POLYGONS
+<img src="https://user-images.githubusercontent.com/1878638/115302852-e193e400-a130-11eb-98a5-3f0cc0f77de7.png" width="440">
 
-Because of the way these shapes are constructed, you can slide them together into a seamless tiling pattern. This tiling pattern and grid of lines are *dual* to each other, i.e. they're secretly the same pattern.
+Because of the way these shapes are constructed, you can slide them together into a seamless tiling pattern.
 
-ANIMATION SLIDING POLYGONS TOGETHER AND HIDING LINES
+![lines to tiles](https://user-images.githubusercontent.com/1878638/115302925-f4a6b400-a130-11eb-8395-37d8a158a115.gif)
 
-Now draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This grid of lines is known as a *pentagrid*.
+This tiling pattern and grid of lines are *dual* to each other, i.e. they're secretly the same pattern.
+
+![grid tiles dual](https://user-images.githubusercontent.com/1878638/115303473-ad6cf300-a131-11eb-9072-2de824874768.png)
+
+Now draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This particular grid of lines is known as a *pentagrid*.
 
 <img src="https://user-images.githubusercontent.com/1878638/115280557-12b2eb00-a116-11eb-902b-cc6d9d21b8cd.png" width="330">
 
