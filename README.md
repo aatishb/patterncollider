@@ -19,7 +19,9 @@ Special thanks to [Arkarup Banerjee](https://www.arkarup.com/), [Shefali Nayak](
 
 ## What Is This?
 
-Pattern Collider is a tool for creating quasiperiodic tiling patterns. You can think of it like a microscope for exploring a mathematical space of pattern. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+Pattern Collider is a tool for creating quasiperiodic tiling patterns. Think of it like a mathematical microscope that you can use to explore intricate & unusual tiling patterns. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+
+VIDEO SCREENSHOT
 
 Quasiperiodic patterns are patterns that don't repeat themselves when you slide in any direction, and where every motif (i.e. every cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they also occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
 
@@ -31,11 +33,17 @@ Visually, quasiperiodic patterns often appear highly repetitive, and yet the ent
 
 Pattern Collider uses the multigrid method of creating quasiperiodic patterns discovered by the mathematician Nicolaas Govert de Bruijn. 
 
-Say you have a bunch of intersecting lines. This collection of lines is also a tiling pattern in disguise! Here's how to see this.
+Say you have a bunch of intersecting lines. This collection of lines is also a tiling pattern in disguise! Here's how to see this. First, find the points where the lines intersect.
 
-Draw an [equilateral polygon](https://en.wikipedia.org/wiki/Equilateral_polygon) centered on each intersection point, whose sides are perpendicular to the lines.
+ANIMTION SHOWING POINTS OF INTERSECTION
+
+Then draw an [equilateral polygon](https://en.wikipedia.org/wiki/Equilateral_polygon) centered on each intersection point, whose sides are perpendicular to the lines.
+
+ANIMATION SHOWING POLYGONS
 
 Because of the way these shapes are constructed, you can always slide them together and fit them into a seamless tiling pattern. We say that this tiling pattern and grid of lines are *dual* to each other, because they're secretly the same pattern.
+
+ANIMATION SLIDING POLYGONS TOGETHER AND HIDING LINES
 
 Now, draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This special grid of lines is called a *pentagrid*.
 
