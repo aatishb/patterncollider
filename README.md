@@ -139,3 +139,15 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 **Tiles**: Shows one of each type of tile being displayed.
 
 ## References
+
+Here are some great references on how to construct Penrose Tiles Using the Pentagrid Method.
+
+- [Penrose Tilings Tied up in Ribbons by David Austin](http://www.ams.org/publicoutreach/feature-column/fcarc-ribbons)
+- [The Empire Problem in Penrose Tilings by Laura Effinger-Dean](http://www.cs.williams.edu/~bailey/06le.pdf)
+- [Pentagrids and Penrose Tilings by Stacy Mowry, Shriya Shukla](https://web.williams.edu/Mathematics/sjmiller/public_html/hudson/HRUMC-Mowry&Shukla_Pentagrids%20and%20Penrose.pdf)
+- [Algebraic Theory of Penrose's Non-Periodic Tilings og the Plane by N. G. de Bruijn](https://new.math.uiuc.edu/oldnew/quasicrystals/papers/debruijnPenrose.pdf)
+- [Penrose Tiling by Andrejs Treibergs](http://www.math.utah.edu/~treiberg/PenroseSlides.pdf)
+
+And this is an interesting popular science read on the discovery on quasicrystals and their connection to Penrose Tilings:
+
+- [The Second Kind of Impossible by Paul Steinhardt](https://bookshop.org/books/the-second-kind-of-impossible-the-extraordinary-quest-for-a-new-form-of-matter-9781476729930/9781476729930)
