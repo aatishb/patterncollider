@@ -2,13 +2,13 @@
 
 - [Credits](https://github.com/aatishb/patterncollider#credits)
 - [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
+- ["Famous" Patterns](https://github.com/aatishb/patterncollider#famous-patterns)
 - [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
 - [Instructions](https://github.com/aatishb/patterncollider#instructions)
 	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
 	- [Pattern](https://github.com/aatishb/patterncollider#pattern-settings)
 	- [Size](https://github.com/aatishb/patterncollider#size)
 	- [Color](https://github.com/aatishb/patterncollider#color)	
-- [Famous Patterns](https://github.com/aatishb/patterncollider#famous-patterns)
 - [References](https://github.com/aatishb/patterncollider#references)
 
 ## Credits
@@ -29,13 +29,23 @@ Quasiperiodic patterns are patterns that don't repeat themselves when you slide 
 
 Visually, quasiperiodic patterns contain many repeating motifs, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never line up with each other (because their ratio is an irrational number).
 
+## "Famous" Patterns
+
+Some examples of previously discovered tiling patterns you can create with Pattern Collider:
+
+- [5-fold Penrose Tiling](https://aatishb.com/patterncollider/) ([reference](https://tilings.math.uni-bielefeld.de/substitution/penrose-rhomb/))
+- [6-fold Stepped Plane](https://aatishb.com/patterncollider/?symmetry=6&disorder=1&randomSeed=0.42&radius=76&zoom=2.4&orientationColoring=true) (click randomize to generate variations) ([reference](https://www.sciencedirect.com/science/article/pii/S0012365X10004516))
+- [7-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=7&radius=88&zoom=2.13&stroke=44) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolars-7-fold/))
+- [8-fold Ammann-Beenker Tiling](https://aatishb.com/patterncollider/?symmetry=8&pattern=0.5&radius=140&zoom=2&stroke=255&showStroke=true&hue=250&hueRange=173&contrast=30&reverseColors=true) ([reference](https://tilings.math.uni-bielefeld.de/substitution/ammann-beenker/))
+- [12-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=12&pattern=0&glide=2&radius=150&zoom=2&rotate=15) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolar/))
+
 ## How It Works
 
 Pattern Collider uses the multigrid method of creating quasiperiodic patterns discovered by the mathematician Nicolaas Govert de Bruijn. 
 
 Say you have a bunch of intersecting lines. This collection of lines is also a tiling pattern in disguise! Here's how to see this. First, find the points where the lines intersect.
 
-ANIMTION SHOWING POINTS OF INTERSECTION
+ANIMATION SHOWING POINTS OF INTERSECTION
 
 Then, centered on each intersection point, draw an [equilateral polygon](https://en.wikipedia.org/wiki/Equilateral_polygon) whose sides are perpendicular to the lines.
 
@@ -122,13 +132,5 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 **Contrast**: Controls the contrast of the pattern, i.e. the darkness to brightness range. Higher contrast makes the patterns more easily visible but de-emphasizes the hue.
 
 **Tiles**: Shows one of each type of tile being displayed.
-
-## "Famous" Patterns
-
-- [5-fold Penrose Tiling](https://aatishb.com/patterncollider/) ([reference](https://tilings.math.uni-bielefeld.de/substitution/penrose-rhomb/))
-- [6-fold Stepped Plane](https://aatishb.com/patterncollider/?symmetry=6&disorder=1&randomSeed=0.42&radius=76&zoom=2.4&orientationColoring=true) (click randomize to generate variations) ([reference](https://www.sciencedirect.com/science/article/pii/S0012365X10004516))
-- [7-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=7&radius=88&zoom=2.13&stroke=44) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolars-7-fold/))
-- [8-fold Ammann-Beenker Tiling](https://aatishb.com/patterncollider/?symmetry=8&pattern=0.5&radius=140&zoom=2&stroke=255&showStroke=true&hue=250&hueRange=173&contrast=30&reverseColors=true) ([reference](https://tilings.math.uni-bielefeld.de/substitution/ammann-beenker/))
-- [12-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=12&pattern=0&glide=2&radius=150&zoom=2&rotate=15) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolar/))
 
 ## References
