@@ -2,7 +2,7 @@
 
 - [Credits](https://github.com/aatishb/patterncollider#credits)
 - [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
-- ["Famous" Patterns](https://github.com/aatishb/patterncollider#famous-patterns)
+- [Some "Famous" Tiling Patterns](https://github.com/aatishb/patterncollider#some-famous-tiling-patterns)
 - [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
 - [Instructions](https://github.com/aatishb/patterncollider#instructions)
 	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
@@ -19,17 +19,19 @@ Special thanks to [Arkarup Banerjee](https://www.arkarup.com/), [Shefali Nayak](
 
 ## What Is This?
 
-Pattern Collider is a tool for creating quasiperiodic tiling patterns. It's like a mathematical microscope that you can use to explore intricate & unusual tiling patterns. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+Pattern Collider is a tool for creating quasiperiodic tiling patterns. It's like a mathematical microscope that you can use to explore intricate & unusual patterns. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
 
 VIDEO SCREENSHOT
+
+### What are Quasiperiodic Patterns?
 
 Quasiperiodic patterns are patterns that don't repeat themselves when you slide in any direction, and where every motif (i.e. every cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they also occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
 
 <img src="https://user-images.githubusercontent.com/1878638/115279244-73d9bf00-a114-11eb-9105-1cad80515a5e.png" width="330">
 
-Visually, quasiperiodic patterns contain many repeating motifs, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never line up with each other (because their ratio is an irrational number).
+Visually, quasiperiodic patterns contain many repeating motifs, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never coincide with each other (because their ratio is an irrational number).
 
-## "Famous" Patterns
+## Some "Famous" Tiling Patterns
 
 Some examples of previously discovered tiling patterns you can create with Pattern Collider:
 
