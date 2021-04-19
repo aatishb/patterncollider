@@ -2,7 +2,6 @@
 
 - [Credits](https://github.com/aatishb/patterncollider#credits)
 - [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
-- [Some "Famous" Tiling Patterns](https://github.com/aatishb/patterncollider#some-famous-tiling-patterns)
 - [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
 - [Instructions](https://github.com/aatishb/patterncollider#instructions)
 	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
@@ -31,9 +30,9 @@ Quasiperiodic patterns are patterns that don't repeat themselves when you slide 
 
 Visually, quasiperiodic patterns contain many repeating motifs, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never coincide with each other (because their ratio is an irrational number).
 
-## Some "Famous" Tiling Patterns
+### Some "Famous" Tiling Patterns
 
-Some examples of previously discovered tiling patterns you can create with Pattern Collider:
+Here are a few previously discovered tiling patterns that you can recreate with Pattern Collider:
 
 - [5-fold Penrose Tiling](https://aatishb.com/patterncollider/) ([reference](https://tilings.math.uni-bielefeld.de/substitution/penrose-rhomb/))
 - [6-fold Stepped Plane](https://aatishb.com/patterncollider/?symmetry=6&disorder=1&randomSeed=0.42&radius=76&zoom=2.4&orientationColoring=true) (click randomize to generate variations) ([reference](https://www.sciencedirect.com/science/article/pii/S0012365X10004516))
