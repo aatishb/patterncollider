@@ -23,7 +23,7 @@ Pattern Collider is a tool for creating quasiperiodic tiling patterns. You can t
 
 Quasiperiodic patterns are patterns that don't repeat themselves when you slide in any direction, and where every motif (i.e. every cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they also occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
 
-IMAGE
+<img src="https://user-images.githubusercontent.com/1878638/115279244-73d9bf00-a114-11eb-9105-1cad80515a5e.png" width="330">
 
 Visually, quasiperiodic patterns often appear highly repetitive, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never line up with each other (because their ratio is an irrational number).
 
@@ -45,15 +45,15 @@ IMAGE
 
 Now, draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This special grid of lines is called a *pentagrid*.
 
-IMAGE
+<img src="https://user-images.githubusercontent.com/1878638/115280557-12b2eb00-a116-11eb-902b-cc6d9d21b8cd.png" width="330">
 
 de Bruijn discovered that if you start from this pentagrid and follow his procedure for creating a tiling pattern, you end up with the well-known Penrose tiling.
 
-IMAGE
+<img src="https://user-images.githubusercontent.com/1878638/115281016-8e149c80-a116-11eb-8567-c2a3520e9b16.png" width="660">
 
 If you shift these lines around, but maintain their spacing and orientation, you can create an infinite family of Penrose-like tilings.
 
-IMAGE
+<img src="https://user-images.githubusercontent.com/1878638/115281491-1135f280-a117-11eb-92af-9adf13fe47ae.gif" width="660">
 
 You can repeat this procedure for more than different numbers of parallel line sets, to create many other quasiperiodic patterns. Pattern Collider uses this method to create quasiperiodic tiling patterns.
 
