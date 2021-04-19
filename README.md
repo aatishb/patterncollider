@@ -1,10 +1,10 @@
 # Pattern Collider
 
-- Credits
-- What Is This?
-- Documentation
-- Interesting Patterns
-- References
+- [Credits](https://github.com/aatishb/patterncollider#credits)
+- [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
+- [Documentation](https://github.com/aatishb/patterncollider#documentation)
+- [Famous Patterns](https://github.com/aatishb/patterncollider#famous-patterns)
+- [References](https://github.com/aatishb/patterncollider#references)
 
 ## Credits
 
@@ -58,35 +58,35 @@ Pattern Collider uses this method to create many different quasiperiodic tiling 
 
 ### Pattern Settings
 
-- *Symmetry*: 
-- *Pattern*: 
-- *Rotate*: 
-- *Glide*: 
-- *Disorder*: 
-- *Randomize*: 
-- *Share Pattern*: 
+- **Symmetry**: 
+- **Pattern**: 
+- **Rotate**: 
+- **Glide**: 
+- **Disorder**: 
+- **Randomize**: 
+- **Share Pattern**: 
 
 ### Size Settings
 
-- *Number of Pieces*: 
-- *Zoom*:
-- *Show Grid/Tiling*:
+- **Number of Pieces**: 
+- **Zoom**:
+- **Show Grid/Tiling**:
 
 ### Color
 
-- *Change Color Palette*:
-- *Reverse Colors*:
-- *Color Using Tile Orientation*:
-- *Color Tiles*: 
-- *Intersections*: 
-- *Edges*: 
-- *Edge Brightness*: 
-- *Hue*: 
-- *Hue Range*: 
-- *Contrast*: 
-- *Saturation*: 
-- *Tiles*: 
+- **Change Color Palette**:
+- **Reverse Colors**:
+- **Color Using Tile Orientation**:
+- **Color Tiles**: 
+- **Intersections**: 
+- **Edges**: 
+- **Edge Brightness**: 
+- **Hue**: 
+- **Hue Range**: 
+- **Contrast**: 
+- **Saturation**: 
+- **Tiles**: 
 
-## How to Recreate Known Patterns
+## Famous Patterns
 
 ## References
