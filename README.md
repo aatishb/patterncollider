@@ -14,13 +14,14 @@ Special thanks to [Arkarup Bannerjee](https://www.arkarup.com/), [Shefali Nayak]
 
 ## What Is This?
 
-**Pattern Collider is a tool for exploring quasiperiodic tiling patterns.** Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+**Pattern Collider is a tool for creating quasiperiodic tiling patterns.** Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
 
-Patterns are **periodic** if they repeat themselves with a fixed period when you slide the pattern in some direction. Conversely, a **nonperiodic** pattern will never repeat itself when you slide in any direction. 
+Patterns are **periodic** if they repeat themselves with a fixed period when you slide the pattern in some direction.
 
-**Quasiperiodic** patterns are a special type of nonperiodic patterns where every motif (i.e. cluster of tiles) occurs infinitely often throughout the pattern.
+**Quasiperiodic** patterns are a special type of patterns that are 1) not periodic and 2) where every motif (i.e. cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling).
 
-The trick to creating quasiperiodic patterns is to construct them out of components that repeat themselves periodically, but whose periods will never perfectly line up (because their ratio is an irrational number). The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling).
+
+Visually, these patterns seem to exhibit a balance between order and disorder, i.e. they appear to repeat themselves when you view a small patch, but as you expand your view you discover that the pattern doesn't repeat itself. The trick to quasiperiodic patterns is that they're constructed out of components that repeat themselves periodically, but whose periods never line up with each other (because their ratio is an irrational number).
 
 IMAGE
 
