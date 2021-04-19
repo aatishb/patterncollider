@@ -18,7 +18,7 @@ Special thanks to [Arkarup Bannerjee](https://www.arkarup.com/), [Shefali Nayak]
 
 Patterns are **periodic** if they repeat themselves with a fixed period when you slide the pattern in some direction. Conversely, a **nonperiodic** pattern will never repeat itself when you slide in any direction. 
 
-**Quasiperiodic** patterns are a special type of nonperiodic patterns where every motif (i.e. every cluster of tiles) arises infinitely often throughout the pattern.
+**Quasiperiodic** patterns are a special type of nonperiodic patterns where every motif (i.e. cluster of tiles) occurs infinitely often throughout the pattern.
 
 The trick to creating quasiperiodic patterns is to construct them out of components that repeat themselves periodically, but whose periods will never perfectly line up (because their ratio is an irrational number). The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling).
 
