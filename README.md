@@ -20,8 +20,7 @@ Patterns are **periodic** if they repeat themselves with a fixed period when you
 
 **Quasiperiodic** patterns are a special type of patterns that are 1) not periodic and 2) where every motif (i.e. cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling).
 
-
-Visually, these patterns seem to exhibit a balance between order and disorder, i.e. they appear to repeat themselves when you view a small patch, but as you expand your view you discover that the pattern doesn't repeat itself. The trick to quasiperiodic patterns is that they're constructed out of components that repeat themselves periodically, but whose periods never line up with each other (because their ratio is an irrational number).
+Visually, these patterns are highly repetitive and yet they never exactly repeat themselves. The secret to quasiperiodic patterns is that they're constructed out of components that periodically repeat, but whose periods never line up with each other (because their ratio is an irrational number).
 
 IMAGE
 
@@ -79,7 +78,7 @@ Pattern Collider uses this method to create many different quasiperiodic tiling 
 - **Zoom**:
 - **Show Grid/Tiling**:
 
-### Color
+### Color Settings
 
 - **Change Color Palette**:
 - **Reverse Colors**:
