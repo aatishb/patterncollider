@@ -19,7 +19,7 @@ Special thanks to [Arkarup Banerjee](https://www.arkarup.com/), [Shefali Nayak](
 
 ## What Is This?
 
-Pattern Collider is a tool for creating quasiperiodic tiling patterns. Think of it like a mathematical microscope that you can use to explore intricate & unusual tiling patterns. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+Pattern Collider is a tool for creating quasiperiodic tiling patterns. It's like a mathematical microscope that you can use to explore intricate & unusual tiling patterns. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
 
 VIDEO SCREENSHOT
 
@@ -27,7 +27,7 @@ Quasiperiodic patterns are patterns that don't repeat themselves when you slide 
 
 <img src="https://user-images.githubusercontent.com/1878638/115279244-73d9bf00-a114-11eb-9105-1cad80515a5e.png" width="330">
 
-Visually, quasiperiodic patterns often appear highly repetitive, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never line up with each other (because their ratio is an irrational number).
+Visually, quasiperiodic patterns contain many repeating motifs, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never line up with each other (because their ratio is an irrational number).
 
 ## How It Works
 
@@ -37,15 +37,15 @@ Say you have a bunch of intersecting lines. This collection of lines is also a t
 
 ANIMTION SHOWING POINTS OF INTERSECTION
 
-Then draw an [equilateral polygon](https://en.wikipedia.org/wiki/Equilateral_polygon) centered on each intersection point, whose sides are perpendicular to the lines.
+Then, centered on each intersection point, draw an [equilateral polygon](https://en.wikipedia.org/wiki/Equilateral_polygon) whose sides are perpendicular to the lines.
 
 ANIMATION SHOWING POLYGONS
 
-Because of the way these shapes are constructed, you can always slide them together and fit them into a seamless tiling pattern. We say that this tiling pattern and grid of lines are *dual* to each other, because they're secretly the same pattern.
+Because of the way these shapes are constructed, you can slide them together into a seamless tiling pattern. This tiling pattern and grid of lines are *dual* to each other, i.e. they're secretly the same pattern.
 
 ANIMATION SLIDING POLYGONS TOGETHER AND HIDING LINES
 
-Now, draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This special grid of lines is called a *pentagrid*.
+Now draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This grid of lines is known as a *pentagrid*.
 
 <img src="https://user-images.githubusercontent.com/1878638/115280557-12b2eb00-a116-11eb-902b-cc6d9d21b8cd.png" width="330">
 
@@ -125,10 +125,10 @@ You can repeat this procedure for different numbers of parallel line sets, to cr
 
 ## "Famous" Patterns
 
-- [5-fold Penrose Tiling](https://aatishb.com/patterncollider/)
+- [5-fold Penrose Tiling](https://aatishb.com/patterncollider/) ([reference](https://tilings.math.uni-bielefeld.de/substitution/penrose-rhomb/))
 - [6-fold Stepped Plane](https://aatishb.com/patterncollider/?symmetry=6&disorder=1&randomSeed=0.42&radius=76&zoom=2.4&orientationColoring=true) (click randomize to generate variations) ([reference](https://www.sciencedirect.com/science/article/pii/S0012365X10004516))
-- [8-fold Ammann-Beenker Tiling](https://aatishb.com/patterncollider/?symmetry=8&pattern=0.5&radius=140&zoom=2&stroke=255&showStroke=true&hue=250&hueRange=173&contrast=30&reverseColors=true) ([reference](https://tilings.math.uni-bielefeld.de/substitution/ammann-beenker/))
 - [7-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=7&radius=88&zoom=2.13&stroke=44) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolars-7-fold/))
+- [8-fold Ammann-Beenker Tiling](https://aatishb.com/patterncollider/?symmetry=8&pattern=0.5&radius=140&zoom=2&stroke=255&showStroke=true&hue=250&hueRange=173&contrast=30&reverseColors=true) ([reference](https://tilings.math.uni-bielefeld.de/substitution/ammann-beenker/))
 - [12-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=12&pattern=0&glide=2&radius=150&zoom=2&rotate=15) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolar/))
 
 ## References
