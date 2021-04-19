@@ -2,6 +2,7 @@
 
 - [Credits](https://github.com/aatishb/patterncollider#credits)
 - [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
+- [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
 - [Documentation](https://github.com/aatishb/patterncollider#instructions--help)
 	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
 	- [Pattern](https://github.com/aatishb/patterncollider#pattern-settings)
@@ -24,7 +25,9 @@ Special thanks to [Arkarup Bannerjee](https://www.arkarup.com/), [Shefali Nayak]
 
 IMAGE
 
-Visually, quasiperiodic patterns often appear highly repetitive, and yet they never exactly repeat themselves. The trick is that they're constructed out of components that do repeat periodically, but whose periods will never perfectly line up with each other (because their ratio is an irrational number).
+Visually, quasiperiodic patterns often appear highly repetitive, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods will never perfectly line up with each other (because their ratio is an irrational number).
+
+## How It Works
 
 Pattern Collider uses the multigrid method of creating quasiperiodic patterns discovered by the mathematician Nicolaas Govert de Bruijn. 
 
