@@ -14,13 +14,13 @@ Special thanks to [Arkarup Bannerjee](https://www.arkarup.com/), [Shefali Nayak]
 
 ## What Is This?
 
-Pattern Collider is a tool for exploring quasiperiodic tiling patterns. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+**Pattern Collider is a tool for exploring quasiperiodic tiling patterns.** Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
 
 Patterns are **periodic** if they repeat themselves with a fixed period when you slide the pattern in some direction. Conversely, a **nonperiodic** pattern will never repeat itself when you slide in any direction. 
 
-**Quasiperiodic** patterns are a special type of nonperiodic patterns where every motif (i.e. every cluster of tiles) arises infinitely often throughout the pattern, but the overall pattern never repeats itself. 
+**Quasiperiodic** patterns are a special type of nonperiodic patterns where every motif (i.e. every cluster of tiles) arises infinitely often throughout the pattern.
 
-The trick to Quasiperiodic patterns is that they are constructed out of components that repeat themselves periodically, but these periods will never perfectly line up (their ratio is an irrational number), and so the overall pattern does not repeat. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling).
+The trick to creating quasiperiodic patterns is to construct them out of components that repeat themselves periodically, but whose periods will never perfectly line up (because their ratio is an irrational number). The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling).
 
 IMAGE
 
