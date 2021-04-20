@@ -1,13 +1,13 @@
 # Pattern Collider
 
-- [Credits](https://github.com/aatishb/patterncollider#credits)
+- [Credits & License](https://github.com/aatishb/patterncollider#credits--license)
 - [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
 - [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
 - [Instructions](https://github.com/aatishb/patterncollider#how-to-use-pattern-collider)
 	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
 	- [Pattern](https://github.com/aatishb/patterncollider#pattern-settings)
-	- [Size](https://github.com/aatishb/patterncollider#size)
-	- [Color](https://github.com/aatishb/patterncollider#color)	
+	- [Size](https://github.com/aatishb/patterncollider#size-settings)
+	- [Color](https://github.com/aatishb/patterncollider#color-settings)	
 - [References](https://github.com/aatishb/patterncollider#references)
 
 ## Credits & License
@@ -23,7 +23,7 @@ The code makes use of the following javascript libraries
 - [hsluv.js](https://www.hsluv.org/) (for colors)
 - [seedrandom.js](https://github.com/davidbau/seedrandom) (for randomization)
 
-All code in this repository with no other license is published under the open-source MIT License.
+All code in this repository with no other license is published under the open-source [MIT License](https://github.com/aatishb/patterncollider/blob/main/LICENSE).
 
 ## What Is This?
 
@@ -61,23 +61,23 @@ At each intersection point, draw [equilateral polygons](https://en.wikipedia.org
 
 <img src="https://user-images.githubusercontent.com/1878638/115302852-e193e400-a130-11eb-98a5-3f0cc0f77de7.png" width="440">
 
-These are the tiles. Each tile arises from the intersection of two lines, and the shape of the tile is determined by the angle at which the two lines meet.
+These are the tiles. Each tile arises from the intersection of two lines. The shape & orientation of the tile is determined by the intersection angle.
 
 Because of the way these tiles are constructed, you can always slide them together into a seamless pattern.
 
 ![lines to tiles](https://user-images.githubusercontent.com/1878638/115302925-f4a6b400-a130-11eb-8395-37d8a158a115.gif)
 
-This tiling pattern and grid of lines are *dual* to each other, which means that they're dual representations of the same underlying pattern.
+This tiling pattern and grid of lines are *dual* to each other, meaning they're dual representations of the same underlying pattern. Every grid of lines is a tiling pattern in disguise.
 
 ![grid tiles dual](https://user-images.githubusercontent.com/1878638/115303473-ad6cf300-a131-11eb-9072-2de824874768.png)
 
-de Bruijn discovered that you can use this duality to easily create Penrose Tiles. To do this, first draw 5 sets of equally-spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This particular grid of lines is known as a *pentagrid*.
+de Bruijn discovered that you can use this duality to construct Penrose Tiles. To do this, first draw 5 sets of equally-spaced parallel lines, with each set tilted 360°/5 = 72° from the previous set. This particular grid of lines is called a *pentagrid*.
 
 <img src="https://user-images.githubusercontent.com/1878638/115280557-12b2eb00-a116-11eb-902b-cc6d9d21b8cd.png" width="330">
 
-de Bruijn discovered that if you start from this pentagrid and follow his procedure for creating a dual tiling pattern, you end up with the well-known Penrose tiling. 
+de Bruijn discovered that if you start from a pentagrid and follow his procedure for creating a dual tiling pattern, you end up with the well-known Penrose tiling. 
 
-Since the lines in the pentagrid only intersect at two angles –– 72° or 144° –– the duality produces two types of tiles –– a thin rhombus and a thick rhombus.
+Since the lines in the pentagrid only intersect at two angles (72° or 144°) the duality produces two types of tiles (a thin rhombus and a thick rhombus).
 
 <img src="https://user-images.githubusercontent.com/1878638/115281016-8e149c80-a116-11eb-8567-c2a3520e9b16.png" width="660">
 
@@ -143,7 +143,7 @@ You can repeat this procedure for different numbers of parallel line sets (aka [
 
 **Hue**: Sets the average hue of the pattern.
 
-**Hue Range**: Sets the hue range of the pattern. Goes from negative to positive. Setting this to zero will color the pattern in shades of a single hue.
+**Hue Range**: Sets the hue range of the pattern. Goes from negative to positive. Setting this to zero will color the tiles in shades of a single hue.
 
 **Saturation**: Controls the saturation of the pattern. Zero = grayscale.
 
@@ -153,13 +153,13 @@ You can repeat this procedure for different numbers of parallel line sets (aka [
 
 ## References
 
-Here are some great references on how to construct Penrose Tiles Using the Pentagrid Method.
+Here are some excellent in-depth references on how to construct Penrose Tiles Using the Pentagrid Method:
 
 - [Penrose Tilings Tied up in Ribbons by David Austin](http://www.ams.org/publicoutreach/feature-column/fcarc-ribbons)
 - [The Empire Problem in Penrose Tilings by Laura Effinger-Dean](http://www.cs.williams.edu/~bailey/06le.pdf)
 - [Pentagrids and Penrose Tilings by Stacy Mowry & Shriya Shukla](https://web.williams.edu/Mathematics/sjmiller/public_html/hudson/HRUMC-Mowry&Shukla_Pentagrids%20and%20Penrose.pdf)
-- [Algebraic Theory of Penrose's Non-Periodic Tilings of the Plane by N. G. de Bruijn](https://new.math.uiuc.edu/oldnew/quasicrystals/papers/debruijnPenrose.pdf)
 - [Penrose Tiling by Andrejs Treibergs](http://www.math.utah.edu/~treiberg/PenroseSlides.pdf)
+- [Algebraic Theory of Penrose's Non-Periodic Tilings of the Plane by N. G. de Bruijn](https://new.math.uiuc.edu/oldnew/quasicrystals/papers/debruijnPenrose.pdf)
 
 And this is an interesting popular science read on the discovery on quasicrystals and their connection to Penrose Tilings:
 
