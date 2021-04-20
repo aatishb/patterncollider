@@ -224,7 +224,7 @@ var app = new Vue({
         offsets = offsets.map((e,i) => e - this.steps * this.glide * this.glideShift[i]);
       }
 
-      return offsets.map(e => e);
+      return offsets;
     },
 
     multiplier() { // dependencies: symmetry
