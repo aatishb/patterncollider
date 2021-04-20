@@ -61,7 +61,7 @@ At each intersection point, draw [equilateral polygons](https://en.wikipedia.org
 
 <img src="https://user-images.githubusercontent.com/1878638/115302852-e193e400-a130-11eb-98a5-3f0cc0f77de7.png" width="440">
 
-These are the tiles. Each tile arises from the intersection of two lines. The shape & orientation of the tile is determined by the intersection angle.
+These are the tiles. Each tile arises from the intersection of two lines. The shape of the tile is determined by the intersection angle.
 
 Because of the way these tiles are constructed, you can always slide them together into a seamless pattern.
 
