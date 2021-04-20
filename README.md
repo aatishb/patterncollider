@@ -71,13 +71,11 @@ This tiling pattern and grid of lines are *dual* to each other, meaning they're 
 
 ![grid tiles dual](https://user-images.githubusercontent.com/1878638/115303473-ad6cf300-a131-11eb-9072-2de824874768.png)
 
-de Bruijn discovered how to use this duality to construct Penrose Tiles. First, draw 5 sets of equally-spaced parallel lines, with each set tilted 360°/5 = 72° from the previous set. This particular grid of lines is called a *pentagrid*.
+We can use this duality to construct Penrose Tiles. First, draw 5 sets of equally-spaced parallel lines, with each set tilted 360°/5 = 72° from the previous set. This particular grid of lines is called a *pentagrid*.
 
 <img src="https://user-images.githubusercontent.com/1878638/115280557-12b2eb00-a116-11eb-902b-cc6d9d21b8cd.png" width="330">
 
-Applying de Bruijn's procedure to transform this grid into a tiling pattern, we end up with the well-known Penrose tiling.
-
-Since lines in the pentagrid only intersect at two angles (72° or 144°), the dual tiling pattern only contains two kinds of tiles (a thin rhombus and a thick rhombus).
+By applying de Bruijn's procedure to transform this grid into a tiling pattern, we end up with the well-known Penrose tiling. Since lines in the pentagrid only intersect at two possible angles (72° or 144°), this tiling pattern only contains two possible types of tiles (a thin rhombus and a thick rhombus).
 
 <img src="https://user-images.githubusercontent.com/1878638/115281016-8e149c80-a116-11eb-8567-c2a3520e9b16.png" width="660">
 
