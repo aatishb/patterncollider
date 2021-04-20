@@ -1,11 +1,9 @@
 # TODO
 
-- [ ] readme page & references
+(currently low priority)
 
-# optional (currently low priority)
-
-- [ ] animate
-- [ ] gallery
 - [ ] ribbon mode
 - [ ] SVG export
-- [ ] line selection glitch when shift = 0 or 1
+- [ ] animate
+- [ ] gallery
+- [ ] line selection glitch for even symmetry when pattern = 0 or 1
