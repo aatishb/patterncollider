@@ -16,14 +16,14 @@ Pattern Collider is created by [Aatish Bhatia](https://aatishb.com/) in collabor
 
 Special thanks to [Arkarup Banerjee](https://www.arkarup.com/), [Shefali Nayak](https://shefalinayak.com/), [Vijay Ravikumar](https://this-vijay.github.io/), and [Connie Sun](https://www.cartoonconnie.com/) for their helpful feedback & suggestions.
 
-The code makes use of the following javascript libraries
+The code uses the following javascript libraries:
 
 - [p5.js](https://p5js.org/) (for drawing)
 - [vue.js](https://vuejs.org/) (for interactivity)
 - [hsluv.js](https://www.hsluv.org/) (for colors)
 - [seedrandom.js](https://github.com/davidbau/seedrandom) (for randomization)
 
-All code in this repository with no other license is published under the open-source [MIT License](https://github.com/aatishb/patterncollider/blob/main/LICENSE).
+All code in this repository with no prior license is published under the open-source [MIT License](https://github.com/aatishb/patterncollider/blob/main/LICENSE).
 
 ## What Is This?
 
