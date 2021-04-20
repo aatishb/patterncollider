@@ -10,29 +10,38 @@
 	- [Color](https://github.com/aatishb/patterncollider#color)	
 - [References](https://github.com/aatishb/patterncollider#references)
 
-## Credits
+## Credits & License
 
 Pattern Collider is created by [Aatish Bhatia](https://aatishb.com/) in collaboration with [Henry Reich](https://www.minutephysics.com/).
 
 Special thanks to [Arkarup Banerjee](https://www.arkarup.com/), [Shefali Nayak](https://shefalinayak.com/), [Vijay Ravikumar](https://this-vijay.github.io/), and [Connie Sun](https://www.cartoonconnie.com/) for their helpful feedback & suggestions.
 
+The code makes use of the following javascript libraries
+
+- [p5.js](https://p5js.org/) (for drawing)
+- [vue.js](https://vuejs.org/) (for interactivity)
+- [hsluv.js](https://www.hsluv.org/) (for colors)
+- [seedrandom.js](https://github.com/davidbau/seedrandom) (for randomization)
+
+All code in this repository with no other license is published under the open-source MIT License.
+
 ## What Is This?
 
-Pattern Collider is a tool for creating quasiperiodic tiling patterns. It's like a mathematical microscope that you can use to explore intricate & unusual patterns. Every pattern that you create with Pattern Collider has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+Pattern Collider is a tool for generating and exploring quasiperiodic tiling patterns. Every pattern that you create has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
 
 VIDEO SCREENSHOT
 
 ### What are Quasiperiodic Patterns?
 
-Quasiperiodic patterns are patterns that don't repeat themselves when you slide in any direction, and where every motif (i.e. every cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they also occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
+Quasiperiodic patterns are patterns that don't repeat themselves when you slide in any direction, but where every motif (i.e. every cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can also be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
 
 <img src="https://user-images.githubusercontent.com/1878638/115279244-73d9bf00-a114-11eb-9105-1cad80515a5e.png" width="330">
 
-Visually, quasiperiodic patterns contain many repeating motifs, and yet the entire pattern never exactly repeats itself. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never coincide with each other (because their ratio is an irrational number).
+Visually, these patterns contain many repeating motifs, and yet the entire pattern doesn't repeat in any direction. The trick is that they're constructed out of components that *do* repeat periodically, but whose periods never coincide with each other (because their ratio is an irrational number).
 
 ### Some "Famous" Tiling Patterns
 
-Here are a few previously discovered tiling patterns that you can recreate with Pattern Collider:
+Here are a few well-known (and less well-known) tiling patterns that you can recreate with Pattern Collider:
 
 - [5-fold Penrose Tiling](https://aatishb.com/patterncollider/) ([reference](https://tilings.math.uni-bielefeld.de/substitution/penrose-rhomb/))
 - [6-fold Stepped Plane](https://aatishb.com/patterncollider/?symmetry=6&disorder=1&randomSeed=0.42&radius=76&zoom=2.4&orientationColoring=true) (click randomize to generate variations) ([reference](https://www.sciencedirect.com/science/article/pii/S0012365X10004516))
@@ -44,27 +53,31 @@ Here are a few previously discovered tiling patterns that you can recreate with 
 
 Pattern Collider uses the [multigrid method](https://new.math.uiuc.edu/oldnew/quasicrystals/papers/debruijnPenrose.pdf) of creating quasiperiodic patterns discovered by the mathematician [de Bruijn](https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn). 
 
-Start with a bunch of intersecting lines. It turns out that this collection of lines is a tiling pattern in disguise! Here's how to see this. First, find the points where the lines intersect.
+de Bruijn noticed that every collection of intersecting lines generates a tiling pattern. To see this, start with a bunch of lines and find the points where they intersect.
 
 <img src="https://user-images.githubusercontent.com/1878638/115302783-c88b3300-a130-11eb-8ae6-67ca68248d6d.png" width="440">
 
-Then, centered on each intersection point, draw [equilateral polygons](https://en.wikipedia.org/wiki/Equilateral_polygon) whose sides are perpendicular to the lines.
+At each intersection point, draw [equilateral polygons](https://en.wikipedia.org/wiki/Equilateral_polygon) whose sides are perpendicular to the lines.
 
 <img src="https://user-images.githubusercontent.com/1878638/115302852-e193e400-a130-11eb-98a5-3f0cc0f77de7.png" width="440">
 
-Because of the way these shapes are constructed, you can slide them together into a seamless tiling pattern.
+These are the tiles. Each tile arises from the intersection of two lines, and the shape of the tile is determined by the angle at which the two lines meet.
+
+Because of the way these tiles are constructed, you can always slide them together into a seamless pattern.
 
 ![lines to tiles](https://user-images.githubusercontent.com/1878638/115302925-f4a6b400-a130-11eb-8395-37d8a158a115.gif)
 
-This tiling pattern and grid of lines are *dual* to each other, i.e. they're secretly the same pattern.
+This tiling pattern and grid of lines are *dual* to each other, which means that they're dual representations of the same underlying pattern.
 
 ![grid tiles dual](https://user-images.githubusercontent.com/1878638/115303473-ad6cf300-a131-11eb-9072-2de824874768.png)
 
-Now that we know how to go between lines and tiles, draw 5 sets of equally spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This particular grid of lines is known as a *pentagrid*.
+de Bruijn discovered that you can use this duality to easily create Penrose Tiles. To do this, first draw 5 sets of equally-spaced parallel lines, each set tilted 360/5 = 72 degrees from the previous set. This particular grid of lines is known as a *pentagrid*.
 
 <img src="https://user-images.githubusercontent.com/1878638/115280557-12b2eb00-a116-11eb-902b-cc6d9d21b8cd.png" width="330">
 
-de Bruijn discovered that if you start from this pentagrid and follow his procedure for creating a dual tiling pattern, you end up with the well-known Penrose tiling.
+de Bruijn discovered that if you start from this pentagrid and follow his procedure for creating a dual tiling pattern, you end up with the well-known Penrose tiling. 
+
+Since the lines in the pentagrid only intersect at two angles –– 72° or 144° –– the duality produces two types of tiles –– a thin rhombus and a thick rhombus.
 
 <img src="https://user-images.githubusercontent.com/1878638/115281016-8e149c80-a116-11eb-8567-c2a3520e9b16.png" width="660">
 
@@ -72,7 +85,7 @@ If you shift these lines around, but maintain their spacing and orientation, you
 
 <img src="https://user-images.githubusercontent.com/1878638/115281491-1135f280-a117-11eb-92af-9adf13fe47ae.gif" width="660">
 
-You can repeat this procedure for different numbers of parallel line sets, to create many other quasiperiodic patterns. Pattern Collider uses this method to create quasiperiodic tiling patterns.
+You can repeat this procedure for different numbers of parallel line sets (aka [multigrids](https://hal.archives-ouvertes.fr/jpa-00225712/document)) to create many other patterns. Pattern Collider uses de Bruijn's multigrid method to create quasiperiodic tiling patterns.
 
 ## How to Use Pattern Collider
 
