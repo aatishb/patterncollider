@@ -157,7 +157,7 @@ Here are some excellent in-depth references on how to construct Penrose Tiles Us
 - [The Empire Problem in Penrose Tilings by Laura Effinger-Dean](http://www.cs.williams.edu/~bailey/06le.pdf)
 - [Pentagrids and Penrose Tilings by Stacy Mowry & Shriya Shukla](https://web.williams.edu/Mathematics/sjmiller/public_html/hudson/HRUMC-Mowry&Shukla_Pentagrids%20and%20Penrose.pdf)
 - [Penrose Tiling by Andrejs Treibergs](http://www.math.utah.edu/~treiberg/PenroseSlides.pdf)
-- [Algebraic Theory of Penrose's Non-Periodic Tilings of the Plane by N. G. de Bruijn](https://new.math.uiuc.edu/oldnew/quasicrystals/papers/debruijnPenrose.pdf)
+- [Algebraic Theory of Penrose's Non-Periodic Tilings of the Plane by N. G. de Bruijn](https://www.math.brown.edu/reschwar/M272/pentagrid.pdf)
 
 And this is an interesting popular science read on the discovery on quasicrystals and their connection to Penrose Tilings:
 
