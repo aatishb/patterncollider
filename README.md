@@ -51,7 +51,7 @@ Here are a few well-known (and less well-known) tiling patterns that you can rec
 
 ## How It Works
 
-Pattern Collider uses the [multigrid method](https://new.math.uiuc.edu/oldnew/quasicrystals/papers/debruijnPenrose.pdf) of creating quasiperiodic patterns discovered by the mathematician [de Bruijn](https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn). 
+Pattern Collider uses the [multigrid method](https://www.math.brown.edu/reschwar/M272/pentagrid.pdf) of creating quasiperiodic patterns discovered by the mathematician [de Bruijn](https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn). 
 
 de Bruijn noticed that every collection of intersecting lines generates a tiling pattern. To see this, start with a bunch of lines and find the points where they intersect.
 
