@@ -67,7 +67,7 @@ Because of the way these tiles are constructed, you can always slide them togeth
 
 ![lines to tiles](https://user-images.githubusercontent.com/1878638/115302925-f4a6b400-a130-11eb-8395-37d8a158a115.gif)
 
-This tiling pattern and grid of lines are *dual* to each other, meaning they're dual representations of the same underlying pattern. Every grid of lines is a tiling pattern in disguise.
+This tiling pattern and grid of lines are *dual* to each other, meaning they're alternate representations of the same pattern. Every grid of lines is a tiling pattern in disguise.
 
 ![grid tiles dual](https://user-images.githubusercontent.com/1878638/115303473-ad6cf300-a131-11eb-9072-2de824874768.png)
 
