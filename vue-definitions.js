@@ -220,8 +220,8 @@ var app = new Vue({
         offsets = offsets.map(e => e + this.disorder * (random() - 0.5));
       }
 
-      if (this.glide > 0) {
-        offsets = offsets.map((e,i) => e - this.steps * this.glide * this.glideShift[i]);
+      if (this.pan > 0) {
+        offsets = offsets.map((e,i) => e - this.steps * this.pan * this.shift[i]);
       }
 
       return offsets;
@@ -291,7 +291,7 @@ var app = new Vue({
 
     },
 
-    glideShift() {
+    shift() {
       // use cosine difference formula with lookup tables for optimization
       return this.sinCosTable.map(e => e.cos * this.sinCosRotate.cos - e.sin * this.sinCosRotate.sin);
     },
@@ -546,7 +546,7 @@ var app = new Vue({
       this.resetSelection();      
     },
 
-    glide() {
+    pan() {
       this.resetSelection();      
     },
 
@@ -607,11 +607,11 @@ var app = new Vue({
 
   data: {
     dataBackup: {},
-    urlParameters: ['symmetry', 'pattern', 'glide', 'disorder', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'hue', 'hueRange', 'contrast', 'sat', 'reverseColors', 'orientationColoring'],
+    urlParameters: ['symmetry', 'pattern', 'pan', 'disorder', 'randomSeed', 'radius', 'zoom', 'rotate', 'colorTiles', 'showIntersections', 'stroke', 'showStroke', 'hue', 'hueRange', 'contrast', 'sat', 'reverseColors', 'orientationColoring'],
     symmetry: 5,
-    radius: 40,
+    radius: 75,
     pattern: 0.2,
-    glide: 0,
+    pan: 0,
     disorder: 0,
     randomSeed: 0.00,
     zoom: 1,
