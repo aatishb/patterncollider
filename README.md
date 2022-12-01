@@ -35,7 +35,7 @@ Here are a few previously named tiling patterns that you can recreate with Patte
 - [6-fold Stepped Plane](https://aatishb.com/patterncollider/?symmetry=6&disorder=1&randomSeed=0.42&radius=76&zoom=2.4&orientationColoring=true) (click randomize to generate variations) ([reference](https://www.sciencedirect.com/science/article/pii/S0012365X10004516))
 - [7-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=7&radius=88&zoom=2.13&stroke=44) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolars-7-fold/))
 - [8-fold Ammann-Beenker Tiling](https://aatishb.com/patterncollider/?symmetry=8&pattern=0.5&radius=140&zoom=2&stroke=255&showStroke=true&hue=250&hueRange=173&contrast=30&reverseColors=true) ([reference](https://tilings.math.uni-bielefeld.de/substitution/ammann-beenker/))
-- [12-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=12&pattern=0&glide=2&radius=150&zoom=2&rotate=15) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolar/))
+- [12-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=12&pattern=0&pan=2&radius=150&zoom=2&rotate=15) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolar/))
 
 ## How It Works
 
@@ -95,17 +95,17 @@ You can repeat this procedure for different numbers of parallel line sets (aka [
 
 **Rotate**: Rotates the pattern about its center. (Rotations are about the center of the tiling pattern, not around the center of the viewable patch. When glide = 0 these are the same.)
 
-**Glide**: Glides the patch sideways along the pattern. You can use glide in combination with rotate to explore the space of the tiling pattern.
+**Pan**: Pans the patch sideways. You can use pan in combination with rotate to move around the tiling pattern.
 
-**Disorder**: Smoothly interpolates the offsets for each family of lines to a random set of offsets. This nudges the grid lines about, allowing you to explore a wider set of tiling patterns than with the pattern slider alone.
+**Disorder**: Offsets each family of lines in the grid by a random amount. The size of the random offset is controlled by the disorder slider. This allowes you to explore a wider set of tiling patterns.
 
-**Randomize**: Randomizes the offsets, so you jump to a different pattern in the space of allowed tiling patterns. This is enabled when disorder > 0.
+**Randomize**: Creates a new set of random offsets, so you jump to a different random pattern. This button only works when disorder > 0.
 
 **Share Pattern**: Copies the URL of this pattern to the clipboard for easy bookmarking & sharing.
 
 ## Size Settings
 
-**Number of Pieces**: Sets the radius of the circular patch of tiles. Larger = more pieces, smaller = fewer pieces.
+**Radius**: Sets the radius of the circular patch of tiles.
 
 **Zoom**: Zooms in or out of the pattern.
 
