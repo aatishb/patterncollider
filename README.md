@@ -1,8 +1,12 @@
 # Pattern Collider
 
-Pattern Collider is a tool for generating and exploring quasiperiodic tiling patterns. Every pattern that you create has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+Pattern Collider is a tool for generating and exploring quasiperiodic tiling patterns. Every pattern that you create has a custom URL that you can bookmark & share.
 
-VIDEO SCREENSHOT
+Learn more about how it works by watching the [Minute Physics video](https://youtu.be/-eqdj63nEr4).
+
+<a href="https://youtu.be/-eqdj63nEr4">
+<img src="https://user-images.githubusercontent.com/1878638/205074495-8566a77a-7853-4e4e-8d63-0eb6b36574bb.jpg" alt="thumbnail" width="600"/>
+</a>
 
 ## Credits & License
 
