@@ -1,22 +1,16 @@
 # Pattern Collider
 
-- [Credits & License](https://github.com/aatishb/patterncollider#credits--license)
-- [What Is This?](https://github.com/aatishb/patterncollider#what-is-this)
-- [How It Works](https://github.com/aatishb/patterncollider#how-it-works)
-- [Instructions](https://github.com/aatishb/patterncollider#how-to-use-pattern-collider)
-	- [Interaction](https://github.com/aatishb/patterncollider#interaction)
-	- [Pattern](https://github.com/aatishb/patterncollider#pattern-settings)
-	- [Size](https://github.com/aatishb/patterncollider#size-settings)
-	- [Color](https://github.com/aatishb/patterncollider#color-settings)	
-- [References](https://github.com/aatishb/patterncollider#references)
+Pattern Collider is a tool for generating and exploring quasiperiodic tiling patterns. Every pattern that you create has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
+
+VIDEO SCREENSHOT
 
 ## Credits & License
 
-Pattern Collider is created by [Aatish Bhatia](https://aatishb.com/) in collaboration with [Henry Reich](https://www.minutephysics.com/).
+Created by [Aatish Bhatia](https://aatishb.com/) in collaboration with [Henry Reich](https://www.minutephysics.com/).
 
 Special thanks to [Arkarup Banerjee](https://www.arkarup.com/), [Shefali Nayak](https://shefalinayak.com/), [Vijay Ravikumar](https://this-vijay.github.io/), and [Connie Sun](https://www.cartoonconnie.com/) for their helpful feedback & suggestions.
 
-The code uses the following javascript libraries:
+This project uses the following javascript libraries:
 
 - [p5.js](https://p5js.org/) (for drawing)
 - [vue.js](https://vuejs.org/) (for interactivity)
@@ -25,13 +19,7 @@ The code uses the following javascript libraries:
 
 All code in this repository with no prior license is published under the open-source [MIT License](https://github.com/aatishb/patterncollider/blob/main/LICENSE).
 
-## What Is This?
-
-Pattern Collider is a tool for generating and exploring quasiperiodic tiling patterns. Every pattern that you create has a custom URL that you can bookmark & share. Learn more about how it works by watching the Minute Physics video.
-
-VIDEO SCREENSHOT
-
-### What are Quasiperiodic Patterns?
+## What are Quasiperiodic Patterns?
 
 Quasiperiodic patterns are patterns that don't repeat themselves when you slide in any direction, but where every motif (i.e. every cluster of tiles) occurs infinitely often throughout the pattern. The most famous example of a quasiperiodic tiling is the [Penrose Tiling](https://en.wikipedia.org/wiki/Penrose_tiling). Quasiperiodic patterns can also be found in [medieval Islamic Art](https://link.springer.com/article/10.1007/s12210-020-00969-9), and they occur in nature in the form of [quasicrystals](https://en.wikipedia.org/wiki/Quasicrystal).
 
@@ -41,13 +29,13 @@ Visually, these patterns contain many repeating motifs, and yet the entire patte
 
 ### Some "Famous" Tiling Patterns
 
-Here are a few well-known (and less well-known) tiling patterns that you can recreate with Pattern Collider:
+Here are a few previously named tiling patterns that you can recreate with Pattern Collider:
 
 - [5-fold Penrose Tiling](https://aatishb.com/patterncollider/) ([reference](https://tilings.math.uni-bielefeld.de/substitution/penrose-rhomb/))
 - [6-fold Stepped Plane](https://aatishb.com/patterncollider/?symmetry=6&disorder=1&randomSeed=0.42&radius=76&zoom=2.4&orientationColoring=true) (click randomize to generate variations) ([reference](https://www.sciencedirect.com/science/article/pii/S0012365X10004516))
 - [7-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=7&radius=88&zoom=2.13&stroke=44) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolars-7-fold/))
 - [8-fold Ammann-Beenker Tiling](https://aatishb.com/patterncollider/?symmetry=8&pattern=0.5&radius=140&zoom=2&stroke=255&showStroke=true&hue=250&hueRange=173&contrast=30&reverseColors=true) ([reference](https://tilings.math.uni-bielefeld.de/substitution/ammann-beenker/))
-- [12-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=12&pattern=0&pan=2&radius=150&zoom=2&rotate=15) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolar/))
+- [12-fold Socolar Tiling](https://aatishb.com/patterncollider/?symmetry=12&pattern=0&glide=2&radius=150&zoom=2&rotate=15) ([reference](https://tilings.math.uni-bielefeld.de/substitution/socolar/))
 
 ## How It Works
 
@@ -107,17 +95,17 @@ You can repeat this procedure for different numbers of parallel line sets (aka [
 
 **Rotate**: Rotates the pattern about its center. (Rotations are about the center of the tiling pattern, not around the center of the viewable patch. When glide = 0 these are the same.)
 
-**Pan**: Pans the patch sideways. You can use pan in combination with rotate to move around the tiling pattern.
+**Glide**: Glides the patch sideways along the pattern. You can use glide in combination with rotate to explore the space of the tiling pattern.
 
-**Disorder**: Offsets each family of lines in the grid by a random amount. The size of the random offset is controlled by the disorder slider. This allowes you to explore a wider set of tiling patterns.
+**Disorder**: Smoothly interpolates the offsets for each family of lines to a random set of offsets. This nudges the grid lines about, allowing you to explore a wider set of tiling patterns than with the pattern slider alone.
 
-**Randomize**: Creates a new set of random offsets, so you jump to a different random pattern. This button only works when disorder > 0.
+**Randomize**: Randomizes the offsets, so you jump to a different pattern in the space of allowed tiling patterns. This is enabled when disorder > 0.
 
 **Share Pattern**: Copies the URL of this pattern to the clipboard for easy bookmarking & sharing.
 
 ## Size Settings
 
-**Radius**: Sets the radius of the circular patch of tiles. Larger = more pieces, smaller = fewer pieces.
+**Number of Pieces**: Sets the radius of the circular patch of tiles. Larger = more pieces, smaller = fewer pieces.
 
 **Zoom**: Zooms in or out of the pattern.
 
