@@ -29,7 +29,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       p.pixelDensity(2);
       p.stroke(255,0,0);
       p.noLoop();
-      drawLines(parent.data);
+      drawLines(p, parent.data);
     };
 
     p.draw = function() {
@@ -54,13 +54,16 @@ function sketch(parent) { // we pass the sketch data from the parent
       }
 
       if (data.download > oldData.download) {
-        p.pixelDensity(4);
-        drawLines(parent.data);
-        p.saveCanvas('GridPattern', 'png');
-        p.pixelDensity(2);
+        let target = parent.$el.parentElement;
+        let width = target.clientWidth;
+        let height = target.clientHeight;
+        let q = p.createGraphics(width, height, p.SVG);
+        q.clear();
+        drawLines(q, parent.data);
+        q.save('Grid Pattern.svg');
       }
 
-      drawLines(data);
+      drawLines(p, data);
     };
 
     p.mouseMoved = function() {
@@ -68,7 +71,7 @@ function sketch(parent) { // we pass the sketch data from the parent
       if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
 
         recentHover = true;
-        drawLines(parent.data);
+        drawLines(p, parent.data);
         
         let xprime = (p.mouseX - p.width/2) * Math.cos(-rotate) - (p.mouseY - p.height/2) * Math.sin(-rotate) + p.width/2;
         let yprime = (p.mouseX - p.width/2) * Math.sin(-rotate) + (p.mouseY - p.height/2) * Math.cos(-rotate) + p.height/2;
@@ -79,7 +82,7 @@ function sketch(parent) { // we pass the sketch data from the parent
             p.translate(p.width / 2, p.height / 2);
             p.stroke(0, 255, 0);
             p.rotate(rotate);
-            drawLine(multiplier * selectedLine.angle, spacing * selectedLine.index);
+            drawLine(p, multiplier * selectedLine.angle, spacing * selectedLine.index);
           p.pop();
         }
 
@@ -88,7 +91,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       } else if (recentHover) {
         recentHover = false;
-        drawLines(parent.data);
+        drawLines(p, parent.data);
       }
 
     };
@@ -238,61 +241,61 @@ function sketch(parent) { // we pass the sketch data from the parent
     }
 
 
-    function drawLines(data) {
+    function drawLines(instance, data) {
       grid = data.grid;
       spacing = data.spacing;
       multiplier = data.multiplier;
-      rotate = p.radians(data.rotate);
+      rotate = instance.radians(data.rotate);
 
-      p.push();
-      p.background(0, 0, 0.2 * 255);
-      p.strokeWeight(1);
-      p.translate(p.width / 2, p.height / 2);
-      p.rotate(rotate);
+      instance.push();
+      instance.background(0, 0, 0.2 * 255);
+      instance.strokeWeight(1);
+      instance.translate(instance.width / 2, instance.height / 2);
+      instance.rotate(rotate);
 
       let selectedLines = parent.data.selectedLines;
 
       for (let line of grid) {
 
         if (selectedLines.filter(e => e.angle == line.angle && e.index == line.index).length > 0) {
-          p.stroke(0, 255, 0);
+          instance.stroke(0, 255, 0);
         } else {
-          p.stroke(255, 0, 0);
+          instance.stroke(255, 0, 0);
         }
-        drawLine(multiplier * line.angle, spacing * line.index);
+        drawLine(instance, multiplier * line.angle, spacing * line.index);
       }
 
 
       if (data.showIntersections) {
-        p.noStroke();
-        p.fill(255);
+        instance.noStroke();
+        instance.fill(255);
         for (let pt of Object.values(data.intersectionPoints)) {
-          p.ellipse(pt.x * spacing, pt.y * spacing, 4);
+          instance.ellipse(pt.x * spacing, pt.y * spacing, 4);
         }
       }
 
       // intersections corresponding to selected tiles
-      p.strokeWeight(2);
-      p.stroke(0, 191, 255);
-      p.noFill();
+      instance.strokeWeight(2);
+      instance.stroke(0, 191, 255);
+      instance.noFill();
       for (let tile of data.selectedTiles) {
-        p.ellipse(tile.x * spacing, tile.y * spacing, 10);
+        instance.ellipse(tile.x * spacing, tile.y * spacing, 10);
       }
       
-      p.pop();
+      instance.pop();
     }
 
     // angle, index
-    function drawLine(angle, index) {
-      let x0 = getXVal(angle, index, -p.height);
-      let x1 = getXVal(angle, index, p.height);
+    function drawLine(instance, angle, index) {
+      let x0 = getXVal(angle, index, -instance.height);
+      let x1 = getXVal(angle, index, instance.height);
       //console.log(x0);
       if (!isNaN(x0) && !isNaN(x1) && Math.abs(x0) < 1000000 && Math.abs(x1) < 1000000) {
-        p.line(x0, -p.height, x1, p.height);
+        instance.line(x0, -instance.height, x1, instance.height);
       } else {
-        let y0 = getYVal(angle, index, -p.width);
-        let y1 = getYVal(angle, index, p.width);
-        p.line(-p.width, y0, p.width, y1);
+        let y0 = getYVal(angle, index, -instance.width);
+        let y1 = getYVal(angle, index, instance.width);
+        instance.line(-instance.width, y0, instance.width, y1);
       }
     }
 

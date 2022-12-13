@@ -31,7 +31,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       p.pixelDensity(2);
       p.noLoop();
-      drawTiles(parent.data);
+      drawTiles(p, parent.data);
     };
 
     p.draw = function() {
@@ -57,13 +57,16 @@ function sketch(parent) { // we pass the sketch data from the parent
       }
 
       if (data.download > oldData.download) {
-        p.pixelDensity(4);
-        drawTiles(data);
-        p.saveCanvas('TilingPattern', 'png');
-        p.pixelDensity(2);
+        let target = parent.$el.parentElement;
+        let width = target.clientWidth;
+        let height = target.clientHeight;
+        let q = p.createGraphics(width, height, p.SVG);
+        q.clear();
+        drawTiles(q, parent.data);
+        q.save('Tiling Pattern.svg');
       }
 
-      drawTiles(data);
+      drawTiles(p, data);
     };
 
     function whichSide(xp, yp, x1, y1, x2, y2) {
@@ -89,7 +92,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
         selectedTile = getSelectedTile(xprime, yprime);
 
-        drawTiles(parent.data);
+        drawTiles(p, parent.data);
 
         if (Object.keys(selectedTile).length > 0) {
 
@@ -139,7 +142,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
         selectedTile = getSelectedTile(xprime, yprime);
 
-        drawTiles(parent.data);
+        drawTiles(p, parent.data);
 
         if (Object.keys(selectedTile).length > 0) {
 
@@ -161,7 +164,7 @@ function sketch(parent) { // we pass the sketch data from the parent
 
       } else if (recentHover) {
         recentHover = false;
-        drawTiles(parent.data);
+        drawTiles(p, parent.data);
       }
 
     };
@@ -243,21 +246,21 @@ function sketch(parent) { // we pass the sketch data from the parent
 
     }
 
-    function drawTiles(data) {
+    function drawTiles(instance, data) {
       let steps = data.steps;
       let multiplier = data.multiplier;
-      let spacing = p.min(p.width, p.height) / (steps);
+      let spacing = instance.min(instance.width, instance.height) / (steps);
       preFactor = spacing * data.multiplier / Math.PI;
       preFactor = preFactor * data.zoom;
       let stroke = data.stroke;
-      rotate = p.radians(data.rotate);
-      p.strokeWeight( Math.min(p.sqrt(preFactor) / 4.5, 1));
-      pan = - data.zoom * p.min(p.width, p.height) * data.pan;
+      rotate = instance.radians(data.rotate);
+      instance.strokeWeight( Math.min(instance.sqrt(preFactor) / 4.5, 1));
+      pan = - data.zoom * instance.min(instance.width, instance.height) * data.pan;
 
-      p.push();
-      p.background(0, 0, 0.2 * 255);
-      p.translate(p.width / 2 + pan, p.height / 2);
-      p.rotate(rotate);
+      instance.push();
+      instance.background(0, 0, 0.2 * 255);
+      instance.translate(instance.width / 2 + pan, instance.height / 2);
+      instance.rotate(rotate);
 
       for (let tile of Object.values(data.tiles)) {
 
@@ -282,48 +285,48 @@ function sketch(parent) { // we pass the sketch data from the parent
           //let onScreenColors = data.colors.filter(e => e.onScreen && e.symmetry == data.symmetry);
           let color = data.colors.filter(e => data.orientationColoring ? e.angles == tile.angles : e.area == tile.area)[0];
 
-          p.fill(color.fill);
+          instance.fill(color.fill);
           if (data.showStroke) {
-            p.stroke(stroke, stroke, stroke);
+            instance.stroke(stroke, stroke, stroke);
           } else {
-            p.noStroke();
+            instance.noStroke();
           }
 
 
           if (tileInSelectedLine) {
-            p.fill(0, 255, 0);
+            instance.fill(0, 255, 0);
             if (numLinesPassingThroughTile > 1) {
-              p.fill(60, 179, 113);
+              instance.fill(60, 179, 113);
             }
           }
           if (tileIsSelected) {
-            p.fill(128, 215, 255);
+            instance.fill(128, 215, 255);
           }
 
         } else {
-          p.stroke(0, 255, 0);
-          p.noFill();
+          instance.stroke(0, 255, 0);
+          instance.noFill();
 
           if (tileInSelectedLine) {
-            p.fill(0, 255, 0, 150);
+            instance.fill(0, 255, 0, 150);
             if (numLinesPassingThroughTile > 1) {
-              p.fill(60, 179, 113, 150);
+              instance.fill(60, 179, 113, 150);
             }
           }
           if (tileIsSelected) {
-            p.fill(110, 110, 255);
+            instance.fill(110, 110, 255);
           }
 
         }
 
-        p.beginShape();
+        instance.beginShape();
         for (let pt of tile.dualPts) {
-          p.vertex(preFactor * pt.x, preFactor * pt.y);
+          instance.vertex(preFactor * pt.x, preFactor * pt.y);
         }
-        p.endShape(p.CLOSE);
+        instance.endShape(instance.CLOSE);
       }
 
-      p.pop();
+      instance.pop();
     }
 
   };
