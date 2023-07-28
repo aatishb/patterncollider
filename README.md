@@ -1,5 +1,7 @@
 # Pattern Collider
 
+https://aatishb.com/patterncollider/
+
 Pattern Collider is a tool for generating and exploring quasiperiodic tiling patterns. Every pattern that you create has a custom URL that you can bookmark & share.
 
 Learn more about how it works by watching the [Minute Physics video](https://youtu.be/-eqdj63nEr4).
